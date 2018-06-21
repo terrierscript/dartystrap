@@ -10,6 +10,7 @@
   "dependencies": {
     "bootstrap": "^4.1.1",
     "dart-sass": "^1.6.2",
+    "lit-html": "^0.10.2",
     "sass": "^1.6.2"
   },
   "devDependencies": {
