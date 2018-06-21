@@ -1,3 +1,3 @@
-import http2 from "http2"
+import http from "http"
 
-console.log(http2)
+const server = http.createServer()
