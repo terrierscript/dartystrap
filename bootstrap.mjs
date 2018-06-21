@@ -9,11 +9,12 @@ const baseBs = fs.readFileSync(
   {encoding: "UTF-8"}
 )
 
-const result = sass.renderSync({
-  data: baseBs,
-  includePaths: [
-    bsRoot
-  ]
-})
-
-console.log(result.css.toString())
+export function build (options) {
+  const result = sass.renderSync({
+    data: baseBs,
+    includePaths: [
+      bsRoot
+    ]
+  })
+  return result.css.toString()
+}
