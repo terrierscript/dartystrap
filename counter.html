@@ -1,0 +1,21 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script type=module>
+      import  {hyper, wire, bind, Component}  from 'https://unpkg.com/hyperhtml@2.10.13/esm/index.js?module';
+      let count = 0;
+      const container = () => html`
+        <div>${count}</div>
+        <button on-click="${(e) => {
+          console.log(e)
+          // count++ 
+        } }">+</button>
+      `
+      render(container(), document.querySelector("#container"))
+    </script>
+    <x-container></x-container>
+    
+  </body>
+</html>

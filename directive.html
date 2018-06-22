@@ -1,0 +1,21 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script type=module>
+      import { html, render } from 'https://dev.jspm.io/lit-html/lib/lit-extended.js';
+      import { directive } from 'https://dev.jspm.io/lit-html';
+      let v = ""
+      const item = () => html`<div>${
+        directive((part) => { 
+          part.setValue('Hello')
+        })}
+        <input on-change=></div>
+      </div>`
+      render(item(), document.querySelector("#container"))
+    </script>
+    <x-container></x-container>
+    
+  </body>
+</html>

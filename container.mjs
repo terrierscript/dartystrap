@@ -1,21 +1,25 @@
-import { html, render } from 'https://dev.jspm.io/lit-html';
+import { html, render, directive } from 'https://dev.jspm.io/lit-html/lib/lit-extended.js';
 
 const input = ({value, onChange}) => {
   console.log(onChange)
   return html`<input 
     value=${value} 
-    onchange=${(e) => {
+    on-change=${(e) => {
       console.log(e, onChange)
       onChange(e)
     }}
   ></input>`
 }
 
+
 export const container = () => {
   let inputVal = "val"
+  const val = (e) => directive( (part) => {
+    part.setValue()
+  })
   const onChange = (e) => {
-    console.log(e)
     inputVal = e.target.value
+    console.log(inputVal)
   }
   return html`
     <div>${inputVal}</div>
