@@ -5,18 +5,23 @@
   "author": "inuscript <inuscript@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node --experimental-modules index.mjs"
+    "start": "node --experimental-modules index.mjs",
+    "lambda": "npx netlify-lambda serve functions"
   },
   "dependencies": {
     "bootstrap": "^4.1.1",
     "dart-sass": "^1.6.2",
     "lit-html": "^0.10.2",
+    "netlify-lambda": "^0.4.0",
     "sass": "^1.6.2"
   },
   "devDependencies": {
     "jest": "^23.1.0"
   },
   "jest": {
-    "testMatch": ["**/__tests__/**/*.mjs?(x)","**/?(*.)+(spec|test).mjs?(x)"]
+    "testMatch": [
+      "**/__tests__/**/*.mjs?(x)",
+      "**/?(*.)+(spec|test).mjs?(x)"
+    ]
   }
 }
