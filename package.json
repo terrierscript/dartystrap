@@ -6,12 +6,14 @@
   "license": "MIT",
   "scripts": {
     "start": "node --experimental-modules index.mjs",
+    "dev": "npx ws",
     "lambda": "npx netlify-lambda serve functions"
   },
   "dependencies": {
     "bootstrap": "^4.1.1",
     "dart-sass": "^1.6.2",
     "lit-html": "^0.10.2",
+    "local-web-server": "^2.5.2",
     "netlify-lambda": "^0.4.0",
     "sass": "^1.6.2"
   },

@@ -5,10 +5,26 @@
     <div id="container"></div>
     <script type=module>
       import { html, render } from 'https://dev.jspm.io/lit-html';
+      import { container } from "./container.mjs"
 
       const item = () => html`<div>hello</div>`
-      const container = () => html`<div> Container ${item()}</div>`
+      // const container = () => html`<div> Container ${item()}</div>`
+      // class XContainer extends HTMLElement {
+      //   constructor() {
+      //     super();
+      //   }
+      //   _render() {
+      //     console.log("aaa")
+      //     this.attachShadow({
+      //       mode: 'open'
+      //     });
+      //     const template = container()
+      //     render(template, this.shadowRoot);
+      //   }
+      // }
       render(container(), document.querySelector("#container"))
     </script>
+    <x-container></x-container>
+    
   </body>
 </html>
