@@ -5,8 +5,10 @@
     <div id="container"></div>
     <script type=module>
       import { html, render } from 'https://dev.jspm.io/lit-html';
-      const Item = () => html`<div>hello</div>`
-      render(Item(), document.querySelector("#container"))
+
+      const item = () => html`<div>hello</div>`
+      const container = () => html`<div> Container ${item()}</div>`
+      render(container(), document.querySelector("#container"))
     </script>
   </body>
 </html>
