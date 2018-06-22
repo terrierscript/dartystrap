@@ -1,0 +1,12 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script type=module>
+      import { html, render } from 'https://dev.jspm.io/lit-html';
+      const Item = () => html`<div>hello</div>`
+      render(Item(), document.querySelector("#container"))
+    </script>
+  </body>
+</html>
