@@ -1,7 +1,8 @@
-const sass = require("../../dart-sass/build/sass.dart")
+console.log("BS")
+import sass from "../../dart-sass/build/sass.dart.js"
+console.log(sass)
 const path = require("path")
 const unpkg = require("./unpkg")
-
 
 const buildParams = params => {
   return Object.entries(params)
@@ -21,6 +22,7 @@ const scssString = append => {
 }
 
 exports.build = (variables = {}) => {
+  return
   const vars = buildParams(variables)
   const scss = scssString(vars)
   return unpkg("bootstrap").then(importer => {

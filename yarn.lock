@@ -1775,7 +1775,7 @@ chokidar@^1.0.0, chokidar@^1.0.1:
   optionalDependencies:
     fsevents "^1.0.0"
 
-chokidar@^2.0.0, chokidar@^2.0.2, chokidar@^2.0.3:
+chokidar@^2.0.2, chokidar@^2.0.3:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.0.4.tgz#356ff4e2b0e8e43e322d18a372460bbcf3accd26"
   dependencies:
@@ -2388,12 +2388,6 @@ d@1:
   resolved "https://registry.yarnpkg.com/d/-/d-1.0.0.tgz#754bb5bfe55451da69a58b94d45f4c5b0462d58f"
   dependencies:
     es5-ext "^0.10.9"
-
-dart-sass@^1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/dart-sass/-/dart-sass-1.6.2.tgz#2eb0198555419137672150ae1d4c14fbf312b8f6"
-  dependencies:
-    chokidar "^2.0.0"
 
 dashdash@^1.12.0:
   version "1.14.1"
@@ -7303,12 +7297,6 @@ sane@^2.0.0:
     watch "~0.18.0"
   optionalDependencies:
     fsevents "^1.2.3"
-
-sass@^1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.6.2.tgz#665cadcbd853e9e497cbd298de645440a992cd1a"
-  dependencies:
-    chokidar "^2.0.0"
 
 sax@^1.2.4, sax@~1.2.1, sax@~1.2.4:
   version "1.2.4"

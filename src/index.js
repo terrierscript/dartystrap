@@ -1,6 +1,6 @@
 console.log("FOOOO")
-// require('core-js')
-require("setimmediate")
+require('core-js')
+// require("setimmediate")
 const { build } = require("./lib/bootstrap.js")
 
 build()
