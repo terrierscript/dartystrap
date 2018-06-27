@@ -23,22 +23,24 @@ class _UnpkgFetcher {
 }
 
 module.exports = packageName => {
-  return axios.get(`https://unpkg.com/${packageName}/?meta`).then(r => {
-    const files = flatten(r.data.files)
-    const resolver = new _UnpkgFetcher(packageName, files)
-    return (url, prev, done) => {
-      const filename = resolver.resolveFilename(url, prev)
-      fetch(filename)
-        .then(r => r.text())
-        .then(scss => {
-          done({
-            // file: resolver.getFullPath(url),
-            contents: scss
+  return fetch(`https://unpkg.com/${packageName}/?meta`)
+    .then(r => r.json())
+    .then(r => {
+      const files = flatten(r.files)
+      const resolver = new _UnpkgFetcher(packageName, files)
+      return (url, prev, done) => {
+        const filename = resolver.resolveFilename(url, prev)
+        fetch(filename)
+          .then(r => r.text())
+          .then(scss => {
+            done({
+              // file: resolver.getFullPath(url),
+              contents: scss
+            })
           })
-        })
-        .catch(e => {
-          console.error(e)
-        })
-    }
-  })
+          .catch(e => {
+            console.error(e)
+          })
+      }
+    })
 }

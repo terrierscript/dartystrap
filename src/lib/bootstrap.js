@@ -36,9 +36,9 @@ exports.build = (variables = {}) => {
       return sass.render(
         {
           data: scss,
-          importer: importer,
+          importer: importer
           // fiber: Fiber,
-          includePaths: [bsRoot]
+          // includePaths: [bsRoot]
         },
         (err, result) => {
           if (err) {

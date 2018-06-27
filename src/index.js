@@ -1,4 +1,6 @@
+require('core-js')
 const { build } = require("./lib/bootstrap.js")
+
 
 build()
   .then(css => {
