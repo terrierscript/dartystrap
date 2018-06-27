@@ -30,6 +30,7 @@ module.exports = packageName => {
       const resolver = new _UnpkgFetcher(packageName, files)
       return (url, prev, done) => {
         const filename = resolver.resolveFilename(url, prev)
+        // console.log(filename)
         fetch(filename)
           .then(r => r.text())
           .then(scss => {

@@ -1,15 +1,7 @@
-const sass = require("sass")
-// const fs = require("fs")
+const sass = require("../../dart-sass/build/sass.dart")
 const path = require("path")
-// import promisify from "promisify"
-// const Fiber = require("fibers")
-// const axios = require("axios")
-// const bsRoot = "./node_modules/bootstrap/scss"
 const unpkg = require("./unpkg")
-// const baseBs = fs.readFileSync(
-//   path.resolve(bsRoot, "bootstrap.scss"),
-//   {encoding: "UTF-8"}
-// )
+
 
 const buildParams = params => {
   return Object.entries(params)
@@ -42,7 +34,10 @@ exports.build = (variables = {}) => {
         },
         (err, result) => {
           if (err) {
-            rej(err)
+            return rej(err)
+          }
+          if (!result) {
+            return rej(result)
           }
           return res(result.css.toString())
         }

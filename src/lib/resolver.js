@@ -1,16 +1,18 @@
 const path = require("path")
+const pathParse = require("path-parse")
 
 const resolvePath = (...args) => {
   return path.join(...["/", ...args])
 }
 
 const partialFileName = fileName => {
-  const { dir, name } = path.parse(fileName)
+  const { dir, name } = pathParse(fileName)
   return resolvePath(dir, `_${normalizeSuffix(name)}`)
 }
 
 const normalizeSuffix = file => {
-  const { name } = path.parse(file)
+  console.log(path)
+  const { name } = pathParse(file)
   return `${name}.scss`
 }
 
