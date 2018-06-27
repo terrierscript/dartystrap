@@ -6,19 +6,22 @@
     <script type=module>
       import { html, render } from 'https://dev.jspm.io/lit-html/lib/lit-extended.js';
       import { directive } from 'https://dev.jspm.io/lit-html';
-      import { withForm } from 'https://dev.jspm.io/lit-form';
-      let v = ""
+      let v = "hello"
       
-      const input = () => directive(part => {
+      const input = (value, onChange) => {
         return html`
-          <input name="name" value="${values.name}" onchange="${handleChange}">
+          <input name="name" value="${value}" oninput="${onchange}">
         `
-      })
+      }
+      let vChange = (e) => {
+        v = e.target.value
+        console.log(v)
+      }
       const item = () => html`<div>${
         directive((part) => { 
-          part.setValue('Hello')
+          part.setValue(v)
         })}
-        <input on-change="${e => console.log(e.target.value) }"></div>
+        ${input(v, vChange)}
       </div>`
       render(item(), document.querySelector("#container"))
     </script>
