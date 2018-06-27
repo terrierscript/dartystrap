@@ -10,6 +10,7 @@
     "lambda": "npx netlify-lambda serve functions"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
     "dart-sass": "^1.6.2",
     "fibers": "^2.0.2",
