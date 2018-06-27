@@ -27,10 +27,27 @@ const scssString = (append) => {
   return scss
 }
 
-const getFile = (url) => {
-  return axios.get(url)
+
+const partialFileName = (url) => {
+  const split = url.split("/")
+  const last = split.pop()
+  return [ ...split, `_${last}`].join("/")
+}
+
+const getUrl = (file) => {
+  const base = "https://unpkg.com/bootstrap@4.1.1/scss"
+  return `${base}/${file}.scss`
+}
+
+const getFile = (file) => {
+  return axios.get(getUrl(file))
     .then(r => {
       return r.data
+    }).catch(e => {
+      return axios.get(getUrl(partialFileName(file)))
+        .then( r => {
+          return r.data
+        })
     })
 }
 exports.build = (variables = {}) => {
@@ -42,9 +59,9 @@ exports.build = (variables = {}) => {
       data: scss,
       importer: (url, prev, done ) => {
         // ...
-        const name = (url !== "bootstrap") ? `_${url}` : url
-        const unpkgUrl = `https://unpkg.com/bootstrap@4.1.1/scss/${name}.scss`
-        getFile(unpkgUrl)
+        // const name = (url !== "bootstrap") ? `_${url}` : url
+        // const unpkgUrl = `https://unpkg.com/bootstrap@4.1.1/scss/${name}.scss`
+        getFile(url)
           .then(r => done({ contents: r}) )
         // return { contents: "" }
       },
