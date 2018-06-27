@@ -12,7 +12,7 @@ class _UnpkgFetcher {
   }
   resolveFilename(filePath, prev) {
     const prevCached = this.resolved[prev] ? this.resolved[prev] : prev
-    console.log(filePath, prevCached)
+    // console.log(filePath, prevCached)
     const fileName = resolver(this.files, filePath, prevCached)
     this.resolved[filePath] = fileName
     return this.getFullPath(fileName)
@@ -27,17 +27,14 @@ module.exports = packageName => {
     .then(r => r.json())
     .then(r => {
       const files = flatten(r.files)
-      console.log(files)
+      // console.log(files)
       const resolver = new _UnpkgFetcher(packageName, files)
       return (url, prev, done) => {
         const filename = resolver.resolveFilename(url, prev)
-        console.log(filename)
         fetch(filename)
           .then(r => r.text())
           .then(scss => {
-            console.log(scss, done)
-            done({
-              // file: resolver.getFullPath(url),
+            return done({
               contents: scss
             })
           })

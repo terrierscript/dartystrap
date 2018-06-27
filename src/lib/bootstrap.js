@@ -1,6 +1,5 @@
-console.log("BS")
-import sass from "../../dart-sass/build/sass.dart.js"
-console.log(sass)
+const sass = require("../../dart-sass/build/npm/sass.dart")
+// const sass = require("sass")
 const path = require("path")
 const unpkg = require("./unpkg")
 
@@ -22,15 +21,17 @@ const scssString = append => {
 }
 
 exports.build = (variables = {}) => {
-  return
   const vars = buildParams(variables)
-  const scss = scssString(vars)
+  // const scss = scssString(vars)
+  const scss = ".foo{ .baz{ color: red} }"
   return unpkg("bootstrap").then(importer => {
     return new Promise((res, rej) => {
       return sass.render(
         {
-          data: scss,
-          importer: importer
+          data: scss
+          // importer: (url, prev, done) => {
+          //   return importer(url, prev, done)
+          // }
           // fiber: Fiber,
           // includePaths: [bsRoot]
         },

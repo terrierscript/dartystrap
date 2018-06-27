@@ -11,8 +11,8 @@ const partialFileName = fileName => {
 }
 
 const normalizeSuffix = file => {
-  console.log(path)
   const { name } = pathParse(file)
+
   return `${name}.scss`
 }
 

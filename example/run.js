@@ -1,4 +1,4 @@
-const { build } = require("../lib/bootstrap.js")
+const { build } = require("../src/lib/bootstrap.js")
 build()
   .then(css => {
     console.log(css)
