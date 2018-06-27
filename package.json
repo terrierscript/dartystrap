@@ -12,6 +12,7 @@
   "dependencies": {
     "bootstrap": "^4.1.1",
     "dart-sass": "^1.6.2",
+    "fibers": "^2.0.2",
     "lit-html": "^0.10.2",
     "local-web-server": "^2.5.2",
     "netlify-lambda": "^0.4.0",
@@ -19,7 +20,8 @@
     "react-dom": "^16.4.1",
     "sass": "^1.6.2",
     "webpack": "^4.12.1",
-    "webpack-command": "^0.3.0"
+    "webpack-command": "^0.3.0",
+    "webpack-serve": "^1.0.4"
   },
   "devDependencies": {
     "jest": "^23.1.0"
