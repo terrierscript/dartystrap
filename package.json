@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-preset-env": "^1.7.0",
     "dart-sass": "^1.6.2",
     "fibers": "^2.0.2",
     "lit-html": "^0.10.2",
@@ -26,11 +27,5 @@
   },
   "devDependencies": {
     "jest": "^23.1.0"
-  },
-  "jest": {
-    "testMatch": [
-      "**/__tests__/**/*.mjs?(x)",
-      "**/?(*.)+(spec|test).mjs?(x)"
-    ]
   }
 }
