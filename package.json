@@ -21,6 +21,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "sass": "^1.6.2",
+    "typescript": "^2.9.2",
     "webpack": "^4.12.1",
     "webpack-command": "^0.3.0",
     "webpack-serve": "^1.0.4"
