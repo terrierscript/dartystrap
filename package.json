@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-preset-env": "^1.7.0",
+    "cross-fetch": "^2.2.1",
     "dart-sass": "^1.6.2",
     "fibers": "^2.0.2",
     "lit-html": "^0.10.2",
@@ -22,6 +23,7 @@
     "react-dom": "^16.4.1",
     "sass": "^1.6.2",
     "typescript": "^2.9.2",
+    "unfetch": "^3.0.0",
     "webpack": "^4.12.1",
     "webpack-command": "^0.3.0",
     "webpack-serve": "^1.0.4"
