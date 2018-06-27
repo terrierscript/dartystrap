@@ -1,9 +1,7 @@
 const { flatten } = require("./flatten")
 
-const axios = require("axios")
 const fetch = require("cross-fetch")
 const path = require("path")
-const { buildIncludePaths } = require("node-sass-magic-importer/dist/toolbox")
 const { resolver } = require("./resolver")
 
 class _UnpkgFetcher {

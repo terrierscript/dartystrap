@@ -1,10 +1,10 @@
 const sass = require("sass")
-const fs = require("fs")
+// const fs = require("fs")
 const path = require("path")
 // import promisify from "promisify"
-const Fiber = require("fibers")
-const axios = require("axios")
-const bsRoot = "./node_modules/bootstrap/scss"
+// const Fiber = require("fibers")
+// const axios = require("axios")
+// const bsRoot = "./node_modules/bootstrap/scss"
 const unpkg = require("./unpkg")
 // const baseBs = fs.readFileSync(
 //   path.resolve(bsRoot, "bootstrap.scss"),
@@ -37,7 +37,7 @@ exports.build = (variables = {}) => {
         {
           data: scss,
           importer: importer,
-          fiber: Fiber,
+          // fiber: Fiber,
           includePaths: [bsRoot]
         },
         (err, result) => {
