@@ -1,6 +1,5 @@
 require("process")
 require("setimmediate")
-console.log(process)
 window.Buffer = require("buffer/").Buffer
 
 // require("setimmediate")
