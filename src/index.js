@@ -1,10 +1,12 @@
-console.log("FOOOO")
-// require("core-js")
+require("process")
 require("setimmediate")
+console.log(process)
 window.Buffer = require("buffer/").Buffer
 
+// require("setimmediate")
+// console.log(setImmediate)
+
 const { build } = require("./lib/bootstrap.js")
-// const { build } = require("./lib/bs.js")
 
 build()
   .then(css => {
@@ -13,3 +15,4 @@ build()
   .catch(err => {
     console.error(err)
   })
+//

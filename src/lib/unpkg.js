@@ -2,8 +2,8 @@ const { flatten } = require("./flatten")
 
 const fetch = require("cross-fetch")
 const path = require("path")
-const { resolver } = require("./resolver")
-
+// const { resolver } = require("./resolver")
+const resolver = () => {}
 class _UnpkgFetcher {
   constructor(packageName, files) {
     this.packageName = packageName
@@ -12,7 +12,9 @@ class _UnpkgFetcher {
   }
   resolveFilename(filePath, prev) {
     const prevCached = this.resolved[prev] ? this.resolved[prev] : prev
-    // console.log(filePath, prevCached)
+    console.log(filePath, prevCached)
+    console.log(prevCached)
+
     const fileName = resolver(this.files, filePath, prevCached)
     this.resolved[filePath] = fileName
     return this.getFullPath(fileName)
@@ -27,7 +29,6 @@ module.exports = packageName => {
     .then(r => r.json())
     .then(r => {
       const files = flatten(r.files)
-      // console.log(files)
       const resolver = new _UnpkgFetcher(packageName, files)
       return (url, prev, done) => {
         const filename = resolver.resolveFilename(url, prev)

@@ -1,8 +1,7 @@
-const sass = require("../../dart-sass/build/npm/sass.dart")
-// const sass = require("dart-sass")
+const sass = require("../../dart-sass/build/npm")
+// const sass = require("sass")
 const path = require("path")
 const unpkg = require("./unpkg")
-console.log(sass)
 const buildParams = params => {
   return Object.entries(params)
     .map(([key, value]) => {
@@ -25,25 +24,19 @@ exports.build = (variables = {}) => {
   const scss = scssString(vars)
   return unpkg("bootstrap").then(importer => {
     return new Promise((res, rej) => {
-      return sass.render(
-        {
-          data: scss,
-          importer: (url, prev, done) => {
-            return importer(url, prev, done)
-          }
-          // fiber: Fiber,
-          // includePaths: [bsRoot]
-        },
-        (err, result) => {
-          if (err) {
-            return rej(err)
-          }
-          if (!result) {
-            return rej(result)
-          }
-          return res(result.css.toString())
+      const result = sass.renderSync({
+        data: scss,
+        importer: (url, prev, done) => {
+          console.log(url, prev, done)
+          return importer(url, prev, done)
         }
-      )
+        // fiber: Fiber,
+        // includePaths: [bsRoot]
+      })
+      if (!result) {
+        return rej(result)
+      }
+      return res(result.css.toString())
     })
   })
 }
