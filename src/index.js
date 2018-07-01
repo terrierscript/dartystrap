@@ -1,3 +1,5 @@
+const fs = require("fs")
+console.log("fs", fs.readdirSync)
 require("core-js/web/immediate")
 // require("setimmediate")
 // import "setimmediate"
@@ -7,7 +9,6 @@ require("core-js/web/immediate")
 // console.log(process)
 window.Buffer = require("buffer/").Buffer
 
-window.fs = {}
 // require("setimmediate")
 // console.log(setImmediate)
 
