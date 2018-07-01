@@ -4329,6 +4329,12 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.0"
 
+hasha@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/hasha/-/hasha-3.0.0.tgz#52a32fab8569d41ca69a61ff1a214f8eb7c8bd39"
+  dependencies:
+    is-stream "^1.0.1"
+
 header-case@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/header-case/-/header-case-1.0.1.tgz#9535973197c144b09613cd65d317ef19963bd02d"
@@ -6991,12 +6997,9 @@ param-case@^2.1.0:
   dependencies:
     no-case "^2.2.0"
 
-parcel-plugin-fsmock@./parcel-plugin-fsmock:
-  version "1.0.0"
-
-parcel@^1.9.3:
+parcel-bundler@^1.9.3:
   version "1.9.3"
-  resolved "https://registry.yarnpkg.com/parcel/-/parcel-1.9.3.tgz#b9d15b373b9665c46b4d59faa8a17d3feaf49ada"
+  resolved "https://registry.yarnpkg.com/parcel-bundler/-/parcel-bundler-1.9.3.tgz#48ec2eed5806b969fc5e56ce697d21aded7f80fe"
   dependencies:
     ansi-to-html "^0.6.4"
     babel-code-frame "^6.26.0"
@@ -7050,6 +7053,15 @@ parcel@^1.9.3:
     tomlify-j0.4 "^3.0.0"
     v8-compile-cache "^2.0.0"
     ws "^5.1.1"
+
+parcel-plugin-bundle-manifest@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/parcel-plugin-bundle-manifest/-/parcel-plugin-bundle-manifest-0.1.2.tgz#342c01d3e9ccd8c4407458dfc3287806737fc405"
+  dependencies:
+    hasha "^3.0.0"
+
+parcel-plugin-fsmock@./parcel-plugin-fsmock:
+  version "1.0.0"
 
 parents@^1.0.0, parents@^1.0.1:
   version "1.0.1"
