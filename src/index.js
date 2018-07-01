@@ -1,7 +1,13 @@
-require("process")
-require("setimmediate")
+require("core-js/web/immediate")
+// require("setimmediate")
+// import "setimmediate"
+// require("process")
+
+// console.log(process.cwd())
+// console.log(process)
 window.Buffer = require("buffer/").Buffer
 
+window.fs = {}
 // require("setimmediate")
 // console.log(setImmediate)
 
@@ -14,4 +20,4 @@ build()
   .catch(err => {
     console.error(err)
   })
-//
+// //
