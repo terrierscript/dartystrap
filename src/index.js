@@ -1,5 +1,3 @@
-const fs = require("fs")
-console.log("fs", fs.readdirSync)
 require("core-js/web/immediate")
 // require("setimmediate")
 // import "setimmediate"

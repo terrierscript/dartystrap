@@ -6991,6 +6991,9 @@ param-case@^2.1.0:
   dependencies:
     no-case "^2.2.0"
 
+parcel-plugin-fsmock@./parcel-plugin-fsmock:
+  version "1.0.0"
+
 parcel@^1.9.3:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/parcel/-/parcel-1.9.3.tgz#b9d15b373b9665c46b4d59faa8a17d3feaf49ada"
