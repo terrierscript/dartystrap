@@ -6,6 +6,9 @@ if (!fetch) {
 }
 const path = require("path")
 
+const unpkg =
+  process.env.NODE_ENV === "production" ? "/unpkg/" : "https://unpkg.com/"
+
 class _UnpkgFetcher {
   constructor(packageName, version, files) {
     this.packageName = packageName
@@ -25,7 +28,7 @@ class _UnpkgFetcher {
     return this.getFullPath(fileName)
   }
   getFullPath(filePath) {
-    return `https://unpkg.com/${this.packageName}@${this.version}${filePath}`
+    return `${unpkg}${this.packageName}@${this.version}${filePath}`
   }
 }
 
@@ -62,7 +65,7 @@ const generateImporter = (r, packageName, version) => {
 }
 
 module.exports = (packageName, version = "4.1.1") => {
-  return fetch(`https://unpkg.com/${packageName}/?meta`)
+  return fetch(`${unpkg}${packageName}@${version}/?meta`)
     .then(r => r.json())
     .then(r => {
       return generateImporter(r, packageName, version)
