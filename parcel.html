@@ -1,0 +1,27 @@
+<html>
+
+<head>
+  <title>Getting Started</title>
+</head>
+
+<body>
+  <pre><code id="result"></code></pre>
+  <!-- <script src="./src/index2.js"></script> -->
+  <script>
+    window.require = name => {
+      console.log("nodeRequire", name)
+      const mock = new Proxy({}, {
+        get(target, propKey, receiver) {
+          console.log(propKey)
+          return mock
+        }
+      })
+      return mock
+    }
+  </script>
+  <script src="./src/index.js"></script>
+  <!-- <script src="./index.js"></script> -->
+  <!-- <script src="./dist/build.js"></script> -->
+</body>
+
+</html>

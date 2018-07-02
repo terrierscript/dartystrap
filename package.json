@@ -9,7 +9,8 @@
     "dev": "npx ws",
     "lambda": "npx netlify-lambda serve functions",
     "budo": "budo src/index.js",
-    "silent": " browserify  -t brfs src/index.js > dist/build.js"
+    "silent": " browserify  -t brfs src/index.js > dist/build.js",
+    "wp": "yarn webpack-serve --mode=development --content=webpack"
   },
   "dependencies": {
     "babel": "^6.23.0",
@@ -48,6 +49,6 @@
     "jest": "^23.1.0"
   },
   "browser": {
-    "fs": "./fs.js"
+    "fs": "empty"
   }
 }
