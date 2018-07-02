@@ -11,7 +11,8 @@
     "budo": "budo src/index.js",
     "silent": " browserify  -t brfs src/index.js > dist/build.js",
     "wp": "yarn webpack-serve --mode=development --content=webpack",
-    "predeploy": "parcel build parcel/index.html",
+    "build": "parcel build parcel/index.html",
+    "predeploy": "yarn build",
     "deploy": "netlify deploy"
   },
   "dependencies": {

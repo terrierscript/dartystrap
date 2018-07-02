@@ -1,4 +1,9 @@
 [build]
   functions = "functions"
-  command = "yarn predeploy"
+  command = "yarn build"
   publish = "dist/"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+  Link = "</*.js>; rel=preload; as=stylesheet"
