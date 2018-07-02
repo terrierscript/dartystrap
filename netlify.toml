@@ -1,2 +1,4 @@
 [build]
   functions = "functions"
+  command = "yarn parcel build parcel.html"
+  publish = "dist/"
