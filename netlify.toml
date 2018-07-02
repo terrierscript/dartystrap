@@ -9,11 +9,3 @@
   status = 200
   headers = {Content-Type="application/javascript"}
   
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Link = [
-      "</unpkg/bootstrap@4.1.1/scss/_code.scss>; rel=preload; as=document",
-      "</unpkg/bootstrap@4.1.1/scss/_functions.scss>; rel=preload; as=document"
-    ]
-  
