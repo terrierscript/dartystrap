@@ -31,8 +31,6 @@ exports.build = (variables = {}) => {
           importer: (url, prev, done) => {
             return importer(url, prev, done)
           }
-          // fiber: Fiber,
-          // includePaths: [bsRoot]
         },
         (err, result) => {
           if (err) {

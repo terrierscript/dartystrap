@@ -42,24 +42,29 @@ const fetchWithWorker = url => {
 const fetchPlain = url => {
   return fetch(url).then(r => r.text())
 }
-module.exports = packageName => {
+
+const generateImporter = (r, packageName, version) => {
+  const files = flatten(r.files)
+  const resolver = new _UnpkgFetcher(packageName, version, files)
+  return (url, prev, done) => {
+    const filename = resolver.resolveFilename(url, prev)
+    // fetchWithWorker(filename)
+    fetchPlain(filename)
+      .then(scss => {
+        return done({
+          contents: scss
+        })
+      })
+      .catch(e => {
+        console.error(e)
+      })
+  }
+}
+
+module.exports = (packageName, version = "4.1.1") => {
   return fetch(`https://unpkg.com/${packageName}/?meta`)
     .then(r => r.json())
     .then(r => {
-      const files = flatten(r.files)
-      const resolver = new _UnpkgFetcher(packageName, "4.1.1", files)
-      return (url, prev, done) => {
-        const filename = resolver.resolveFilename(url, prev)
-        fetchWithWorker(filename)
-          // fetchPlain(filename)
-          .then(scss => {
-            return done({
-              contents: scss
-            })
-          })
-          .catch(e => {
-            console.error(e)
-          })
-      }
+      return generateImporter(r, packageName, version)
     })
 }
