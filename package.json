@@ -6,11 +6,13 @@
   "license": "MIT",
   "scripts": {
     "start": "node --experimental-modules index.mjs",
-    "dev": "npx ws",
+    "dev": "parcel serve parcel.html",
     "lambda": "npx netlify-lambda serve functions",
     "budo": "budo src/index.js",
     "silent": " browserify  -t brfs src/index.js > dist/build.js",
-    "wp": "yarn webpack-serve --mode=development --content=webpack"
+    "wp": "yarn webpack-serve --mode=development --content=webpack",
+    "predeploy": "parcel build parcel.html",
+    "deploy": "netlify deploy"
   },
   "dependencies": {
     "babel": "^6.23.0",
