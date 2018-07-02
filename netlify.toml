@@ -7,5 +7,4 @@
   from = "/unpkg/*"
   to = "https://unpkg.com/:splat"
   status = 200
-  headers = {Content-Type="application/javascript"}
   
