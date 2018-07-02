@@ -1,9 +1,11 @@
 const { flatten } = require("./flatten")
+const { resolver } = require("./resolver2")
+const r = require("./resolver")
+console.log(resolver)
 
 const fetch = require("cross-fetch")
 const path = require("path")
-const { resolver } = require("./resolver")
-console.log(resolver)
+
 class _UnpkgFetcher {
   constructor(packageName, version, files) {
     this.packageName = packageName
