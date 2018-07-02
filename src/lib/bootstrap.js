@@ -20,6 +20,8 @@ const scssString = append => {
   return scss
 }
 
+const worker = new Worker("../run.worker.js")
+
 exports.build = (variables = {}) => {
   const vars = buildParams(variables)
   const scss = scssString(vars)
@@ -29,7 +31,12 @@ exports.build = (variables = {}) => {
         {
           data: scss,
           importer: (url, prev, done) => {
-            return importer(url, prev, done)
+            // worker.addEventListener("message", e => {
+            //   res(e.data)
+            //   done
+            // })
+            worker.postMessage({ importer, url, prev, done })
+            // importer(url, prev, done)
           }
         },
         (err, result) => {

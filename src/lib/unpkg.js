@@ -32,8 +32,9 @@ class _UnpkgFetcher {
   }
 }
 
+const worker = new Worker("../dl.worker.js")
+
 const fetchWithWorker = url => {
-  const worker = new Worker("../dl.worker.js")
   return new Promise((res, rej) => {
     worker.addEventListener("message", e => {
       res(e.data)
@@ -51,7 +52,7 @@ const generateImporter = (r, packageName, version) => {
   const resolver = new _UnpkgFetcher(packageName, version, files)
   return (url, prev, done) => {
     const filename = resolver.resolveFilename(url, prev)
-    // fetchWithWorker(filename)
+    fetchWithWorker(filename)
     fetchPlain(filename)
       .then(scss => {
         return done({
