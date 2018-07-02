@@ -1,4 +1,4 @@
-const { Packager } = require("parcel-bundler")
+const { Packager, Asset } = require("parcel-bundler")
 const JSPackager = require("parcel-bundler/src/packagers/JSPackager")
 
 class MyPackager extends Packager {
@@ -21,9 +21,7 @@ class MyPackager extends Packager {
     // await this.dest.end(trailer)
   }
 }
+
 module.exports = bundler => {
-  // throw "fffff"
-  // console.log(bundler)
-  // console.log("bundler")
-  // bundler.addPackager("js", MyPackager)
+  // bundler.addAssetType(".js", require.resolve("./MyAsset.js"))
 }
