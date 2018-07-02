@@ -9,9 +9,10 @@
   <!-- <script src="./src/index2.js"></script> -->
   <script>
     window.require = name => {
-      // if (name !== "fs") {
-      //   return false
-      // }
+      console.log("poly require", name)
+      if (name !== "fs") {
+        return false
+      }
       const fsMock = {
         statSync(name) {
           return {

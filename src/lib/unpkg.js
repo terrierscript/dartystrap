@@ -1,7 +1,5 @@
 const { flatten } = require("./flatten")
-const { resolver } = require("./resolver2")
-const r = require("./resolver")
-console.log(resolver)
+const { resolver } = require("./resolver")
 
 const fetch = require("cross-fetch")
 const path = require("path")
