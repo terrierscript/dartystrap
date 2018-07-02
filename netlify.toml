@@ -11,4 +11,8 @@
 [[headers]]
   for = "/*"
   [headers.values]
-  Link = "</unpkg/bootstrap@4.1.1/scss/_code.scss>; rel=preload; as=document"
+    Link = [
+      "</unpkg/bootstrap@4.1.1/scss/_code.scss>; rel=preload; as=stylesheet",
+      "</unpkg/bootstrap@4.1.1/scss/_functions.scss>; rel=preload; as=stylesheet"
+    ]
+  
