@@ -33,7 +33,7 @@ module.exports = packageName => {
   return fetch(`https://unpkg.com/${packageName}/?meta`)
     .then(r => r.json())
     .then(r => {
-      const worker = new Worker("../worker")
+      // const worker = new Worker("../worker")
       const files = flatten(r.files)
       const resolver = new _UnpkgFetcher(packageName, "4.1.1", files)
       return (url, prev, done) => {
