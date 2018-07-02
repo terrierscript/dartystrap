@@ -1,4 +1,4 @@
 [build]
   functions = "functions"
-  command = "yarn parcel build parcel.html"
+  command = "yarn predeploy"
   publish = "dist/"
