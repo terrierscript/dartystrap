@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node --experimental-modules index.mjs",
-    "dev": "parcel serve parcel/index.html",
+    "dev": "parcel serve parcel/index.html --no-cache",
     "lambda": "npx netlify-lambda serve functions",
     "budo": "budo src/index.js",
     "silent": " browserify  -t brfs src/index.js > dist/build.js",

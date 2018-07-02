@@ -1,5 +1,4 @@
-require("core-js/web/immediate")
-window.Buffer = require("buffer/").Buffer
+require("./polyfill")
 
 const { build } = require("./lib/bootstrap.js")
 
