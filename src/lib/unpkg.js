@@ -1,7 +1,9 @@
 const { flatten } = require("./flatten")
 const { resolver } = require("./resolver")
 
-// const fetch = require("cross-fetch")
+if (!fetch) {
+  const fetch = require("cross-fetch")
+}
 const path = require("path")
 
 class _UnpkgFetcher {
