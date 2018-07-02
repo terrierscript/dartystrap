@@ -4,8 +4,8 @@
   publish = "dist/"
 
 [[redirects]]
-  from = "/unpkg"
-  to = "https://unpkg.com"
+  from = "/unpkg/*"
+  to = "https://unpkg.com/"
   status = 200
   
 [[headers]]
