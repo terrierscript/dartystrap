@@ -23,8 +23,7 @@ class MyPackager extends Packager {
 }
 module.exports = bundler => {
   // throw "fffff"
-  console.log(bundler)
-  console.log("bundler")
-
+  // console.log(bundler)
+  // console.log("bundler")
   // bundler.addPackager("js", MyPackager)
 }

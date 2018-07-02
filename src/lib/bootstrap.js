@@ -1,5 +1,5 @@
-const sass = require("../../dart-sass/build/npm")
-// const sass = require("sass")
+// const sass = require("../../dart-sass/build/npm")
+const sass = require("sass")
 const path = require("path")
 const unpkg = require("./unpkg")
 

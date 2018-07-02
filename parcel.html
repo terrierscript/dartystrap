@@ -8,16 +8,38 @@
   <pre><code id="result"></code></pre>
   <!-- <script src="./src/index2.js"></script> -->
   <script>
-    window.require = name => {
-      console.log("nodeRequire", name)
-      const mock = new Proxy({}, {
-        get(target, propKey, receiver) {
-          console.log(propKey)
-          return mock
-        }
-      })
-      return mock
-    }
+    // window.require = name => {
+    //   console.log("eee", name)
+    //   const fsMock = {
+    //     statSync$1(name) {
+    //       console.log("statSync$1", name)
+    //     },
+    //     statSync(name) {
+    //       console.log("mock statSync", name)
+    //       return {
+    //         isFile: () => {
+    //           // return true;
+    //           // console.log("isFile")
+    //           return false
+    //         },
+    //         isDirectory: () => {
+    //           // console.log("isDirectroy")
+
+    //           return false
+    //         }
+    //       }
+    //     },
+    //   }
+    // <!-- 
+    //       const mock = new Proxy(fsMock, {
+    //         get(target, propKey, receiver) {
+    //           console.log("propKey", propKey)
+    //           return mock
+    //         }
+    //       })
+    //       console.log(mock, name) -->
+    // return fsMock
+    // }
   </script>
   <script src="./src/index.js"></script>
   <!-- <script src="./index.js"></script> -->
