@@ -5,28 +5,11 @@
 </head>
 
 <body>
+  <script src="./require-hack.js"></script>
+  <div id="app"></div>
   <pre><code id="result"></code></pre>
   <!-- <script src="./src/index2.js"></script> -->
   <script>
-    window.require = name => {
-      console.log("poly require", name)
-      if (name !== "fs") {
-        return false
-      }
-      const fsMock = {
-        statSync(name) {
-          return {
-            isFile: () => {
-              return false
-            },
-            isDirectory: () => {
-              return false
-            }
-          }
-        },
-      }
-      return fsMock
-    }
   </script>
   <script src="../src/index.js"></script>
   <!-- <script src="./index.js"></script> -->

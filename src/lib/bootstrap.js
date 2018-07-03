@@ -20,35 +20,32 @@ const scssString = append => {
   return scss
 }
 
-const worker = new Worker("../run.worker.js")
+const renderSass = (scss, importer) => {
+  return new Promise((res, rej) => {
+    const result = sass.render(
+      {
+        data: scss,
+        importer: (url, prev, done) => {
+          importer(url, prev, done)
+        }
+      },
+      (err, result) => {
+        if (err) {
+          return rej(err)
+        }
+        if (!result) {
+          return rej(result)
+        }
+        return res(result.css.toString())
+      }
+    )
+  })
+}
 
 exports.build = (variables = {}) => {
   const vars = buildParams(variables)
   const scss = scssString(vars)
   return unpkg("bootstrap").then(importer => {
-    return new Promise((res, rej) => {
-      const result = sass.render(
-        {
-          data: scss,
-          importer: (url, prev, done) => {
-            // worker.addEventListener("message", e => {
-            //   res(e.data)
-            //   done
-            // })
-            worker.postMessage({ importer, url, prev, done })
-            // importer(url, prev, done)
-          }
-        },
-        (err, result) => {
-          if (err) {
-            return rej(err)
-          }
-          if (!result) {
-            return rej(result)
-          }
-          return res(result.css.toString())
-        }
-      )
-    })
+    return renderSass(scss, importer)
   })
 }

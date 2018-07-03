@@ -32,7 +32,7 @@ class _UnpkgFetcher {
   }
 }
 
-const worker = new Worker("../dl.worker.js")
+const worker = new Worker("../worker/dl.worker.js")
 
 const fetchWithWorker = url => {
   return new Promise((res, rej) => {
