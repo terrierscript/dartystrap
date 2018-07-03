@@ -65,6 +65,7 @@ const generateImporter = (r, packageName, version) => {
   }
 }
 
+// ↓こいつをworker化したい。promiseである必要も無い
 module.exports = (packageName, version = "4.1.1") => {
   return fetch(`${unpkg}${packageName}@${version}/?meta`)
     .then(r => r.json())
