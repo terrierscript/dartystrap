@@ -3,7 +3,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { App } from "./app/App"
 
-ReactDOM.render(document.querySelector("#app"), <App />)
+ReactDOM.render(<App />, document.querySelector("#app"))
 
 // console.time("css")
 // build()

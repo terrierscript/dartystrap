@@ -1,12 +1,28 @@
 import React from "react"
-import { build } from "./lib/bootstrap.js"
+import { Component } from "react"
+import { build } from "../lib/bootstrap.js"
 
-export class App extends React.Component {
-  state = {}
+const Result = ({ children }) => {
+  return (
+    <pre>
+      <code>{children}</code>
+    </pre>
+  )
+}
+
+export class App extends Component<any, any> {
+  state = { css: "" }
   componentDidMount() {
-    build()
+    console.log("start")
+    build().then(css => {
+      this.setState({ css })
+    })
   }
   render() {
-    return <div />
+    return (
+      <div>
+        <Result>{this.state.css}</Result>
+      </div>
+    )
   }
 }
