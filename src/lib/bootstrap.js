@@ -15,7 +15,9 @@ const scssString = append => {
   const url = "scss/bootstrap"
   const scss = `
   ${append}
+  .sample{
   @import "${url}";
+  }
   `
   return scss
 }

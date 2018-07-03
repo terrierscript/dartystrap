@@ -25,18 +25,21 @@ export class Examples extends React.Component<any, any> {
     css: ""
   }
   componentDidUpdate() {
+    console.log("update")
     this.build()
   }
   componentDidMount() {
     this.build()
   }
   build() {
-    const decorator = scss => `.sample{ ${scss} }`
-    build(this.props.variables, decorator).then(css => {
+    console.log(this.props.variables)
+    // const decorator = scss => `.sample{ ${scss} }`
+    build(this.props.variables).then(css => {
       this.setState({ css })
     })
   }
   render() {
+    console.log(this.state.css)
     return (
       <div>
         <style>{this.state.css}</style>
