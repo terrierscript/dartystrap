@@ -2,6 +2,7 @@ import React from "react"
 import { Component } from "react"
 import { build } from "../lib/bootstrap"
 import { Variables, VariablesMap } from "./Variables"
+import { Examples } from "./Examples"
 
 const Result = ({ children }) => {
   return (
@@ -12,7 +13,7 @@ const Result = ({ children }) => {
 }
 
 export class App extends Component<any, any> {
-  state = { cssResult: "" }
+  state = { cssResult: "", variables: {} }
   componentDidMount() {
     this.sync()
   }
@@ -33,11 +34,13 @@ export class App extends Component<any, any> {
         }
       }, {})
     this.sync(variables)
+    this.setState({ variables })
   }
   render() {
     return (
       <div>
         <Variables onChangeVariables={this.handleChangeVaribles} />
+        <Examples variables={this.state.variables} />
         <Result>{this.state.cssResult}</Result>
       </div>
     )

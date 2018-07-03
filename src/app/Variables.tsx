@@ -44,7 +44,6 @@ class VariablesContainer extends Component<Props, State> {
         value: e.target.value
       }
     }
-    console.log(newVariables)
     this.setState(
       {
         variables: newVariables
