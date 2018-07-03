@@ -11,7 +11,9 @@ const Result = ({ children }) => {
 }
 
 export class App extends Component<any, any> {
-  state = { css: "" }
+  state = {
+    css: ""
+  }
   componentDidMount() {
     console.log("start")
     build().then(css => {
