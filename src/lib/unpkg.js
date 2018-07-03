@@ -32,16 +32,16 @@ class _UnpkgFetcher {
   }
 }
 
-const worker = new Worker("../worker/dl.worker.js")
+// const worker = new Worker("../worker/dl.worker.js")
 
-const fetchWithWorker = url => {
-  return new Promise((res, rej) => {
-    worker.addEventListener("message", e => {
-      res(e.data)
-    })
-    worker.postMessage(url)
-  })
-}
+// const fetchWithWorker = url => {
+//   return new Promise((res, rej) => {
+//     worker.addEventListener("message", e => {
+//       res(e.data)
+//     })
+//     worker.postMessage(url)
+//   })
+// }
 
 const fetchPlain = url => {
   return fetch(url).then(r => r.text())

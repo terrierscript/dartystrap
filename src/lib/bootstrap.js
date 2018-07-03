@@ -42,7 +42,7 @@ const renderSass = (scss, importer) => {
   })
 }
 
-exports.build = (variables = {}) => {
+export const build = (variables = {}) => {
   const vars = buildParams(variables)
   const scss = scssString(vars)
   return unpkg("bootstrap").then(importer => {
