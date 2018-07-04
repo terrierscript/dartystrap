@@ -11,18 +11,26 @@ export const fetchJson = (url: string) => {
   return fetch(url).then((r) => r.json())
 }
 
-export const fetchWithStorage = (url: string, fetchFn = fetchPlain) => {
-  if (!localStorage) {
-    return fetchFn(url)
-  }
+export const fetchWithStorage = (url: string) => {
   const item = localStorage.getItem(url)
   if (!item) {
-    return fetchFn(url).then((item) => {
+    return fetchPlain(url).then((item) => {
       localStorage.setItem(url, item)
       return item
     })
   }
   return Promise.resolve(item)
+}
+
+export const fetchWithStorageJson = (url: string) => {
+  const item = localStorage.getItem(url)
+  if (!item) {
+    return fetchJson(url).then((item) => {
+      localStorage.setItem(url, JSON.stringify(item))
+      return item
+    })
+  }
+  return Promise.resolve(JSON.parse(item))
 }
 
 // const worker = new Worker("../worker/dl.worker.js")

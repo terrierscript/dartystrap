@@ -1,9 +1,7 @@
-import { fetchJson } from "./fetch"
-
-const { flatten } = require("./flatten")
-const { resolver } = require("./resolver")
-const { fetchWithStorage } = require("./fetch")
-const path = require("path")
+import { flatten } from "./flatten"
+import { resolver } from "./resolver"
+import { fetchWithStorage, fetchWithStorageJson } from "./fetch"
+import path from "path"
 
 const unpkg =
   process.env.NODE_ENV === "production" ? "/unpkg/" : "https://unpkg.com/"
@@ -52,10 +50,9 @@ const generateImporter = (r, packageName, version) => {
   }
 }
 
-// ↓こいつをworker化したい。promiseである必要も無い
 export default (packageName, version = "4.1.1") => {
   const metaUrl = `${unpkg}${packageName}@${version}/?meta`
-  return fetchWithStorage(metaUrl, fetchJson).then((r) => {
+  return fetchWithStorageJson(metaUrl).then((r) => {
     return generateImporter(r, packageName, version)
   })
 }

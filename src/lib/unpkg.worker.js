@@ -1,2 +1,2 @@
-const unpkg = require("./unpkg")
-self.addEventListener("message", function(e) {}, false)
+// const unpkg = require("./unpkg")
+// self.addEventListener("message", function(e) {}, false)
