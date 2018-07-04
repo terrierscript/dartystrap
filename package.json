@@ -16,9 +16,6 @@
     "deploy": "netlify deploy"
   },
   "dependencies": {
-    "@types/node": "^10.5.1",
-    "@types/react": "^16.4.6",
-    "@types/react-dom": "^16.0.6",
     "babel": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
@@ -53,6 +50,9 @@
     "webpack-serve": "^1.0.4"
   },
   "devDependencies": {
+    "@types/node": "^10.5.1",
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
     "jest": "^23.1.0"
   },
   "browser": {
