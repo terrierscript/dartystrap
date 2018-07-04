@@ -1,7 +1,8 @@
-import React from "react"
+import { BootstrapCompiler } from "./BootstrapCompiler";
+
+import React, from "react"
 import { Component } from "react"
-import { build } from "../lib/bootstrap"
-import { Variables } from "./Variables"
+import { VariableContainer } from "./Variables"
 import {
   VariablesMap,
   convertToMap,
@@ -19,33 +20,37 @@ const Result = ({ children }) => {
   )
 }
 
-type AppState = { cssResult: string; variables: KeyValue }
+type AppState = {
+  variables: KeyValue
+}
 
 export class App extends Component<{}, AppState> {
-  state = { cssResult: "", variables: {} }
-  componentDidMount() {
-    this.sync()
-  }
-  sync(variables = {}) {
-    console.log("sync")
-
-    build(variables).then((cssResult) => {
-      this.setState({ cssResult })
-    })
-  }
+  state = { variables: {} }
   handleChangeVaribles = (v: VariablesMap) => {
     const variables = convertToKeyValue(v)
-    this.sync(variables)
     this.setState({ variables })
   }
   render() {
-    const { cssResult } = this.state
     return (
-      <div>
-        <Variables onChangeVariables={this.handleChangeVaribles} />
-        <Examples baseCss={cssResult} />
-        <Result>{cssResult}</Result>
-      </div>
+      <>
+        <VariableContainer>
+          {(varaibles) => (
+            <BootstrapCompiler variables={{}}>
+              {(defaultBootstrap) => (
+                <BootstrapCompiler variables={this.state.variables}>
+                  {(customizedBootstrap) => (
+                    <>
+                      <Examples baseCss={customizedBootstrap} />}
+                      <Examples baseCss={defaultBootstrap} />
+                      <Result>{customizedBootstrap}</Result>
+                    </>
+                  )}
+                </BootstrapCompiler>
+              )}
+            </BootstrapCompiler>
+          )}
+        </VariableContainer>
+      </>
     )
   }
-}
+}export export 

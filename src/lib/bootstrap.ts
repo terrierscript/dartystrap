@@ -22,8 +22,9 @@ const scssString = (append) => {
   return scss
 }
 
-const renderSass = (scss, importer): Promise<string> => {
+const renderSass = (scss: string, importer): Promise<string> => {
   return new Promise((res, rej) => {
+    // console.time("css")
     const result = sass.render(
       {
         data: scss,
@@ -32,6 +33,8 @@ const renderSass = (scss, importer): Promise<string> => {
         }
       },
       (err, result) => {
+        // console.timeEnd("css")
+
         if (err) {
           return rej(err)
         }
