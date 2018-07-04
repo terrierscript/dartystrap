@@ -4,8 +4,8 @@ import { build } from "../lib/bootstrap"
 import { KeyValue } from "./scssVariables"
 
 type Props = {
-  variables: KeyValue
-  children: (css: string) => ReactNode
+  variablesKeyValue: KeyValue
+  children: (props: State) => ReactNode
 }
 type State = {
   css: string
@@ -17,22 +17,23 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     isCompiling: false
   }
   componentDidMount() {
-    this.build()
+    this.buildBootstrap()
   }
   componentDidUpdate(prevProps) {
     if (prevProps == this.props) {
       return
     }
-    this.build()
+    this.buildBootstrap()
   }
-  build() {
-    const { variables } = this.props
-    build(variables).then((css) => {
-      this.setState({ css })
+  buildBootstrap() {
+    this.setState({ isCompiling: true }, () => {
+      const { variablesKeyValue } = this.props
+      build(variablesKeyValue).then((css) => {
+        this.setState({ css, isCompiling: false })
+      })
     })
   }
   render() {
-    const { css } = this.state
-    return this.props.children(css)
+    return this.props.children(this.state)
   }
 }

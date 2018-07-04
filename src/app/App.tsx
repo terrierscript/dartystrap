@@ -25,21 +25,17 @@ type AppState = {
 }
 
 export class App extends Component<{}, AppState> {
-  state = { variables: {} }
-  handleChangeVaribles = (v: VariablesMap) => {
-    const variables = convertToKeyValue(v)
-    this.setState({ variables })
-  }
   render() {
     return (
       <>
         <VariableContainer>
-          {(varaibles) => (
-            <BootstrapCompiler variables={this.state.variables}>
-              {(customizedBootstrap) => (
+          {(variables) => (
+            <BootstrapCompiler variablesKeyValue={variables}>
+              {({ css, isCompiling }) => (
                 <>
-                  <Examples baseCss={customizedBootstrap} />
-                  <Result>{customizedBootstrap}</Result>
+                  <div>{isCompiling ? "now Compile" : "compile Finished"}</div>
+                  <Examples baseCss={css} />
+                  <Result>{css}</Result>
                 </>
               )}
             </BootstrapCompiler>

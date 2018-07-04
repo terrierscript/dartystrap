@@ -1,7 +1,13 @@
 import * as React from "react"
 import { SFC } from "react"
 import { Component, ReactNode } from "react"
-import { VariableType, VariablesMap, convertToMap } from "./scssVariables"
+import {
+  VariableType,
+  VariablesMap,
+  convertToMap,
+  convertToKeyValue
+} from "./scssVariables"
+import { Submitter } from "./Submitter"
 
 type VariableChangeHandler = (value: VariableType) => any
 type VariableContainerChildren = {
@@ -34,33 +40,6 @@ class InternalVariablesContainer extends Component<Props, State> {
       variables: this.state.variables,
       onChangeVariable: this.handleChange
     })
-  }
-}
-
-class Submitter<T> extends Component<
-  { item: T; children: (item: T) => ReactNode },
-  { item: T }
-> {
-  constructor(props) {
-    super(props)
-    this.state = { item: this.props.item }
-  }
-  handleClick = () => {
-    this.setState({ item: this.props.item })
-  }
-  // update only state update
-  shouldComponentUpdate(nextState) {
-    const stateUpdated = this.state !== nextState
-    console.log("stateUpdated", stateUpdated)
-    return stateUpdated
-  }
-  render() {
-    return (
-      <>
-        <button onClick={this.handleClick}>Update</button>
-        {this.props.children(this.state.item)}
-      </>
-    )
   }
 }
 
@@ -101,7 +80,7 @@ const VariableForm: SFC<VariableContainerChildren> = ({
   )
 }
 const Console = (item) => {
-  console.log(item)
+  console.log("Console", item)
   return null
 }
 export const VariableContainer = ({ children }) => {
@@ -112,8 +91,9 @@ export const VariableContainer = ({ children }) => {
           <Console variables={props.variables} />
           <VariableForm {...props} />
           <Submitter<VariablesMap> item={props.variables}>
-            {({ variables }) => {
-              return <div>{children(variables)}</div>
+            {(item) => {
+              const variablesKeyValue = convertToKeyValue(item)
+              return <div>{children(variablesKeyValue)}</div>
             }}
           </Submitter>
         </>
