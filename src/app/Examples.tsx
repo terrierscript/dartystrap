@@ -1,33 +1,47 @@
 import React, { SFC } from "react"
-
-import { build } from "../lib/bootstrap"
+import sass from "sass"
+// import { build } from "../lib/bootstrap"
 import { SampleButtons } from "./examples/SampleButtons"
+import ShadowDOM from "react-shadow"
 
-export class Examples extends React.Component<any, any> {
-  state = {
-    css: ""
-  }
-  componentDidUpdate() {
-    console.log("update")
-    this.build()
-  }
-  componentDidMount() {
-    this.build()
-  }
-  build() {
-    // const decorator = scss => `.sample{ ${scss} }`
-    // build(this.props.variables).then(css => {
-    //   this.setState({ css })
-    // })
-  }
+export class Examples extends React.Component<{ baseCss: string }, {}> { //  { css: string }
+  // state = { css: "" }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.baseCss === this.props.baseCss) {
+  //     return
+  //   }
+  //   console.log("update")
+  //   this.build()
+  // }
+  // componentDidMount() {
+  //   this.build()
+  // }
+  // build() {
+  //   const { baseCss } = this.props
+  //   const scss = `
+  //     .sample{
+  //       ${baseCss}
+  //     }
+  //   `
+  //   const result = sass.renderSync({
+  //     data: scss
+  //   })
+  //   // (err, result) => {
+  //   //   if (err) {
+  //   //   }
+  //   this.setState({ css: result.css.toString() })
+  //   // }
+  // }
   render() {
     return (
-      <div>
-        <style>{this.state.css}</style>
-        <div className="sample">
-          <SampleButtons />
+      <ShadowDOM>
+        <div>
+          <style>{this.props.baseCss}</style>
+          <div className="sample">
+            <SampleButtons />
+          </div>
         </div>
-      </div>
+      </ShadowDOM>
     )
   }
 }

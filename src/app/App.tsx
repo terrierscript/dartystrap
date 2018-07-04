@@ -19,15 +19,16 @@ const Result = ({ children }) => {
   )
 }
 
-export class App extends Component<
-  any,
-  { cssResult: string; variables: KeyValue }
-> {
+type AppState = { cssResult: string; variables: KeyValue }
+
+export class App extends Component<{}, AppState> {
   state = { cssResult: "", variables: {} }
   componentDidMount() {
     this.sync()
   }
   sync(variables = {}) {
+    console.log("sync")
+
     build(variables).then((cssResult) => {
       this.setState({ cssResult })
     })
@@ -38,11 +39,12 @@ export class App extends Component<
     this.setState({ variables })
   }
   render() {
+    const { cssResult } = this.state
     return (
       <div>
         <Variables onChangeVariables={this.handleChangeVaribles} />
-        <Examples variables={this.state.variables} />
-        <Result>{this.state.cssResult}</Result>
+        <Examples baseCss={cssResult} />
+        <Result>{cssResult}</Result>
       </div>
     )
   }
