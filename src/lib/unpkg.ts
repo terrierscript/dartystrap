@@ -1,3 +1,5 @@
+import { fetchJson } from "./fetch"
+
 const { flatten } = require("./flatten")
 const { resolver } = require("./resolver")
 const { fetchWithStorage } = require("./fetch")
@@ -7,6 +9,10 @@ const unpkg =
   process.env.NODE_ENV === "production" ? "/unpkg/" : "https://unpkg.com/"
 
 class _UnpkgFetcher {
+  packageName = ""
+  version = ""
+  files = []
+  resolved = {}
   constructor(packageName, version, files) {
     this.packageName = packageName
     this.version = version
@@ -19,7 +25,7 @@ class _UnpkgFetcher {
     // console.log(prevCached)
     const fileName = resolver(this.files, filePath, prevCached)
     if (!fileName) {
-      throw new "FileName is not found"()
+      throw "FileName is not found"
     }
     this.resolved[filePath] = fileName
     return this.getFullPath(fileName)
@@ -36,22 +42,21 @@ const generateImporter = (r, packageName, version) => {
     const filename = resolver.resolveFilename(url, prev)
     // fetchWithWorker(filename)
     fetchWithStorage(filename)
-      .then(scss => {
+      .then((scss) => {
         return done({
           contents: scss
         })
       })
-      .catch(e => {
+      .catch((e) => {
         console.error(e)
       })
   }
 }
 
 // ↓こいつをworker化したい。promiseである必要も無い
-module.exports = (packageName, version = "4.1.1") => {
-  return fetch(`${unpkg}${packageName}@${version}/?meta`)
-    .then(r => r.json())
-    .then(r => {
-      return generateImporter(r, packageName, version)
-    })
+export default (packageName, version = "4.1.1") => {
+  const metaUrl = `${unpkg}${packageName}@${version}/?meta`
+  return fetchWithStorage(metaUrl, fetchJson).then((r) => {
+    return generateImporter(r, packageName, version)
+  })
 }

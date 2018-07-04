@@ -3,17 +3,21 @@ if (!fetch) {
   const fetch = require("cross-fetch")
 }
 
-exports.fetchPlain = url => {
-  return fetch(url).then(r => r.text())
+export const fetchPlain = (url: string) => {
+  return fetch(url).then((r) => r.text())
 }
 
-exports.fetchWithStorage = url => {
+export const fetchJson = (url: string) => {
+  return fetch(url).then((r) => r.json())
+}
+
+export const fetchWithStorage = (url: string, fetchFn = fetchPlain) => {
   if (!localStorage) {
-    return fetchPlain(url)
+    return fetchFn(url)
   }
   const item = localStorage.getItem(url)
   if (!item) {
-    return fetchPlain(url).then(item => {
+    return fetchFn(url).then((item) => {
       localStorage.setItem(url, item)
       return item
     })
