@@ -40,7 +40,6 @@ const generateImporter = (r, packageName, version) => {
   const resolver = new _UnpkgFetcher(packageName, version, files)
   return (url, prev, done) => {
     const filename = resolver.resolveFilename(url, prev)
-    // fetchWithWorker(filename)
     fetchWithStorage(filename)
       .then((scss) => {
         return done({

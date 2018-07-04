@@ -5,12 +5,12 @@ const resolvePath = (...args) => {
   return path.join(...["/", ...args])
 }
 
-const partialFileName = fileName => {
+const partialFileName = (fileName) => {
   const { dir, name } = pathParse(fileName)
   return resolvePath(dir, `_${normalizeSuffix(name)}`)
 }
 
-const normalizeSuffix = file => {
+const normalizeSuffix = (file) => {
   const { name } = pathParse(file)
 
   return `${name}.scss`
@@ -22,7 +22,7 @@ const normalizeSuffix = file => {
  * @param {String} url
  * @param {String} prev
  */
-exports.resolver = (files, url, prev) => {
+export const resolver = (files: string[], url: string, prev: string) => {
   const cwd = prev === "stdin" ? path.dirname(url) : path.dirname(prev)
   const normalizedFile = normalizeSuffix(url)
   const filesSet = new Set(files)

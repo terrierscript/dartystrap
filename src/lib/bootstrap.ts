@@ -1,9 +1,9 @@
 // const sass = require("../../dart-sass/build/npm")
-const sass = require("sass")
-const path = require("path")
-const unpkg = require("./unpkg")
+import sass from "sass"
+import path from "path"
+import unpkg from "./unpkg"
 
-const buildParams = params => {
+const buildParams = (params) => {
   return Object.entries(params)
     .map(([key, value]) => {
       return [`$${key}: ${value};`]
@@ -11,7 +11,7 @@ const buildParams = params => {
     .join("\n")
 }
 //
-const scssString = append => {
+const scssString = (append) => {
   const url = "scss/bootstrap"
   const scss = `
   ${append}
@@ -44,10 +44,10 @@ const renderSass = (scss, importer) => {
   })
 }
 
-export const build = (variables = {}, decorator = scss => scss) => {
+export const build = (variables = {}, decorator = (scss) => scss) => {
   const vars = buildParams(variables)
   const scss = decorator(scssString(vars))
-  return unpkg("bootstrap").then(importer => {
+  return unpkg("bootstrap").then((importer) => {
     return renderSass(scss, importer)
   })
 }
