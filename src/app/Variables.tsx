@@ -1,37 +1,23 @@
 import * as React from "react"
 import { SFC } from "react"
 import { Component, ReactNode } from "react"
+import { VariableType, VariablesMap, convertToMap } from "./scssVariables"
 
-type VariableType = {
-  name: string
-  defaultValue: string
-  value: string
-}
-
-export type VariablesMap = { [key: string]: VariableType }
 type VariableChangeHandler = (e: any, value: VariableType) => any
 type VariableContainerChildren = {
   variables?: VariablesMap
   onChange?: VariableChangeHandler
 }
+
 type Props = {
   onChangeVariables: (value: VariablesMap) => any
   children: (value: VariableContainerChildren) => ReactNode
 }
 type State = { variables: VariablesMap }
 
-const initial: VariablesMap = Object.entries({
+const initial: VariablesMap = convertToMap({
   blue: "#007bff"
-}).reduce((curr, [name, defaultValue]) => {
-  return {
-    ...curr,
-    [name]: {
-      name,
-      defaultValue,
-      value: ""
-    }
-  }
-}, {})
+})
 
 class VariablesContainer extends Component<Props, State> {
   state = { variables: initial }
@@ -71,11 +57,11 @@ const VariableForm: SFC<VariableContainerChildren> = ({
 }) => {
   return (
     <>
-      {Object.values(variables).map(vars => {
+      {Object.values(variables).map((vars) => {
         return (
           <div key={vars.name}>
             <label>${vars.name}</label>
-            <input value={vars.value} onChange={e => onChange(e, vars)} />
+            <input value={vars.value} onChange={(e) => onChange(e, vars)} />
           </div>
         )
       })}
@@ -86,7 +72,7 @@ const VariableForm: SFC<VariableContainerChildren> = ({
 export const Variables = ({ onChangeVariables }) => {
   return (
     <VariablesContainer onChangeVariables={onChangeVariables}>
-      {params => {
+      {(params) => {
         return (
           <div>
             <VariableForm {...params} />

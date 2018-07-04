@@ -22,7 +22,7 @@ const scssString = (append) => {
   return scss
 }
 
-const renderSass = (scss, importer) => {
+const renderSass = (scss, importer): Promise<string> => {
   return new Promise((res, rej) => {
     const result = sass.render(
       {

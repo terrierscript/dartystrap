@@ -2,6 +2,7 @@ import React, { SFC } from "react"
 
 import { build } from "../lib/bootstrap"
 import { SampleButtons } from "./examples/SampleButtons"
+
 export class Examples extends React.Component<any, any> {
   state = {
     css: ""
@@ -15,9 +16,9 @@ export class Examples extends React.Component<any, any> {
   }
   build() {
     // const decorator = scss => `.sample{ ${scss} }`
-    build(this.props.variables).then(css => {
-      this.setState({ css })
-    })
+    // build(this.props.variables).then(css => {
+    //   this.setState({ css })
+    // })
   }
   render() {
     return (
