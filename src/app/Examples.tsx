@@ -4,44 +4,37 @@ import sass from "sass"
 import { SampleButtons } from "./examples/SampleButtons"
 import ShadowDOM from "react-shadow"
 
-export class Examples extends React.Component<{ baseCss: string }, {}> { //  { css: string }
-  // state = { css: "" }
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.baseCss === this.props.baseCss) {
-  //     return
-  //   }
-  //   console.log("update")
-  //   this.build()
-  // }
-  // componentDidMount() {
-  //   this.build()
-  // }
-  // build() {
-  //   const { baseCss } = this.props
-  //   const scss = `
-  //     .sample{
-  //       ${baseCss}
-  //     }
-  //   `
-  //   const result = sass.renderSync({
-  //     data: scss
-  //   })
-  //   // (err, result) => {
-  //   //   if (err) {
-  //   //   }
-  //   this.setState({ css: result.css.toString() })
-  //   // }
-  // }
+const ExampleWithCss = ({ css }) => {
+  return (
+    <ShadowDOM>
+      <div>
+        <style>{css}</style>
+        <div className="sample">
+          <SampleButtons />
+        </div>
+      </div>
+    </ShadowDOM>
+  )
+}
+const ExampleWithDefaultBootstrap = () => {
+  const bootstrapUrl =
+    "https://unpkg.com/bootstrap@4.1.1/dist/css/bootstrap.min.css"
+  return (
+    <ShadowDOM include={[bootstrapUrl]}>
+      <div className="sample">
+        <SampleButtons />
+      </div>
+    </ShadowDOM>
+  )
+}
+
+export class Examples extends React.Component<{ baseCss: string }, {}> {
   render() {
     return (
-      <ShadowDOM>
-        <div>
-          <style>{this.props.baseCss}</style>
-          <div className="sample">
-            <SampleButtons />
-          </div>
-        </div>
-      </ShadowDOM>
+      <>
+        <ExampleWithCss css={this.props.baseCss} />
+        <ExampleWithDefaultBootstrap />
+      </>
     )
   }
 }

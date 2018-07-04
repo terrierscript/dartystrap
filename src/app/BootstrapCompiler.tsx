@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode, PureComponent } from "react"
 import { Component } from "react"
 import { build } from "../lib/bootstrap"
 import { KeyValue } from "./scssVariables"
@@ -11,16 +11,19 @@ type State = {
   css: string
   isCompiling: boolean
 }
-export class BootstrapCompiler extends Component<Props, State> {
+export class BootstrapCompiler extends PureComponent<Props, State> {
   state = {
     css: "",
     isCompiling: false
   }
+  componentDidMount() {
+    this.build()
+  }
   componentDidUpdate(prevProps) {
     if (prevProps == this.props) {
-      console.log("not update")
       return
     }
+    this.build()
   }
   build() {
     const { variables } = this.props

@@ -48,6 +48,12 @@ class Submitter<T> extends Component<
   handleClick = () => {
     this.setState({ item: this.props.item })
   }
+  // update only state update
+  shouldComponentUpdate(nextState) {
+    const stateUpdated = this.state !== nextState
+    console.log("stateUpdated", stateUpdated)
+    return stateUpdated
+  }
   render() {
     return (
       <>

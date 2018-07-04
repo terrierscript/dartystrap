@@ -1,6 +1,6 @@
-import { BootstrapCompiler } from "./BootstrapCompiler";
+import { BootstrapCompiler } from "./BootstrapCompiler"
 
-import React, from "react"
+import React from "react"
 import { Component } from "react"
 import { VariableContainer } from "./Variables"
 import {
@@ -35,17 +35,12 @@ export class App extends Component<{}, AppState> {
       <>
         <VariableContainer>
           {(varaibles) => (
-            <BootstrapCompiler variables={{}}>
-              {(defaultBootstrap) => (
-                <BootstrapCompiler variables={this.state.variables}>
-                  {(customizedBootstrap) => (
-                    <>
-                      <Examples baseCss={customizedBootstrap} />}
-                      <Examples baseCss={defaultBootstrap} />
-                      <Result>{customizedBootstrap}</Result>
-                    </>
-                  )}
-                </BootstrapCompiler>
+            <BootstrapCompiler variables={this.state.variables}>
+              {(customizedBootstrap) => (
+                <>
+                  <Examples baseCss={customizedBootstrap} />
+                  <Result>{customizedBootstrap}</Result>
+                </>
               )}
             </BootstrapCompiler>
           )}
@@ -53,4 +48,4 @@ export class App extends Component<{}, AppState> {
       </>
     )
   }
-}export export 
+}
