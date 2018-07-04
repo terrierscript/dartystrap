@@ -1,9 +1,6 @@
 const { flatten } = require("./flatten")
 const { resolver } = require("./resolver")
-
-if (!fetch) {
-  const fetch = require("cross-fetch")
-}
+const { fetchWithStorage } = require("./fetch")
 const path = require("path")
 
 const unpkg =
@@ -32,28 +29,13 @@ class _UnpkgFetcher {
   }
 }
 
-// const worker = new Worker("../worker/dl.worker.js")
-
-// const fetchWithWorker = url => {
-//   return new Promise((res, rej) => {
-//     worker.addEventListener("message", e => {
-//       res(e.data)
-//     })
-//     worker.postMessage(url)
-//   })
-// }
-
-const fetchPlain = url => {
-  return fetch(url).then(r => r.text())
-}
-
 const generateImporter = (r, packageName, version) => {
   const files = flatten(r.files)
   const resolver = new _UnpkgFetcher(packageName, version, files)
   return (url, prev, done) => {
     const filename = resolver.resolveFilename(url, prev)
     // fetchWithWorker(filename)
-    fetchPlain(filename)
+    fetchWithStorage(filename)
       .then(scss => {
         return done({
           contents: scss
