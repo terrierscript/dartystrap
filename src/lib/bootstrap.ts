@@ -27,22 +27,42 @@ const renderSassMock = (...args): Promise<string> => {
     sass.render({ data: scss }, (e, r) => res(r.css.toString()))
   })
 }
+
+const awaitImporter = (importer, url, prev) => {
+  return new Promise((res) => {
+    importer(url, prev, (r) => {
+      res(r)
+    })
+  })
+}
+
+// async function renderSync(scss: string, importer) {
+//   const result = sass.renderSync({
+//     data: scss,
+//     importer(url, prev) {
+//       return await awaitImporter(importer, url, prev)
+//     }
+//   })
+//   return result.css.toString()
+// }
 const renderSass = (scss: string, importer): Promise<string> => {
   // return renderSassMock()
   return new Promise((res, rej) => {
     // scss = ".foo{color:red}"
-    console.log(scss)
-    const result = sass.render(
+    console.log(sass)
+    const result = sass.renderSync(
       {
         data: scss,
         importe(url, prev, done) {
           console.log(url, prev, done)
+          return ""
           done("")
           // importer(url, prev, done)
         }
       },
       (err, result) => {
         if (err) {
+          console.log("ERRRRR")
           return rej(err)
         }
         if (!result) {
