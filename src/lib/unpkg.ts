@@ -71,13 +71,11 @@ class _FileNameResolver {
 
 const generateImporter = (resolver) => {
   return (url, prev, done) => {
-    console.log(url, prev, done)
-    const c = resolver.getContent(url, prev)
-    console.log(c)
+    const contents = resolver.getContent(url, prev)
     if (typeof done === "function") {
-      return done(c)
+      return done({ contents })
     }
-    return c
+    return { contents }
   }
 }
 
