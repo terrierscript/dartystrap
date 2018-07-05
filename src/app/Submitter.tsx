@@ -1,10 +1,9 @@
 import * as React from "react"
 import { Component, ReactNode } from "react"
 
-export class Submitter<T> extends Component<
-  { item: T; children: (item: T) => ReactNode },
-  { item: T }
-> {
+type Props<T> = { item: T; children: (item: T) => ReactNode }
+type State<T> = { item: T }
+export class Submitter<T> extends Component<Props<T>, State<T>> {
   constructor(props) {
     super(props)
     this.state = { item: this.props.item }
@@ -19,10 +18,10 @@ export class Submitter<T> extends Component<
   }
   render() {
     return (
-      <>
+      <div>
         <button onClick={this.handleClick}>Update</button>
         {this.props.children(this.state.item)}
-      </>
+      </div>
     )
   }
 }
