@@ -50,7 +50,7 @@ const renderSass = (scss: string, importer): Promise<string> => {
   return new Promise((res, rej) => {
     // scss = ".foo{color:red}"
     console.log(sass)
-    const result = sass.renderSync(
+    const result = sass.render(
       {
         data: scss,
         importe(url, prev, done) {
