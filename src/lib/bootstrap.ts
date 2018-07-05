@@ -26,7 +26,7 @@ const render = (scss: string, importer): Promise<string> => {
     const result = sass.render(
       {
         data: scss,
-        importer: (url, prev, done) => {
+        importer(url, prev, done) {
           importer(url, prev, done)
         }
       },
@@ -50,6 +50,7 @@ const renderSync = (scss: string, importer): string => {
   const result = sass.renderSync({
     data: scss,
     importer: (url, prev) => {
+      console.log("impoter", url, prev)
       return importer(url, prev)
     }
   })
@@ -61,6 +62,6 @@ export const build = (variables = {}) => {
   const vars = buildParams(variables)
   const scss = scssString(vars)
   return unpkg("bootstrap").then((importer) => {
-    return renderSync(scss, importer)
+    return render(scss, importer)
   })
 }
