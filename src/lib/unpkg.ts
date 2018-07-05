@@ -19,7 +19,7 @@ class _UnpkgFetcher {
   }
   resolveFilename(filePath, prev) {
     const prevCached = this.resolved[prev] ? this.resolved[prev] : prev
-    // console.log(filePath, prevCached)
+    console.log(filePath, prevCached)
     // console.log(prevCached)
     const fileName = resolver(this.files, filePath, prevCached)
     if (!fileName) {
@@ -35,6 +35,7 @@ class _UnpkgFetcher {
 
 const generateImporter = (r, packageName, version) => {
   const files = flatten(r.files)
+  console.log(files)
   const resolver = new _UnpkgFetcher(packageName, version, files)
   return (url, prev, done) => {
     const filename = resolver.resolveFilename(url, prev)

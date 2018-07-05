@@ -1,17 +1,20 @@
-// require("core-js/web/immediate")
 import "./polyfill"
-// require("core-js/web/immediate")
-// window.Buffer = require("buffer/").Buffer
+import { build } from "../lib/bootstrap"
 
-// console.log(process)
-import { build } from "../lib/bootstrap.js"
+console.log("polyfill", setImmediate)
+console.log("Buffer", Buffer)
 
 self.addEventListener(
   "message",
   function(e) {
-    build(e.data).then((css) => {
-      self.postMessage(css)
-    })
+    build(e.data)
+      .then((css) => {
+        console.log(css)
+        self.postMessage(css)
+      })
+      .catch((e) => {
+        console.error(e)
+      })
   },
   false
 )

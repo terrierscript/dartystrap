@@ -20,6 +20,7 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
   componentDidMount() {
     this.buildBootstrap()
     this.worker.addEventListener("message", (e) => {
+      console.log(e)
       this.setState({ css: e.data, isCompiling: false })
     })
   }
@@ -33,9 +34,6 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     this.setState({ isCompiling: true }, () => {
       const { variablesKeyValue } = this.props
       this.worker.postMessage(variablesKeyValue)
-      // build(variablesKeyValue).then((css) => {
-      //   this.setState({ css, isCompiling: false })
-      // })
     })
   }
   render() {

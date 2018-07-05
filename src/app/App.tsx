@@ -28,15 +28,16 @@ export class App extends Component<{}, AppState> {
   render() {
     return (
       <>
+        <h1>Bootstrap Builder</h1>
         <VariableContainer>
           {(variables) => (
             <BootstrapCompiler variablesKeyValue={variables}>
               {({ css, isCompiling }) => (
-                <>
-                  <div>{isCompiling ? "now Compile" : "compile Finished"}</div>
-                  <Examples baseCss={css} />
-                  <Result>{css}</Result>
-                </>
+                //     <>
+                //       <div>{isCompiling ? "now Compile" : "compile Finished"}</div>
+                //       <Examples baseCss={css} />
+                <Result>{css}</Result>
+                //     </>
               )}
             </BootstrapCompiler>
           )}

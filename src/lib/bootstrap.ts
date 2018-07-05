@@ -1,7 +1,8 @@
-// const sass = require("../../dart-sass/build/npm")
+// import sass from "../../dart-sass/build/npm"
 import sass from "sass"
-import path from "path"
+// import path from "path"
 import unpkg from "./unpkg"
+// import { ServerResponse } from "http"
 
 const buildParams = (params) => {
   return Object.entries(params)
@@ -15,26 +16,32 @@ const scssString = (append) => {
   const url = "scss/bootstrap"
   const scss = `
   ${append}
-  .sample{
   @import "${url}";
-  }
   `
   return scss
 }
-
-const renderSass = (scss: string, importer): Promise<string> => {
+const renderSassMock = (...args): Promise<string> => {
   return new Promise((res, rej) => {
-    // console.time("css")
+    const scss = ".foo{color:red}"
+    console.log(sass)
+    sass.render({ data: scss }, (e, r) => res(r.css.toString()))
+  })
+}
+const renderSass = (scss: string, importer): Promise<string> => {
+  // return renderSassMock()
+  return new Promise((res, rej) => {
+    // scss = ".foo{color:red}"
+    console.log(scss)
     const result = sass.render(
       {
         data: scss,
-        importer: (url, prev, done) => {
-          importer(url, prev, done)
+        importe(url, prev, done) {
+          console.log(url, prev, done)
+          done("")
+          // importer(url, prev, done)
         }
       },
       (err, result) => {
-        // console.timeEnd("css")
-
         if (err) {
           return rej(err)
         }
@@ -47,9 +54,9 @@ const renderSass = (scss: string, importer): Promise<string> => {
   })
 }
 
-export const build = (variables = {}, decorator = (scss) => scss) => {
+export const build = (variables = {}) => {
   const vars = buildParams(variables)
-  const scss = decorator(scssString(vars))
+  const scss = scssString(vars)
   return unpkg("bootstrap").then((importer) => {
     return renderSass(scss, importer)
   })

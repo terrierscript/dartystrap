@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node --experimental-modules index.mjs",
-    "dev": "parcel serve parcel/index.html ",
+    "dev": "parcel serve parcel/index.html --no-cache --no-source-maps",
     "lambda": "npx netlify-lambda serve functions",
     "budo": "budo src/index.js",
     "silent": " browserify  -t brfs src/index.js > dist/build.js",
@@ -29,6 +29,7 @@
     "dart-sass": "^1.8.0",
     "fibers": "^2.0.2",
     "formik": "^0.11.11",
+    "global": "^4.3.2",
     "lit-html": "^0.10.2",
     "local-web-server": "^2.5.2",
     "netlify-lambda": "^0.4.0",

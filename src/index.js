@@ -3,6 +3,9 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { App } from "./app/App"
 
+// const bufferPolyfill = require("buffer/")
+// console.log("main", bufferPolyfill)
+
 ReactDOM.render(<App />, document.querySelector("#app"))
 
 // console.time("css")
