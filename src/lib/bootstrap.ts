@@ -15,14 +15,12 @@ const scssString = (append) => {
   const url = "scss/bootstrap"
   const scss = `
   ${append}
-  .sample{
   @import "${url}";
-  }
   `
   return scss
 }
 
-const renderSass = (scss: string, importer): Promise<string> => {
+const render = (scss: string, importer): Promise<string> => {
   return new Promise((res, rej) => {
     // console.time("css")
     const result = sass.render(
@@ -47,10 +45,22 @@ const renderSass = (scss: string, importer): Promise<string> => {
   })
 }
 
-export const build = (variables = {}, decorator = (scss) => scss) => {
+const renderSync = (scss: string, importer): string => {
+  // scss = ".foo{colo:red}"
+  const result = sass.renderSync({
+    data: scss,
+    importer: (url, prev) => {
+      return importer(url, prev)
+    }
+  })
+  console.log(result.css)
+  return result.css.toString()
+}
+
+export const build = (variables = {}) => {
   const vars = buildParams(variables)
-  const scss = decorator(scssString(vars))
+  const scss = scssString(vars)
   return unpkg("bootstrap").then((importer) => {
-    return renderSass(scss, importer)
+    return renderSync(scss, importer)
   })
 }
