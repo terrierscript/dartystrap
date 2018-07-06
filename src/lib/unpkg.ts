@@ -6,16 +6,43 @@ import path from "path"
 const unpkg =
   process.env.NODE_ENV === "production" ? "/unpkg/" : "https://unpkg.com/"
 
-class _UnpkgFetcher {
-  packageName = ""
-  version = ""
-  files = []
+const loadAllContents = (
+  baseUrl: string,
+  paths: string[]
+): Promise<FileStorage> =>
+  Promise.all(
+    paths.map((url) =>
+      fetchWithStorage(`${baseUrl}/${url}`).then((scss) => {
+        return {
+          url,
+          scss
+        }
+      })
+    )
+  ).then((results) => {
+    return results.reduce((curr, { url, scss }) => {
+      return {
+        ...curr,
+        [url]: scss
+      }
+    }, {})
+  })
+
+type FileStorage = {
+  [filename: string]: string
+}
+
+class _FileNameResolver {
+  // packageName = ""
+  // version = ""
+  files: string[] = []
   resolved = {}
-  constructor(packageName, version, files) {
-    this.packageName = packageName
-    this.version = version
-    this.files = Object.keys(files)
-    this.resolved = {}
+  fileStorage: FileStorage = {}
+  constructor(/*packageName, version,*/ fileStorage) {
+    // this.packageName = packageName
+    // this.version = version
+    this.files = Object.keys(fileStorage)
+    this.fileStorage = fileStorage
   }
   resolveFilename(filePath, prev) {
     const prevCached = this.resolved[prev] ? this.resolved[prev] : prev
@@ -23,37 +50,48 @@ class _UnpkgFetcher {
     // console.log(prevCached)
     const fileName = resolver(this.files, filePath, prevCached)
     if (!fileName) {
-      throw "FileName is not found"
+      throw `FileName is not found ${fileName}`
     }
     this.resolved[filePath] = fileName
-    return this.getFullPath(fileName)
+    return fileName
+    // return this.getFullPath(fileName)
   }
-  getFullPath(filePath) {
-    return `${unpkg}${this.packageName}@${this.version}${filePath}`
+  getContent(url, prev): string {
+    const filename = this.resolveFilename(url, prev)
+    const content = this.fileStorage[filename]
+    if (!content) {
+      throw `Not found ${filename}`
+    }
+    return content
   }
+  // getFullPath(filePath) {
+  //   return `${unpkg}${this.packageName}@${this.version}${filePath}`
+  // }
 }
 
-const generateImporter = (r, packageName, version) => {
-  const files = flatten(r.files)
-  console.log(files)
-  const resolver = new _UnpkgFetcher(packageName, version, files)
+const generateImporter = (resolver) => {
   return (url, prev, done) => {
-    const filename = resolver.resolveFilename(url, prev)
-    fetchWithStorage(filename)
-      .then((scss) => {
-        return done({
-          contents: scss
-        })
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+    const contents = resolver.getContent(url, prev)
+    if (typeof done === "function") {
+      return done({ contents })
+    }
+    return { contents }
   }
 }
 
 export default (packageName, version = "4.1.1") => {
-  const metaUrl = `${unpkg}${packageName}@${version}/?meta`
-  return fetchWithStorageJson(metaUrl).then((r) => {
-    return generateImporter(r, packageName, version)
-  })
+  const baseUrl = `${unpkg}${packageName}@${version}`
+  const metaUrl = `${baseUrl}/?meta`
+  return fetchWithStorageJson(metaUrl)
+    .then((response) => {
+      const files = flatten(response.files)
+      const scssFiles = Object.keys(files).filter(
+        (name) => name.indexOf(".scss") > -1
+      )
+      return loadAllContents(baseUrl, scssFiles)
+    })
+    .then((contents) => {
+      const resolver = new _FileNameResolver(/*packageName, version,*/ contents)
+      return generateImporter(resolver)
+    })
 }

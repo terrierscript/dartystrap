@@ -36,28 +36,13 @@ const awaitImporter = (importer, url, prev) => {
   })
 }
 
-// async function renderSync(scss: string, importer) {
-//   const result = sass.renderSync({
-//     data: scss,
-//     importer(url, prev) {
-//       return await awaitImporter(importer, url, prev)
-//     }
-//   })
-//   return result.css.toString()
-// }
-const renderSass = (scss: string, importer): Promise<string> => {
-  // return renderSassMock()
+const render = (scss: string, importer): Promise<string> => {
   return new Promise((res, rej) => {
-    // scss = ".foo{color:red}"
-    console.log(sass)
     const result = sass.render(
       {
         data: scss,
-        importe(url, prev, done) {
-          console.log(url, prev, done)
-          return ""
-          done("")
-          // importer(url, prev, done)
+        importer(url, prev, done) {
+          importer(url, prev, done)
         }
       },
       (err, result) => {
@@ -74,10 +59,21 @@ const renderSass = (scss: string, importer): Promise<string> => {
   })
 }
 
+const renderSync = (scss: string, importer): string => {
+  const result = sass.renderSync({
+    data: scss,
+    importer: (url, prev) => {
+      return importer(url, prev)
+    }
+  })
+  return result.css.toString()
+}
+
 export const build = (variables = {}) => {
   const vars = buildParams(variables)
   const scss = scssString(vars)
   return unpkg("bootstrap").then((importer) => {
-    return renderSass(scss, importer)
+    return renderSync(scss, importer)
+    // return render(scss, importer)
   })
 }
