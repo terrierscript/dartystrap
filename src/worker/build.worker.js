@@ -1,8 +1,8 @@
 import "./polyfill"
 import { build } from "../lib/bootstrap"
 
-console.log("polyfill", setImmediate)
-console.log("Buffer", Buffer)
+// console.log("polyfill", setImmediate)
+// console.log("Buffer", Buffer)
 
 self.addEventListener(
   "message",

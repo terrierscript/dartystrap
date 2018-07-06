@@ -73,6 +73,7 @@ export const build = (variables = {}) => {
   const vars = buildParams(variables)
   const scss = scssString(vars)
   return unpkg("bootstrap").then((importer) => {
+    console.log(importer)
     return renderSync(scss, importer)
     // return render(scss, importer)
   })
