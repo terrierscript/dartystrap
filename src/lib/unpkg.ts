@@ -69,16 +69,6 @@ class _FileNameResolver {
   // }
 }
 
-const generateImporter = (resolver) => {
-  return (url, prev, done) => {
-    const contents = resolver.getContent(url, prev)
-    if (typeof done === "function") {
-      return done({ contents })
-    }
-    return { contents }
-  }
-}
-
 export default (packageName, version = "4.1.1") => {
   const baseUrl = `${unpkg}${packageName}@${version}`
   const metaUrl = `${baseUrl}/?meta`
@@ -92,6 +82,6 @@ export default (packageName, version = "4.1.1") => {
     })
     .then((contents) => {
       const resolver = new _FileNameResolver(/*packageName, version,*/ contents)
-      return generateImporter(resolver)
+      return resolver
     })
 }

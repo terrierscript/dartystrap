@@ -59,7 +59,7 @@ const render = (scss: string, importer): Promise<string> => {
   })
 }
 
-const renderSync = (scss: string, importer): string => {
+export const renderSync = (scss: string, importer): string => {
   const result = sass.renderSync({
     data: scss,
     importer: (url, prev) => {
@@ -69,12 +69,21 @@ const renderSync = (scss: string, importer): string => {
   return result.css.toString()
 }
 
+export const generateImporter = (resolver) => {
+  return (url, prev, done) => {
+    const contents = resolver.getContent(url, prev)
+    if (typeof done === "function") {
+      return done({ contents })
+    }
+    return { contents }
+  }
+}
+
 export const build = (variables = {}) => {
   const vars = buildParams(variables)
   const scss = scssString(vars)
-  return unpkg("bootstrap").then((importer) => {
-    console.log(importer)
-    return renderSync(scss, importer)
+  return unpkg("bootstrap").then((resolver) => {
+    return renderSync(scss, resolver)
     // return render(scss, importer)
   })
 }
