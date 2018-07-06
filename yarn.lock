@@ -8381,6 +8381,10 @@ scope-analyzer@^2.0.1:
     estree-is-function "^1.0.0"
     get-assigned-identifiers "^1.1.0"
 
+scss-symbols-parser@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/scss-symbols-parser/-/scss-symbols-parser-1.1.3.tgz#5708d5584d8e402fc7cbdf9b87af3ba61bcc36d4"
+
 semver-diff@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/semver-diff/-/semver-diff-2.1.0.tgz#4bbb8437c8d37e4b0cf1a68fd726ec6d645d6d36"

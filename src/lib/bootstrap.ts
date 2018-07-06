@@ -6,7 +6,7 @@ import unpkg from "./unpkg"
 const buildParams = (params) => {
   return Object.entries(params)
     .map(([key, value]) => {
-      return [`$${key}: ${value};`]
+      return [`${key}: ${value};`]
     })
     .join("\n")
 }

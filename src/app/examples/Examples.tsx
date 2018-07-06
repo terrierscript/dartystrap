@@ -1,7 +1,7 @@
 import React, { SFC } from "react"
 import sass from "sass"
 // import { build } from "../lib/bootstrap"
-import { SampleButtons } from "./examples/SampleButtons"
+import { SampleButtons } from "./SampleButtons"
 import ShadowDOM from "react-shadow"
 
 const ExampleWithCss = ({ css }) => {

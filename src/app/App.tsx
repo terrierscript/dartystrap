@@ -2,7 +2,7 @@ import { BootstrapCompiler } from "./BootstrapCompiler"
 
 import React from "react"
 import { Component } from "react"
-import { VariableContainer } from "./Variables"
+import { VariableContainer } from "./variables/Variables"
 import {
   VariablesMap,
   convertToMap,
@@ -10,7 +10,7 @@ import {
   KeyValue
 } from "./scssVariables"
 
-import { Examples } from "./Examples"
+import { Examples } from "./examples/Examples"
 
 const Result = ({ children }) => {
   return (

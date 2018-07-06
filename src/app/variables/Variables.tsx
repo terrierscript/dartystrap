@@ -5,9 +5,12 @@ import {
   VariableType,
   VariablesMap,
   convertToMap,
-  convertToKeyValue
-} from "./scssVariables"
-import { Submitter } from "./Submitter"
+  convertToKeyValue,
+  convertToMapFromArray
+} from "app/scssVariables"
+
+import { Submitter } from "app/Submitter"
+import { fields } from "./init"
 
 type VariableChangeHandler = (value: VariableType) => any
 type VariableContainerChildren = {
@@ -20,9 +23,7 @@ type Props = {
 }
 type State = { variables: VariablesMap }
 
-const initial: VariablesMap = convertToMap({
-  blue: "#007bff"
-})
+const initial: VariablesMap = convertToMapFromArray(fields)
 
 class InternalVariablesContainer extends Component<Props, State> {
   state = { variables: initial }
@@ -48,8 +49,9 @@ const VariableInput: SFC<{
   onChangeVariable: VariableChangeHandler
 }> = ({ variable, onChangeVariable }) => (
   <div key={variable.name}>
-    <label>${variable.name}</label>
+    <label>{variable.name}</label>
     <input
+      placeholder={variable.defaultValue}
       value={variable.value}
       onChange={(e) => {
         onChangeVariable({
