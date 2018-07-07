@@ -1,9 +1,9 @@
 import * as React from "react"
 import { SFC } from "react"
 import { VariableType } from "../scssVariables"
-import { VariableChangeHandler } from "./Variables"
 import { getType } from "./VariableForm"
 import styled from "react-emotion"
+import { VariableChangeHandler } from "./VariablesState"
 
 const Row = styled("div")`
   width: 200px;
@@ -21,6 +21,7 @@ export const VariableInput: SFC<{
     placeholder: variable.defaultValue,
     checked: value
   }
+  console.log({ name, value })
   return (
     <Row>
       <label>

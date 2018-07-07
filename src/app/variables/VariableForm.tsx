@@ -1,7 +1,7 @@
 import { VariableInput } from "./VariableInput"
 
 import React, { SFC } from "react"
-import { VariableContainerChildren } from "./Variables"
+import { VariableContainerChildren } from "./VariablesState"
 
 export const getType = (value) => {
   if (value === "true" || value === "false") {
