@@ -10,11 +10,11 @@
     "budo": "budo src/index.js",
     "silent": " browserify  -t brfs src/index.js > dist/build.js",
     "wp": "yarn webpack-serve --mode=development --content=webpack",
-    "build": "parcel build parcel/index.html --no-minify",
+    "build": "ENV=development parcel build parcel/index.html --no-minify",
     "build-parcel": "cd node_modules/parcel-bundler; yarn; yarn build",
     "predeploy": "yarn build",
     "init-prepare": "yarn build-parcel",
-    "deploy": "yarn build-raw; netlify deploy"
+    "deploy": "yarn build; netlify deploy"
   },
   "dependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
