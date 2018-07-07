@@ -9,14 +9,9 @@ import {
   VariableContainerChildProps
 } from "app/variables/Variables"
 import { Examples } from "app/examples/Examples"
-
-const Result = ({ children }) => {
-  return (
-    <pre>
-      <code>{children}</code>
-    </pre>
-  )
-}
+import { Flexbox } from "./layout"
+import { Result } from "./result/Result"
+import styled from "react-emotion"
 
 const Container: SFC<{
   children: (
@@ -32,24 +27,33 @@ const Container: SFC<{
   </VariableContainer>
 )
 
+const Center = styled(Flexbox)`
+  max-width: 800px;
+`
 export class MyApp extends Component {
   render() {
     return (
-      <div>
+      <Center>
         <Container>
-          {({ css, isCompiling }) => (
-            <div>
-              <div>{isCompiling ? "now Compile" : "compile Finished"}</div>
-              <div>
+          {({ Form, Button, css, isCompiling }) => (
+            <Flexbox>
+              <Flexbox>
+                <Form />
+                <Button />
+              </Flexbox>
+              <Flexbox>
+                {isCompiling ? "now Compile" : "compile Finished"}
+              </Flexbox>
+              <Flexbox>
                 <Examples baseCss={css} />
-              </div>
-              <div>
+              </Flexbox>
+              <Flexbox>
                 <Result>{css}</Result>
-              </div>
-            </div>
+              </Flexbox>
+            </Flexbox>
           )}
         </Container>
-      </div>
+      </Center>
     )
   }
 }

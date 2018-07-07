@@ -1,12 +1,14 @@
 import * as React from "react"
-import { Component, ReactNode } from "react"
+import { Component, ReactNode, SFC } from "react"
 
-type Props<T> = { item: T; children: (item: T) => ReactNode }
-type State<T> = { item: T }
-export class Submitter<T> extends Component<Props<T>, State<T>> {
+export class Submitter<T> extends Component<
+  { item: T; children: (props: { item: T | {}; Button: SFC }) => ReactNode },
+  { item: T | {} }
+> {
   constructor(props) {
     super(props)
-    this.state // = { item: this.props.item }
+    // TODO
+    this.state = { item: {} } // = { item: this.props.item }
   }
   handleClick = () => {
     this.setState({ item: this.props.item })
@@ -17,11 +19,8 @@ export class Submitter<T> extends Component<Props<T>, State<T>> {
     return stateUpdated
   }
   render() {
-    return (
-      <div>
-        <button onClick={this.handleClick}>Generate</button>
-        {this.props.children(this.state.item)}
-      </div>
-    )
+    const Button = () => <button onClick={this.handleClick}>Generate</button>
+
+    return this.props.children({ item: this.state.item, Button })
   }
 }
