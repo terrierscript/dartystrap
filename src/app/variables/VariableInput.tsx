@@ -28,6 +28,7 @@ export const VariableInput: SFC<{
         <input
           {...inputProps}
           onChange={(e) => {
+            console.log(e.target)
             const newValue =
               type === "checkbox" ? e.target.checked : e.target.value
             onChangeVariable({ ...variable, value: newValue.toString() })

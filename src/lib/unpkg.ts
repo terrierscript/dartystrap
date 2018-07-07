@@ -46,7 +46,6 @@ class _FileNameResolver {
   }
   resolveFilename(filePath, prev) {
     const prevCached = this.resolved[prev] ? this.resolved[prev] : prev
-    console.log(filePath, prevCached)
     // console.log(prevCached)
     const fileName = resolver(this.files, filePath, prevCached)
     if (!fileName) {

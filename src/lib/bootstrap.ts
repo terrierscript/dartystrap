@@ -47,7 +47,6 @@ const render = (scss: string, importer): Promise<string> => {
       },
       (err, result) => {
         if (err) {
-          console.log("ERRRRR")
           return rej(err)
         }
         if (!result) {
