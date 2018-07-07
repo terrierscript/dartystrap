@@ -23,8 +23,6 @@ export const VariableInput: SFC<{
   if (type === "color" && !value) {
     value = variable.defaultValue
   }
-  // const value = variable.value
-  // console.log(variable.name, value)
 
   const inputProps: any = {
     type,
@@ -32,7 +30,6 @@ export const VariableInput: SFC<{
     placeholder: variable.defaultValue,
     checked: value
   }
-  // console.log(inputProps.value)
   return (
     <Row>
       <label>
@@ -42,7 +39,6 @@ export const VariableInput: SFC<{
           onChange={(e) => {
             const newValue =
               type === "checkbox" ? e.target.checked : e.target.value
-            // console.log("newValue", newValue)
             onChangeVariable({ ...variable, value: newValue.toString() })
           }}
         />
