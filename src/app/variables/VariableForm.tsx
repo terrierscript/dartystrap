@@ -1,6 +1,7 @@
 import React, { SFC } from "react"
 import { VariableType } from "../scssVariables"
 import { VariableChangeHandler, VariableContainerChildren } from "./Variables"
+import styled, { css } from "react-emotion"
 
 const getType = (value) => {
   if (value === "true" || value === "false") {
@@ -9,6 +10,9 @@ const getType = (value) => {
   return value.indexOf("#") === 0 ? "color" : "input"
 }
 
+const Row = styled("div")`
+  width: 300px;
+`
 const VariableInput: SFC<{
   variable: VariableType
   onChangeVariable: VariableChangeHandler
@@ -22,7 +26,7 @@ const VariableInput: SFC<{
     checked: value === "true"
   }
   return (
-    <div>
+    <Row>
       <label>
         {variable.name}
         <input
@@ -34,7 +38,7 @@ const VariableInput: SFC<{
           }}
         />
       </label>
-    </div>
+    </Row>
   )
 }
 

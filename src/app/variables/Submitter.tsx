@@ -2,7 +2,7 @@ import * as React from "react"
 import { Component, ReactNode } from "react"
 
 export class Submitter<T> extends Component<
-  { item: T; children: (item: T) => ReactNode },
+  { item: T; children: ({ item: T, Button: SFC }) => ReactNode },
   { item: T }
 > {
   constructor(props) {
@@ -18,11 +18,8 @@ export class Submitter<T> extends Component<
     return stateUpdated
   }
   render() {
-    return (
-      <>
-        <button onClick={this.handleClick}>Generate</button>
-        {this.props.children(this.state.item)}
-      </>
-    )
+    const Button = () => <button onClick={this.handleClick}>Generate</button>
+
+    return this.props.children({ item: this.state.item, Button })
   }
 }

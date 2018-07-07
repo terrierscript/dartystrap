@@ -51,24 +51,39 @@ const Console = (item) => {
   return null
 }
 
-export type VariableContainerChildProps = { variables: KeyValue }
+export type VariableContainerChildProps = {
+  variables: KeyValue
+  Form: SFC
+  Button: SFC
+}
 
 export const VariableContainer: SFC<{
   children: (props: VariableContainerChildProps) => ReactNode
 }> = ({ children }) => {
   return (
     <InternalVariablesContainer>
-      {(props: VariableContainerChildren) => (
-        <div>
-          <VariableForm {...props} />
-          <Submitter<VariablesMap> item={props.variables}>
-            {(item) => {
-              const variablesKeyValue = convertToKeyValue(item)
-              return <div>{children({ variables: variablesKeyValue })}</div>
-            }}
-          </Submitter>
-        </div>
-      )}
+      {(props: VariableContainerChildren) => {
+        const Form: SFC = () => <VariableForm {...props} />
+
+        return (
+          <div>
+            <Submitter<VariablesMap> item={props.variables}>
+              {({ Button, item }) => {
+                const variablesKeyValue = convertToKeyValue(item)
+                return (
+                  <div>
+                    {children({
+                      variables: variablesKeyValue,
+                      Form,
+                      Button
+                    })}
+                  </div>
+                )
+              }}
+            </Submitter>
+          </div>
+        )
+      }}
     </InternalVariablesContainer>
   )
 }
