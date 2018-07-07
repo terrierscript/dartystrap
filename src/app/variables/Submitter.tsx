@@ -7,7 +7,7 @@ export class Submitter<T> extends Component<
 > {
   constructor(props) {
     super(props)
-    this.state = { item: this.props.item }
+    this.state // = { item: this.props.item }
   }
   handleClick = () => {
     this.setState({ item: this.props.item })
