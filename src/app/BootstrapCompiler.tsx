@@ -1,7 +1,6 @@
 import { ReactNode, PureComponent } from "react"
 import { Component } from "react"
-// import { build } from "../lib/bootstrap"
-import { KeyValue, VariablesMap, convertToKeyValue } from "./scssVariables"
+import { VariablesMap, convertToKeyValue } from "./scssVariables"
 
 type Props = {
   submitVariables: VariablesMap
