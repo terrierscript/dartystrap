@@ -19,18 +19,18 @@ export const VariableInput: SFC<{
   onChangeVariable: VariableChangeHandler
 }> = ({ variable, onChangeVariable }) => {
   const type = getType(variable.defaultValue)
-  const value =
-    // variable.value === undefined ? variable.value : variable.defaultValue
-    variable.value
-  console.log(variable.name, value)
+  // const value =
+  //   variable.value === undefined ? variable.value : variable.defaultValue
+  const value = variable.value
+  // console.log(variable.name, value)
 
   const inputProps: any = {
     type,
-    value
-    // placeholder: variable.defaultValue
-    // checked: value
+    value,
+    placeholder: variable.defaultValue,
+    checked: value
   }
-  console.log(inputProps.value)
+  // console.log(inputProps.value)
   return (
     <Row>
       <label>
@@ -40,7 +40,7 @@ export const VariableInput: SFC<{
           onChange={(e) => {
             const newValue =
               type === "checkbox" ? e.target.checked : e.target.value
-            console.log("newValue", newValue)
+            // console.log("newValue", newValue)
             onChangeVariable({ ...variable, value: newValue.toString() })
           }}
         />
