@@ -12,6 +12,7 @@
     "wp": "yarn webpack-serve --mode=development --content=webpack",
     "build": "parcel build parcel/index.html",
     "predeploy": "yarn build",
+    "postinstall": "yarn link parcel-bundler; yarn link sass",
     "deploy": "netlify deploy"
   },
   "dependencies": {
