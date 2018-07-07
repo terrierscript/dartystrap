@@ -17,7 +17,7 @@ const Container: SFC<{
 }> = ({ children }) => (
   <Variables>
     {(variableProps) => (
-      <BootstrapCompiler variablesKeyValue={variableProps.variables}>
+      <BootstrapCompiler submitVariables={variableProps.submitVariables}>
         {(bsProps) => children({ ...variableProps, ...bsProps })}
       </BootstrapCompiler>
     )}

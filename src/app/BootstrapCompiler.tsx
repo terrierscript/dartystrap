@@ -1,10 +1,10 @@
 import { ReactNode, PureComponent } from "react"
 import { Component } from "react"
 // import { build } from "../lib/bootstrap"
-import { KeyValue } from "./scssVariables"
+import { KeyValue, VariablesMap, convertToKeyValue } from "./scssVariables"
 
 type Props = {
-  variablesKeyValue: KeyValue
+  submitVariables: VariablesMap
   children: (props: BootstrapCompilerChildrenProps) => ReactNode
 }
 type State = {
@@ -34,7 +34,9 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
   }
   buildBootstrap() {
     this.setState({ isCompiling: true }, () => {
-      const { variablesKeyValue } = this.props
+      const { submitVariables } = this.props
+      const variablesKeyValue = convertToKeyValue(submitVariables)
+
       this.worker.postMessage(variablesKeyValue)
     })
   }

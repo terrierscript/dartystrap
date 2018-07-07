@@ -10,7 +10,7 @@ import { Submitter } from "./Submitter"
 import { VariableForm } from "./VariableForm"
 
 export type VariableContainerChildProps = {
-  variables: KeyValue
+  submitVariables: VariablesMap
   Form: SFC
   Button: SFC
 }
@@ -26,11 +26,10 @@ export const Variables: SFC<{
         return (
           <Submitter<VariablesMap> item={props.variables}>
             {({ Button, item }) => {
-              const variablesKeyValue = convertToKeyValue(item)
               return (
                 <div>
                   {children({
-                    variables: variablesKeyValue,
+                    submitVariables: item,
                     Form,
                     Button
                   })}
