@@ -1,16 +1,8 @@
-import { BootstrapCompiler } from "./BootstrapCompiler"
-
 import React from "react"
+import { BootstrapCompiler } from "app/BootstrapCompiler"
 import { Component } from "react"
-import { VariableContainer } from "./variables/Variables"
-import {
-  VariablesMap,
-  convertToMap,
-  convertToKeyValue,
-  KeyValue
-} from "./scssVariables"
-
-import { Examples } from "./examples/Examples"
+import { VariableContainer } from "app/variables/Variables"
+import { Examples } from "app/examples/Examples"
 
 const Result = ({ children }) => {
   return (
@@ -20,28 +12,28 @@ const Result = ({ children }) => {
   )
 }
 
-type AppState = {
-  variables: KeyValue
-}
-
-export class App extends Component<{}, AppState> {
+export class MyApp extends Component {
   render() {
     return (
-      <>
+      <div>
         <VariableContainer>
           {(variables) => (
             <BootstrapCompiler variablesKeyValue={variables}>
               {({ css, isCompiling }) => (
-                <>
+                <div>
                   <div>{isCompiling ? "now Compile" : "compile Finished"}</div>
-                  <Examples baseCss={css} />
-                  <Result>{css}</Result>
-                </>
+                  <div>
+                    <Examples baseCss={css} />
+                  </div>
+                  <div>
+                    <Result>{css}</Result>
+                  </div>
+                </div>
               )}
             </BootstrapCompiler>
           )}
         </VariableContainer>
-      </>
+      </div>
     )
   }
 }

@@ -20,7 +20,7 @@ export class Submitter<T> extends Component<
   render() {
     return (
       <>
-        <button onClick={this.handleClick}>Update</button>
+        <button onClick={this.handleClick}>Generate</button>
         {this.props.children(this.state.item)}
       </>
     )

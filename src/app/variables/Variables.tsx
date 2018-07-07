@@ -9,11 +9,12 @@ import {
   convertToMapFromArray
 } from "app/scssVariables"
 
-import { Submitter } from "app/Submitter"
+import { Submitter } from "./Submitter"
 import { fields } from "./init"
+import { VariableForm } from "./VariableForm"
 
-type VariableChangeHandler = (value: VariableType) => any
-type VariableContainerChildren = {
+export type VariableChangeHandler = (value: VariableType) => any
+export type VariableContainerChildren = {
   variables: VariablesMap
   onChangeVariable: VariableChangeHandler
 }
@@ -44,69 +45,16 @@ class InternalVariablesContainer extends Component<Props, State> {
   }
 }
 
-const getType = (value) => {
-  if (value === "true" || value === "false") {
-    return "checkbox"
-  }
-  return value.indexOf("#") === 0 ? "color" : "input"
-}
-const VariableInput: SFC<{
-  variable: VariableType
-  onChangeVariable: VariableChangeHandler
-}> = ({ variable, onChangeVariable }) => {
-  const type = getType(variable.defaultValue)
-  const value = variable.value || variable.defaultValue
-  const inputProps = {
-    type,
-    value,
-    placeholder: variable.defaultValue,
-    checked: value === "true"
-  }
-  return (
-    <div>
-      <label>
-        {variable.name}
-        <input
-          {...inputProps}
-          onChange={(e) => {
-            const newValue =
-              type === "checkbox" ? e.target.checked : e.target.value
-            onChangeVariable({ ...variable, value: newValue.toString() })
-          }}
-        />
-      </label>
-    </div>
-  )
-}
-
-const VariableForm: SFC<VariableContainerChildren> = ({
-  variables,
-  onChangeVariable
-}) => {
-  return (
-    <>
-      {Object.values(variables).map((variable) => {
-        return (
-          <VariableInput
-            key={variable.name}
-            variable={variable}
-            onChangeVariable={onChangeVariable}
-          />
-        )
-      })}
-    </>
-  )
-}
 const Console = (item) => {
   console.log("Console", item)
   return null
 }
+
 export const VariableContainer = ({ children }) => {
   return (
     <InternalVariablesContainer>
-      {(props) => (
-        <>
-          <Console variables={props.variables} />
+      {(props: VariableContainerChildren) => (
+        <div>
           <VariableForm {...props} />
           <Submitter<VariablesMap> item={props.variables}>
             {(item) => {
@@ -114,7 +62,7 @@ export const VariableContainer = ({ children }) => {
               return <div>{children(variablesKeyValue)}</div>
             }}
           </Submitter>
-        </>
+        </div>
       )}
     </InternalVariablesContainer>
   )
