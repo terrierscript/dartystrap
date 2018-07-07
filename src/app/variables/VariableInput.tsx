@@ -21,7 +21,7 @@ export const VariableInput: SFC<{
     placeholder: variable.defaultValue,
     checked: value
   }
-  console.log({ name, value })
+  console.log(variable.name, value)
   return (
     <Row>
       <label>

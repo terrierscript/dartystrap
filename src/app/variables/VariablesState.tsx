@@ -25,7 +25,6 @@ export class VariablesState extends React.Component<Props, State> {
   state = { variables: initial }
   handleChange = (newVariableType: VariableType) => {
     const { name } = newVariableType
-    console.log(name, newVariableType)
     this.setState({
       variables: {
         ...this.state.variables,
