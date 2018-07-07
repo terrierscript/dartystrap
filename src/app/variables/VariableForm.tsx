@@ -1,7 +1,9 @@
 import { VariableInput } from "./VariableInput"
 
 import React, { SFC } from "react"
-import { VariableContainerChildren } from "./Variables"
+import { VariableType } from "../scssVariables"
+import { VariableChangeHandler, VariableContainerChildren } from "./Variables"
+import styled, { css } from "react-emotion"
 
 export const getType = (value) => {
   if (value === "true" || value === "false") {

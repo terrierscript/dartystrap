@@ -3,7 +3,11 @@ import { SFC } from "react"
 import { VariableType } from "../scssVariables"
 import { VariableChangeHandler } from "./Variables"
 import { getType } from "./VariableForm"
+import styled from "react-emotion"
 
+const Row = styled("div")`
+  width: 200px;
+`
 export const VariableInput: SFC<{
   variable: VariableType
   onChangeVariable: VariableChangeHandler
@@ -18,7 +22,7 @@ export const VariableInput: SFC<{
     checked: value === "true"
   }
   return (
-    <div>
+    <Row>
       <label>
         {variable.name}
         <input
@@ -30,6 +34,6 @@ export const VariableInput: SFC<{
           }}
         />
       </label>
-    </div>
+    </Row>
   )
 }
