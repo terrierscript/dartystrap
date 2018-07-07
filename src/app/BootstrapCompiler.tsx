@@ -5,12 +5,15 @@ import { KeyValue } from "./scssVariables"
 
 type Props = {
   variablesKeyValue: KeyValue
-  children: (props: State) => ReactNode
+  children: (props: BootstrapCompilerChildrenProps) => ReactNode
 }
 type State = {
   css: string
   isCompiling: boolean
 }
+
+export type BootstrapCompilerChildrenProps = State
+
 export class BootstrapCompiler extends PureComponent<Props, State> {
   state = {
     css: "",

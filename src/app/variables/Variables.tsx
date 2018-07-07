@@ -4,9 +4,10 @@ import { Component, ReactNode } from "react"
 import {
   VariableType,
   VariablesMap,
-  convertToMap,
+  // convertToMap,
   convertToKeyValue,
-  convertToMapFromArray
+  convertToMapFromArray,
+  KeyValue
 } from "app/scssVariables"
 
 import { Submitter } from "./Submitter"
@@ -26,7 +27,7 @@ type State = { variables: VariablesMap }
 
 const initial: VariablesMap = convertToMapFromArray(fields)
 
-class InternalVariablesContainer extends Component<Props, State> {
+class InternalVariablesContainer extends React.Component<Props, State> {
   state = { variables: initial }
   handleChange = (newVariableType: VariableType) => {
     const { name } = newVariableType
@@ -50,7 +51,9 @@ const Console = (item) => {
   return null
 }
 
-export const VariableContainer = ({ children }) => {
+export const VariableContainer: SFC<{
+  children: (props: { variables: KeyValue }) => ReactNode
+}> = ({ children }) => {
   return (
     <InternalVariablesContainer>
       {(props: VariableContainerChildren) => (
@@ -59,7 +62,7 @@ export const VariableContainer = ({ children }) => {
           <Submitter<VariablesMap> item={props.variables}>
             {(item) => {
               const variablesKeyValue = convertToKeyValue(item)
-              return <div>{children(variablesKeyValue)}</div>
+              return <div>{children({ variables: variablesKeyValue })}</div>
             }}
           </Submitter>
         </div>

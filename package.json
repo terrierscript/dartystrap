@@ -5,7 +5,6 @@
   "author": "inuscript <inuscript@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node --experimental-modules index.mjs",
     "dev": "parcel serve parcel/index.html --no-cache --no-autoinstall",
     "lambda": "npx netlify-lambda serve functions",
     "budo": "budo src/index.js",
