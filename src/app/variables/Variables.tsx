@@ -4,14 +4,14 @@ import { VariablesState, VariableContainerChildren } from "./VariablesState"
 
 import { SFC } from "react"
 import { ReactNode } from "react"
-import { VariablesMap, convertToKeyValue, KeyValue } from "app/scssVariables"
+import { VariablesMap } from "app/scssVariables"
 
 import { Submitter } from "./Submitter"
-import { VariableForm } from "./VariableForm"
+// import { VariableForm } from "./VariableForm"
 
 export type VariableContainerChildProps = {
   submitVariables: VariablesMap
-  Form: SFC
+  // Form: SFC
   Button: SFC
 }
 
@@ -21,7 +21,7 @@ export const Variables: SFC<{
   return (
     <VariablesState>
       {(props: VariableContainerChildren) => {
-        const Form: SFC = () => <VariableForm key="form" {...props} />
+        // const Form: SFC = () => <VariableForm key="form" {...props} />
 
         return (
           <Submitter<VariablesMap> item={props.variables}>
@@ -30,7 +30,6 @@ export const Variables: SFC<{
                 <div>
                   {children({
                     submitVariables: item,
-                    Form,
                     Button
                   })}
                 </div>
