@@ -2,12 +2,13 @@ import * as React from "react"
 import { Component, ReactNode } from "react"
 
 export class Submitter<T> extends Component<
-  { item: T; children: (item: T) => ReactNode },
-  { item: T }
+  { item: T; children: (item: T | {}) => ReactNode },
+  { item: T | {} }
 > {
   constructor(props) {
     super(props)
-    this.state // = { item: this.props.item }
+    // TODO
+    this.state = { item: {} } // = { item: this.props.item }
   }
   handleClick = () => {
     this.setState({ item: this.props.item })
