@@ -15,11 +15,11 @@ export const VariableInput: SFC<{
   const type = getType(variable.defaultValue)
   const value =
     variable.value === undefined ? variable.value : variable.defaultValue
-  const inputProps = {
+  const inputProps: any = {
     type,
     value,
     placeholder: variable.defaultValue,
-    checked: value === "true"
+    checked: value
   }
   return (
     <Row>
@@ -28,9 +28,9 @@ export const VariableInput: SFC<{
         <input
           {...inputProps}
           onChange={(e) => {
-            console.log(e.target)
             const newValue =
               type === "checkbox" ? e.target.checked : e.target.value
+
             onChangeVariable({ ...variable, value: newValue.toString() })
           }}
         />

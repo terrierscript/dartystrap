@@ -6,7 +6,6 @@ self.addEventListener(
   function(e) {
     build(e.data)
       .then((css) => {
-        console.log(css)
         self.postMessage(css)
       })
       .catch((e) => {

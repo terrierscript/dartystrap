@@ -5,7 +5,7 @@
   "author": "inuscript <inuscript@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel serve parcel/index.html --no-cache --no-autoinstall --log-level 3",
+    "dev": "parcel serve parcel/index.html --no-autoinstall --no-hmr",
     "lambda": "npx netlify-lambda serve functions",
     "budo": "budo src/index.js",
     "silent": " browserify  -t brfs src/index.js > dist/build.js",
@@ -57,8 +57,5 @@
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
     "jest": "^23.1.0"
-  },
-  "browser": {
-    "fs": "./fs.js"
   }
 }

@@ -4,10 +4,7 @@ import {
   BootstrapCompilerChildrenProps
 } from "app/BootstrapCompiler"
 import { Component } from "react"
-import {
-  VariableContainer,
-  VariableContainerChildProps
-} from "app/variables/Variables"
+import { Variables, VariableContainerChildProps } from "app/variables/Variables"
 import { Examples } from "app/examples/Examples"
 import { Flexbox } from "./layout"
 import { Result } from "./result/Result"
@@ -18,13 +15,13 @@ const Container: SFC<{
     props: VariableContainerChildProps & BootstrapCompilerChildrenProps
   ) => ReactNode
 }> = ({ children }) => (
-  <VariableContainer>
+  <Variables>
     {(variableProps) => (
       <BootstrapCompiler variablesKeyValue={variableProps.variables}>
         {(bsProps) => children({ ...variableProps, ...bsProps })}
       </BootstrapCompiler>
     )}
-  </VariableContainer>
+  </Variables>
 )
 
 const Center = styled(Flexbox)`

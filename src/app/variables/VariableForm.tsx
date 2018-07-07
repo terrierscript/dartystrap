@@ -1,9 +1,7 @@
 import { VariableInput } from "./VariableInput"
 
 import React, { SFC } from "react"
-import { VariableType } from "../scssVariables"
-import { VariableChangeHandler, VariableContainerChildren } from "./Variables"
-import styled, { css } from "react-emotion"
+import { VariableContainerChildren } from "./Variables"
 
 export const getType = (value) => {
   if (value === "true" || value === "false") {
@@ -16,6 +14,7 @@ export const VariableForm: SFC<VariableContainerChildren> = ({
   variables,
   onChangeVariable
 }) => {
+  console.log("VF")
   return (
     <>
       {Object.values(variables).map((variable) => {

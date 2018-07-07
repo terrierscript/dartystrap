@@ -4,7 +4,6 @@ import { Component, ReactNode } from "react"
 import {
   VariableType,
   VariablesMap,
-  // convertToMap,
   convertToKeyValue,
   convertToMapFromArray,
   KeyValue
@@ -31,6 +30,7 @@ class InternalVariablesContainer extends React.Component<Props, State> {
   state = { variables: initial }
   handleChange = (newVariableType: VariableType) => {
     const { name } = newVariableType
+    console.log(name, newVariableType)
     this.setState({
       variables: {
         ...this.state.variables,
@@ -46,18 +46,13 @@ class InternalVariablesContainer extends React.Component<Props, State> {
   }
 }
 
-const Console = (item) => {
-  console.log("Console", item)
-  return null
-}
-
 export type VariableContainerChildProps = {
   variables: KeyValue
   Form: SFC
   Button: SFC
 }
 
-export const VariableContainer: SFC<{
+export const Variables: SFC<{
   children: (props: VariableContainerChildProps) => ReactNode
 }> = ({ children }) => {
   return (
