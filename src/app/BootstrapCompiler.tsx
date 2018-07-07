@@ -33,7 +33,6 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     this.buildBootstrap()
   }
   buildBootstrap() {
-    return
     this.setState({ isCompiling: true }, () => {
       const { variablesKeyValue } = this.props
       this.worker.postMessage(variablesKeyValue)

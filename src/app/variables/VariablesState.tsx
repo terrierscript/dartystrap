@@ -8,6 +8,7 @@ import {
 import { ReactNode } from "react"
 import { fields } from "./init"
 import { VariableForm } from "./VariableForm"
+import { Flexbox } from "../layout/index"
 
 export type VariableChangeHandler = (value: VariableType) => any
 export type VariableContainerChildren = {
@@ -39,10 +40,10 @@ export class VariablesState extends React.Component<Props, State> {
       onChangeVariable: this.handleChange
     }
     return (
-      <div>
+      <Flexbox>
         <VariableForm key="form" {...props} />
         {this.props.children(props)}
-      </div>
+      </Flexbox>
     )
   }
 }

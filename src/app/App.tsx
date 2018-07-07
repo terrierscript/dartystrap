@@ -32,10 +32,9 @@ export class MyApp extends Component {
     return (
       <Center>
         <Container>
-          {({ Form, Button, css, isCompiling }) => (
+          {({ Button, css, isCompiling }) => (
             <Flexbox>
               <Flexbox>
-                <Form />
                 <Button />
               </Flexbox>
               <Flexbox>
