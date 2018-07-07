@@ -1,13 +1,26 @@
 export type VariableType = {
   name: string
   defaultValue: string
-  value: string
+  value?: string
 }
 export type VariablesMap = { [key: string]: VariableType }
 export type KeyValue = { [key: string]: string }
 
-export const convertToMap = (obj: KeyValue): VariablesMap => {
-  return Object.entries(obj).reduce((curr, [name, defaultValue]) => {
+// export const convertToMap = (obj: KeyValue): VariablesMap => {
+//   return Object.entries(obj).reduce((curr, [name, defaultValue]) => {
+//     return {
+//       ...curr,
+//       [name]: {
+//         name,
+//         defaultValue,
+//         value: ""
+//       }
+//     }
+//   }, {})
+// }
+
+export const convertToMapFromArray = (arr: VariableType[]): VariablesMap => {
+  return arr.reduce((curr, { name, defaultValue }) => {
     return {
       ...curr,
       [name]: {

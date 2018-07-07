@@ -1,16 +1,14 @@
-import { BootstrapCompiler } from "./BootstrapCompiler"
-
-import React from "react"
-import { Component } from "react"
-import { VariableContainer } from "./Variables"
+import React, { SFC, ReactNode } from "react"
 import {
-  VariablesMap,
-  convertToMap,
-  convertToKeyValue,
-  KeyValue
-} from "./scssVariables"
-
-import { Examples } from "./Examples"
+  BootstrapCompiler,
+  BootstrapCompilerChildrenProps
+} from "app/BootstrapCompiler"
+import { Component } from "react"
+import {
+  VariableContainer,
+  VariableContainerChildProps
+} from "app/variables/Variables"
+import { Examples } from "app/examples/Examples"
 
 const Result = ({ children }) => {
   return (
@@ -20,29 +18,38 @@ const Result = ({ children }) => {
   )
 }
 
-type AppState = {
-  variables: KeyValue
-}
+const Container: SFC<{
+  children: (
+    props: VariableContainerChildProps & BootstrapCompilerChildrenProps
+  ) => ReactNode
+}> = ({ children }) => (
+  <VariableContainer>
+    {(variableProps) => (
+      <BootstrapCompiler variablesKeyValue={variableProps.variables}>
+        {(bsProps) => children({ ...variableProps, ...bsProps })}
+      </BootstrapCompiler>
+    )}
+  </VariableContainer>
+)
 
-export class App extends Component<{}, AppState> {
+export class MyApp extends Component {
   render() {
     return (
-      <>
-        <h1>Bootstrap Builder</h1>
-        <VariableContainer>
-          {(variables) => (
-            <BootstrapCompiler variablesKeyValue={variables}>
-              {({ css, isCompiling }) => (
-                //     <>
-                //       <div>{isCompiling ? "now Compile" : "compile Finished"}</div>
-                //       <Examples baseCss={css} />
+      <div>
+        <Container>
+          {({ css, isCompiling }) => (
+            <div>
+              <div>{isCompiling ? "now Compile" : "compile Finished"}</div>
+              <div>
+                <Examples baseCss={css} />
+              </div>
+              <div>
                 <Result>{css}</Result>
-                //     </>
-              )}
-            </BootstrapCompiler>
+              </div>
+            </div>
           )}
-        </VariableContainer>
-      </>
+        </Container>
+      </div>
     )
   }
 }

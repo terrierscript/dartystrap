@@ -6,7 +6,7 @@ type State<T> = { item: T }
 export class Submitter<T> extends Component<Props<T>, State<T>> {
   constructor(props) {
     super(props)
-    this.state = { item: this.props.item }
+    this.state // = { item: this.props.item }
   }
   handleClick = () => {
     this.setState({ item: this.props.item })
@@ -19,7 +19,7 @@ export class Submitter<T> extends Component<Props<T>, State<T>> {
   render() {
     return (
       <div>
-        <button onClick={this.handleClick}>Update</button>
+        <button onClick={this.handleClick}>Generate</button>
         {this.props.children(this.state.item)}
       </div>
     )
