@@ -9,7 +9,8 @@ export const VariableInput: SFC<{
   onChangeVariable: VariableChangeHandler
 }> = ({ variable, onChangeVariable }) => {
   const type = getType(variable.defaultValue)
-  const value = variable.value === undefined || variable.defaultValue
+  const value =
+    variable.value === undefined ? variable.value : variable.defaultValue
   const inputProps = {
     type,
     value,

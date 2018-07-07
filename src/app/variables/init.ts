@@ -127,10 +127,10 @@ export const fields = [
     name: "$spacer",
     defaultValue: "1rem"
   },
-  {
-    name: "$link-color",
-    defaultValue: 'theme-color"primary"'
-  },
+  // {
+  //   name: "$link-color",
+  //   defaultValue: 'theme-color"primary"'
+  // },
   {
     name: "$link-decoration",
     defaultValue: "none"
