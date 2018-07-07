@@ -1,7 +1,13 @@
 import React, { SFC, ReactNode } from "react"
-import { BootstrapCompiler } from "app/BootstrapCompiler"
+import {
+  BootstrapCompiler,
+  BootstrapCompilerChildrenProps
+} from "app/BootstrapCompiler"
 import { Component } from "react"
-import { VariableContainer } from "app/variables/Variables"
+import {
+  VariableContainer,
+  VariableContainerChildProps
+} from "app/variables/Variables"
 import { Examples } from "app/examples/Examples"
 
 const Result = ({ children }) => {
@@ -13,7 +19,9 @@ const Result = ({ children }) => {
 }
 
 const Container: SFC<{
-  children: (props: any) => ReactNode
+  children: (
+    props: VariableContainerChildProps & BootstrapCompilerChildrenProps
+  ) => ReactNode
 }> = ({ children }) => (
   <VariableContainer>
     {(variableProps) => (

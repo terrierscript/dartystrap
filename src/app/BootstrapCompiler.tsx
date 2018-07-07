@@ -11,7 +11,6 @@ type State = {
   css: string
   isCompiling: boolean
 }
-
 export type BootstrapCompilerChildrenProps = State
 
 export class BootstrapCompiler extends PureComponent<Props, State> {

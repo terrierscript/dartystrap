@@ -51,8 +51,10 @@ const Console = (item) => {
   return null
 }
 
+export type VariableContainerChildProps = { variables: KeyValue }
+
 export const VariableContainer: SFC<{
-  children: (props: { variables: KeyValue }) => ReactNode
+  children: (props: VariableContainerChildProps) => ReactNode
 }> = ({ children }) => {
   return (
     <InternalVariablesContainer>
