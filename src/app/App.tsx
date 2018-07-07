@@ -12,28 +12,32 @@ const Result = ({ children }) => {
   )
 }
 
+const Container = (children) => (
+  <VariableContainer>
+    {(variableProps) => (
+      <BootstrapCompiler variablesKeyValue={variableProps.variables}>
+        {(bsProps) => children({ ...variableProps, ...bsProps })}
+      </BootstrapCompiler>
+    )}
+  </VariableContainer>
+)
+
 export class MyApp extends Component {
   render() {
     return (
-      <div>
-        <VariableContainer>
-          {(variables) => (
-            <BootstrapCompiler variablesKeyValue={variables}>
-              {({ css, isCompiling }) => (
-                <div>
-                  <div>{isCompiling ? "now Compile" : "compile Finished"}</div>
-                  <div>
-                    <Examples baseCss={css} />
-                  </div>
-                  <div>
-                    <Result>{css}</Result>
-                  </div>
-                </div>
-              )}
-            </BootstrapCompiler>
-          )}
-        </VariableContainer>
-      </div>
+      <Container>
+        {({ css, isCompiling }) => (
+          <div>
+            <div>{isCompiling ? "now Compile" : "compile Finished"}</div>
+            <div>
+              <Examples baseCss={css} />
+            </div>
+            <div>
+              <Result>{css}</Result>
+            </div>
+          </div>
+        )}
+      </Container>
     )
   }
 }
