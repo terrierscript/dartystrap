@@ -1,3 +1,4 @@
+import window from "global/window"
 // polyfill if need
 if (!fetch) {
   const fetch = require("cross-fetch")
@@ -12,6 +13,9 @@ export const fetchJson = (url: string) => {
 }
 
 export const fetchWithStorage = (url: string) => {
+  if (!window.localStorage) {
+    return fetchPlain(url)
+  }
   const item = localStorage.getItem(url)
   if (!item) {
     return fetchPlain(url).then((item) => {
@@ -23,6 +27,9 @@ export const fetchWithStorage = (url: string) => {
 }
 
 export const fetchWithStorageJson = (url: string) => {
+  if (!window.localStorage) {
+    return fetchJson(url)
+  }
   const item = localStorage.getItem(url)
   if (!item) {
     return fetchJson(url).then((item) => {
