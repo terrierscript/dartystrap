@@ -13,7 +13,7 @@
     "build": "parcel build parcel/index.html",
     "build-parcel": "cd node_modules/parcel-bundler; yarn; yarn build",
     "predeploy": "yarn build",
-    "prepare": "yarn build-parcel",
+    "init-prepare": "yarn build-parcel",
     "deploy": "netlify deploy"
   },
   "dependencies": {
