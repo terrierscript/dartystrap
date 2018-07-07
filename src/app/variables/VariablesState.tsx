@@ -7,6 +7,7 @@ import {
 } from "app/scssVariables"
 import { ReactNode } from "react"
 import { fields } from "./init"
+import { VariableForm } from "./VariableForm"
 
 export type VariableChangeHandler = (value: VariableType) => any
 export type VariableContainerChildren = {
@@ -33,9 +34,15 @@ export class VariablesState extends React.Component<Props, State> {
   }
   render() {
     // console.log(this.state.variables["$link-decoration"])
-    return this.props.children({
+    const props = {
       variables: this.state.variables,
       onChangeVariable: this.handleChange
-    })
+    }
+    return (
+      <div>
+        <VariableForm key="form" {...props} />
+        {this.props.children(props)}
+      </div>
+    )
   }
 }

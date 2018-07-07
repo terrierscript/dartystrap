@@ -21,40 +21,28 @@ export const Variables: SFC<{
   return (
     <VariablesState>
       {(props: VariableContainerChildren) => {
-        const Form: SFC = () => <VariableForm {...props} />
-        const Button: SFC = () => <div />
-        const item = props.variables
-        const variablesKeyValue = convertToKeyValue(item)
+        const Form: SFC = () => <VariableForm key="form" {...props} />
+        // const item = props.variables
+        // const variablesKeyValue = convertToKeyValue(item)
 
         return (
           <div>
-            <div>
-              {children({
-                variables: variablesKeyValue,
-                Form,
-                Button
-              })}
-            </div>
+            <Submitter<VariablesMap> item={props.variables}>
+              {({ Button, item }) => {
+                const variablesKeyValue = convertToKeyValue(item)
+                return (
+                  <div>
+                    {children({
+                      variables: variablesKeyValue,
+                      Form,
+                      Button
+                    })}
+                  </div>
+                )
+              }}
+            </Submitter>
           </div>
         )
-        // return (
-        //   <div>
-        //     <Submitter<VariablesMap> item={props.variables}>
-        //       {({ Button, item }) => {
-        //         const variablesKeyValue = convertToKeyValue(item)
-        //         return (
-        //           <div>
-        //             {children({
-        //               variables: variablesKeyValue,
-        //               Form,
-        //               Button
-        //             })}
-        //           </div>
-        //         )
-        //       }}
-        //     </Submitter>
-        //   </div>
-        // )
       }}
     </VariablesState>
   )
