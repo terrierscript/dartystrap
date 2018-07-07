@@ -11,9 +11,9 @@
     "silent": " browserify  -t brfs src/index.js > dist/build.js",
     "wp": "yarn webpack-serve --mode=development --content=webpack",
     "build": "parcel build parcel/index.html",
-    "build-parcel": "cd node_modules/parcel-bundler; yarn",
+    "build-parcel": "cd node_modules/parcel-bundler; yarn; yarn build",
     "predeploy": "yarn build",
-    "postinstall": "yarn build-parcel",
+    "prepare": "yarn build-parcel",
     "deploy": "netlify deploy"
   },
   "dependencies": {
@@ -37,6 +37,7 @@
     "parcel-plugin-typescript": "^1.0.0",
     "path-parse": "^1.0.5",
     "process": "~0.11.0",
+    "prop-types": "^15.6.2",
     "react": "^16",
     "react-dom": ">=0.14.7 <=16.x",
     "react-emotion": "^9.2.5",
