@@ -20,6 +20,7 @@ const scssString = (append) => {
   `
   return scss
 }
+
 const renderSassMock = (...args): Promise<string> => {
   return new Promise((res, rej) => {
     const scss = ".foo{color:red}"
@@ -28,22 +29,12 @@ const renderSassMock = (...args): Promise<string> => {
   })
 }
 
-const awaitImporter = (importer, url, prev) => {
-  return new Promise((res) => {
-    importer(url, prev, (r) => {
-      res(r)
-    })
-  })
-}
-
 const render = (scss: string, importer): Promise<string> => {
   return new Promise((res, rej) => {
     const result = sass.render(
       {
         data: scss,
-        importer(url, prev, done) {
-          importer(url, prev, done)
-        }
+        importer
       },
       (err, result) => {
         if (err) {
@@ -61,9 +52,7 @@ const render = (scss: string, importer): Promise<string> => {
 export const renderSync = (scss: string, importer): string => {
   const result = sass.renderSync({
     data: scss,
-    importer: (url, prev) => {
-      return importer(url, prev)
-    }
+    importer
   })
   return result.css.toString()
 }
@@ -78,11 +67,14 @@ export const generateImporter = (resolver) => {
   }
 }
 
-export const build = (variables = {}) => {
+export const build = (variables = {}, sync = true) => {
   const vars = buildParams(variables)
   const scss = scssString(vars)
   return unpkg("bootstrap").then((resolver) => {
-    return renderSync(scss, generateImporter(resolver))
-    // return render(scss, generateImporter(resolver))
+    if (sync) {
+      return renderSync(scss, generateImporter(resolver))
+    } else {
+      return render(scss, generateImporter(resolver))
+    }
   })
 }
