@@ -9,8 +9,10 @@ const ExmapleSnippet = ({ html }) => (
 const ExampleWithCss = ({ css, html }) => {
   return (
     <ShadowDOM>
-      <style>{css}</style>
-      <ExmapleSnippet html={html} />
+      <div>
+        <style>{css}</style>
+        <ExmapleSnippet html={html} />
+      </div>
     </ShadowDOM>
   )
 }
@@ -20,7 +22,7 @@ const ExampleWithDefaultBootstrap = ({ html }) => {
     "https://unpkg.com/bootstrap@4.1.1/dist/css/bootstrap.min.css"
   return (
     <ShadowDOM include={[bootstrapUrl]}>
-      <div className="sample">
+      <div>
         <ExmapleSnippet html={html} />
       </div>
     </ShadowDOM>
