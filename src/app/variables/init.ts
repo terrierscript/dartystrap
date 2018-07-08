@@ -1,7 +1,7 @@
 export const fields = [
   {
     name: "$white",
-    defaultValue: "#fff"
+    defaultValue: "#ffffff"
   },
   {
     name: "$gray-100",
@@ -41,7 +41,7 @@ export const fields = [
   },
   {
     name: "$black",
-    defaultValue: "#000"
+    defaultValue: "#000000"
   },
   {
     name: "$blue",

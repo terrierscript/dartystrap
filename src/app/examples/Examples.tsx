@@ -32,7 +32,9 @@ export class Examples extends React.Component<{ baseCss: string }, {}> {
   render() {
     return (
       <>
+        <h1>Customize</h1>
         <ExampleWithCss css={this.props.baseCss} />
+        <h1>Default</h1>
         <ExampleWithDefaultBootstrap />
       </>
     )
