@@ -1,28 +1,27 @@
 import React, { SFC } from "react"
-import sass from "sass"
-// import { build } from "../lib/bootstrap"
-import { SampleButtons } from "./SampleButtons"
 import ShadowDOM from "react-shadow"
+import { examples } from "./samples"
 
-const ExampleWithCss = ({ css }) => {
+const ExmapleSnippet = ({ html }) => (
+  <div dangerouslySetInnerHTML={{ __html: html }} />
+)
+
+const ExampleWithCss = ({ css, html }) => {
   return (
     <ShadowDOM>
-      <div>
-        <style>{css}</style>
-        <div className="sample">
-          <SampleButtons />
-        </div>
-      </div>
+      <style>{css}</style>
+      <ExmapleSnippet html={html} />
     </ShadowDOM>
   )
 }
-const ExampleWithDefaultBootstrap = () => {
+
+const ExampleWithDefaultBootstrap = ({ html }) => {
   const bootstrapUrl =
     "https://unpkg.com/bootstrap@4.1.1/dist/css/bootstrap.min.css"
   return (
     <ShadowDOM include={[bootstrapUrl]}>
       <div className="sample">
-        <SampleButtons />
+        <ExmapleSnippet html={html} />
       </div>
     </ShadowDOM>
   )
@@ -30,12 +29,13 @@ const ExampleWithDefaultBootstrap = () => {
 
 export class Examples extends React.Component<{ baseCss: string }, {}> {
   render() {
+    const html = examples["button"]
     return (
       <>
         <h1>Customize</h1>
-        <ExampleWithCss css={this.props.baseCss} />
+        <ExampleWithCss css={this.props.baseCss} html={html} />
         <h1>Default</h1>
-        <ExampleWithDefaultBootstrap />
+        <ExampleWithDefaultBootstrap html={html} />
       </>
     )
   }
