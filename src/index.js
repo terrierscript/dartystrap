@@ -1,8 +1,3 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import { App } from "./app/App"
-
-
 import { start } from "./start"
 
 start()
