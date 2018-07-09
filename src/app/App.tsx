@@ -2,7 +2,7 @@ import React, { SFC, ReactNode } from "react"
 import {
   BootstrapCompiler,
   BootstrapCompilerChildrenProps
-} from "app/BootstrapCompiler"
+} from "app/compiler/BootstrapCompiler"
 import { Component } from "react"
 import { Variables, VariableContainerChildProps } from "app/variables/Variables"
 import { Examples } from "app/examples/Examples"

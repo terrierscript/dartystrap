@@ -1,6 +1,10 @@
 import { ReactNode, PureComponent } from "react"
-import { VariablesMap, convertToKeyValue } from "./scssVariables"
-import { compileWithWorker, compile } from "./compiler"
+import { VariablesMap, convertToKeyValue } from "../scssVariables"
+import {
+  compileWithWorker,
+  compile,
+  compileWithDynamicImport
+} from "./compiler"
 
 type Props = {
   submitVariables: VariablesMap
@@ -27,7 +31,7 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     this.setState({ isCompiling: true }, () => {
       const { submitVariables } = this.props
       const variablesKeyValue = convertToKeyValue(submitVariables)
-      compile(variablesKeyValue).then((css) => {
+      compileWithDynamicImport(variablesKeyValue).then((css) => {
         this.setState({ css, isCompiling: false })
       })
     })
