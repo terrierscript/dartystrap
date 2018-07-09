@@ -1,8 +1,9 @@
-import "./polyfill"
-const build = self.addEventListener(
+// import "../polyfill"
+
+self.addEventListener(
   "message",
   function(e) {
-    import("../lib/index.js").then(({ build }) => {
+    import("../lib/build.js").then(({ build }) => {
       build(e.data)
         .then((css) => {
           self.postMessage(css)

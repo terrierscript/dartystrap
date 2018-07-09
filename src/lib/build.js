@@ -1,3 +1,4 @@
+import "../polyfill.js"
 import { build as baseBuild } from "./bootstrap"
 
 export function build(...args) {

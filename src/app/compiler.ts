@@ -10,10 +10,16 @@ export const compileWithWorker = (variables) => {
   return promise
 }
 
-export const compile = (variables) => {
-  return import("../lib/index.js").then((modules) => {
-    console.log(modules)
-    const { build } = modules
-    return build(variables)
-  })
+export const compile = (variables): any => {
+  const { build } = require("../lib/build.js")
+  console.log(build)
+  return build(variables)
+}
+
+export const compileWithDynamicImport = (variables): any => {
+  // return import("../lib/build.js").then((modules) => {
+  //   console.log(modules.default)
+  //   const { build } = modules
+  //   return build(variables)
+  // })
 }
