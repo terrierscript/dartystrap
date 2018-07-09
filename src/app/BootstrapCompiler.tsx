@@ -1,5 +1,6 @@
 import { ReactNode, PureComponent } from "react"
 import { VariablesMap, convertToKeyValue } from "./scssVariables"
+import { compileWithWorker, compile } from "./compiler"
 
 type Props = {
   submitVariables: VariablesMap
@@ -12,17 +13,9 @@ type State = {
 export type BootstrapCompilerChildrenProps = State
 
 export class BootstrapCompiler extends PureComponent<Props, State> {
-  state = {
-    css: "",
-    isCompiling: false
-  }
-  worker = new Worker("../worker/build.worker.js")
+  state = { css: "", isCompiling: false }
   componentDidMount() {
     this.buildBootstrap()
-    this.worker.addEventListener("message", (e) => {
-      // console.log(e)
-      this.setState({ css: e.data, isCompiling: false })
-    })
   }
   componentDidUpdate(prevProps) {
     if (prevProps == this.props) {
@@ -34,8 +27,9 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     this.setState({ isCompiling: true }, () => {
       const { submitVariables } = this.props
       const variablesKeyValue = convertToKeyValue(submitVariables)
-
-      this.worker.postMessage(variablesKeyValue)
+      compile(variablesKeyValue).then((css) => {
+        this.setState({ css, isCompiling: false })
+      })
     })
   }
   render() {

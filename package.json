@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "parcel serve parcel/index.html --no-autoinstall --no-hmr",
+    "devdev": "yarn dev --no-cache --no-source-maps",
     "lambda": "npx netlify-lambda serve functions",
     "budo": "budo src/index.js",
     "silent": " browserify  -t brfs src/index.js > dist/build.js",

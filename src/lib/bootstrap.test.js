@@ -2,13 +2,13 @@ const { build } = require("./bootstrap.js")
 
 it(
   "bootstrap",
-  done => {
+  (done) => {
     build()
-      .then(css => {
+      .then((css) => {
         console.log(css)
         done()
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err)
       })
   },
