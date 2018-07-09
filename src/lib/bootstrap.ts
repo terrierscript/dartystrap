@@ -57,7 +57,7 @@ export const renderSync = (scss: string, importer): string => {
   return result.css.toString()
 }
 
-export const generateImporter = (resolver) => {
+const generateImporter = (resolver) => {
   return (url, prev, done) => {
     const contents = resolver.getContent(url, prev)
     if (typeof done === "function") {
