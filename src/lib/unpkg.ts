@@ -34,27 +34,21 @@ type FileStorage = {
 }
 
 class _FileNameResolver {
-  // packageName = ""
-  // version = ""
   files: string[] = []
   resolved = {}
   fileStorage: FileStorage = {}
-  constructor(/*packageName, version,*/ fileStorage) {
-    // this.packageName = packageName
-    // this.version = version
+  constructor(fileStorage) {
     this.files = Object.keys(fileStorage)
     this.fileStorage = fileStorage
   }
   resolveFilename(filePath, prev) {
     const prevCached = this.resolved[prev] ? this.resolved[prev] : prev
-    // console.log(prevCached)
     const fileName = resolver(this.files, filePath, prevCached)
     if (!fileName) {
       throw `FileName is not found ${fileName}`
     }
     this.resolved[filePath] = fileName
     return fileName
-    // return this.getFullPath(fileName)
   }
   getContent(url, prev): string {
     const filename = this.resolveFilename(url, prev)
@@ -64,9 +58,6 @@ class _FileNameResolver {
     }
     return content
   }
-  // getFullPath(filePath) {
-  //   return `${unpkg}${this.packageName}@${this.version}${filePath}`
-  // }
 }
 
 export default (packageName, version = "4.1.1") => {
@@ -81,7 +72,7 @@ export default (packageName, version = "4.1.1") => {
       return loadAllContents(baseUrl, scssFiles)
     })
     .then((contents) => {
-      const resolver = new _FileNameResolver(/*packageName, version,*/ contents)
+      const resolver = new _FileNameResolver(contents)
       return resolver
     })
 }
