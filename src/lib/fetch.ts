@@ -39,14 +39,3 @@ export const fetchWithStorageJson = (url: string) => {
   }
   return Promise.resolve(JSON.parse(item))
 }
-
-// const worker = new Worker("../worker/dl.worker.js")
-
-// const fetchWithWorker = url => {
-//   return new Promise((res, rej) => {
-//     worker.addEventListener("message", e => {
-//       res(e.data)
-//     })
-//     worker.postMessage(url)
-//   })
-// }
