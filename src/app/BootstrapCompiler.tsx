@@ -1,5 +1,4 @@
 import { ReactNode, PureComponent } from "react"
-import { Component } from "react"
 import { VariablesMap, convertToKeyValue } from "./scssVariables"
 
 type Props = {

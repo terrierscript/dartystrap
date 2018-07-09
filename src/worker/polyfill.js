@@ -1,3 +1,3 @@
 require("core-js/web/immediate")
 
-self.Buffer = require("buffer").Buffer
+// self.Buffer = require("buffer").Buffer
