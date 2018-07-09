@@ -18,9 +18,9 @@ export type BootstrapCompilerChildrenProps = State
 
 export class BootstrapCompiler extends PureComponent<Props, State> {
   state = { css: "", isCompiling: false }
-  componentDidMount() {
-    this.buildBootstrap()
-  }
+  // componentDidMount() {
+  //   this.buildBootstrap()
+  // }
   componentDidUpdate(prevProps) {
     if (prevProps == this.props) {
       return
