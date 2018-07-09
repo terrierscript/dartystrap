@@ -7360,8 +7360,8 @@ param-case@^2.1.0:
     ws "^5.1.1"
 
 "parcel-plugin-darty@github:terrierscript/parcel-plugin-darty":
-  version "1.0.10"
-  resolved "https://codeload.github.com/terrierscript/parcel-plugin-darty/tar.gz/3c09e05671f43ec09d5b5ef2c8f929169f17df3c"
+  version "1.0.8"
+  resolved "https://codeload.github.com/terrierscript/parcel-plugin-darty/tar.gz/9b5f0b51988d522263b88c97287acca3fdb98361"
   dependencies:
     mocha "^5.2.0"
 
