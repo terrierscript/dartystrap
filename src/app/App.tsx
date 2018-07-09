@@ -27,6 +27,7 @@ const Container: SFC<{
 const Center = styled(Flexbox)`
   max-width: 800px;
 `
+
 export class MyApp extends Component {
   render() {
     return (
