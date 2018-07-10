@@ -9,6 +9,7 @@ import { Examples } from "app/examples/Examples"
 import { Flexbox } from "./layout"
 import { Result } from "./result/Result"
 import styled from "react-emotion"
+import { CompileStatus } from "./compiler/CompileStatus"
 
 const Container: SFC<{
   children: (
@@ -39,7 +40,7 @@ export class MyApp extends Component {
                 <Button />
               </Flexbox>
               <Flexbox>
-                {isCompiling ? "now Compile" : "compile Finished"}
+                <CompileStatus isCompiling={isCompiling} />
               </Flexbox>
               <Flexbox>
                 <Examples baseCss={css} />

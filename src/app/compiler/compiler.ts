@@ -1,5 +1,5 @@
 export const compileWithWorker = (variables) => {
-  const worker = new Worker("../worker/build.worker.js")
+  const worker = new Worker("../../worker/build.worker.js")
   const promise = new Promise((resolve) => {
     worker.addEventListener("message", (e) => {
       // console.log(e)
@@ -18,7 +18,6 @@ export const compile = (variables): any => {
 
 export const compileWithDynamicImport = (variables): any => {
   return import("../../lib/build.js").then((modules) => {
-    console.log(modules.default)
     const { build } = modules
     return build(variables)
   })
