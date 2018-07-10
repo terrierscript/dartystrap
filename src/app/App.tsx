@@ -34,13 +34,13 @@ export class MyApp extends Component {
     return (
       <Center>
         <Container>
-          {({ Button, css, isCompiling }) => (
+          {({ Button, css, status }) => (
             <Flexbox>
               <Flexbox>
                 <Button />
               </Flexbox>
               <Flexbox>
-                <CompileStatus isCompiling={isCompiling} />
+                <CompileStatus status={status} />
               </Flexbox>
               <Flexbox>
                 <Examples baseCss={css} />

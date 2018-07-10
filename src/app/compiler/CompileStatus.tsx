@@ -1,6 +1,7 @@
-import React from "react"
+import React, { SFC } from "react"
 import { keyframes } from "emotion"
 import styled from "react-emotion"
+import { CompilerStatus } from "./BootstrapCompiler"
 
 const spin = keyframes`
   from {
@@ -25,6 +26,15 @@ const NowCompiling = () => {
   )
 }
 
-export const CompileStatus = ({ isCompiling }) => {
-  return isCompiling ? <NowCompiling /> : <div>✅ Compile Complete</div>
+export const CompileStatus: SFC<{ status: CompilerStatus }> = ({ status }) => {
+  switch (status) {
+    case CompilerStatus.INIT:
+      return <div>Click Button</div>
+    case CompilerStatus.PROGRESS:
+      return <NowCompiling />
+    case CompilerStatus.SUCCESS:
+      return <div>✅ Compile Complete</div>
+    case CompilerStatus.ERROR:
+      return <div>❌ Error!</div>
+  }
 }
