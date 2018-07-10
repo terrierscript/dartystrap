@@ -2,8 +2,8 @@
 
 self.addEventListener(
   "message",
-  function(e) {
-    import("../lib/build.js").then((mod) => {
+  (e) => {
+    self.importScripts("../lib/build.js").then((mod) => {
       console.log(mod)
       const { build } = mod
       build(e.data)
