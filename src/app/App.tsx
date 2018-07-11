@@ -2,13 +2,14 @@ import React, { SFC, ReactNode } from "react"
 import {
   BootstrapCompiler,
   BootstrapCompilerChildrenProps
-} from "app/BootstrapCompiler"
+} from "app/compiler/BootstrapCompiler"
 import { Component } from "react"
 import { Variables, VariableContainerChildProps } from "app/variables/Variables"
 import { Examples } from "app/examples/Examples"
 import { Flexbox } from "./layout"
 import { Result } from "./result/Result"
 import styled from "react-emotion"
+import { CompileStatus } from "./compiler/CompileStatus"
 
 const Container: SFC<{
   children: (
@@ -27,18 +28,19 @@ const Container: SFC<{
 const Center = styled(Flexbox)`
   max-width: 800px;
 `
+
 export class MyApp extends Component {
   render() {
     return (
       <Center>
         <Container>
-          {({ Button, css, isCompiling }) => (
+          {({ Button, css, status }) => (
             <Flexbox>
               <Flexbox>
                 <Button />
               </Flexbox>
               <Flexbox>
-                {isCompiling ? "now Compile" : "compile Finished"}
+                <CompileStatus status={status} />
               </Flexbox>
               <Flexbox>
                 <Examples baseCss={css} />
