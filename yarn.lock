@@ -7301,9 +7301,9 @@ param-case@^2.1.0:
   dependencies:
     no-case "^2.2.0"
 
-"parcel-bundler@github:parcel-bundler/parcel#master":
-  version "1.9.4"
-  resolved "https://codeload.github.com/parcel-bundler/parcel/tar.gz/764f568993a11689b7014df1977c18f6bda42e4c"
+parcel-bundler@^1.9.6:
+  version "1.9.6"
+  resolved "https://registry.yarnpkg.com/parcel-bundler/-/parcel-bundler-1.9.6.tgz#de950a6a133d7d5edc21b69a84498ef3b8eeb69f"
   dependencies:
     ansi-to-html "^0.6.4"
     babel-code-frame "^6.26.0"
@@ -7341,6 +7341,7 @@ param-case@^2.1.0:
     node-forge "^0.7.1"
     node-libs-browser "^2.0.0"
     opn "^5.1.0"
+    ora "^2.1.0"
     physical-cpu-count "^2.0.0"
     postcss "^6.0.19"
     postcss-value-parser "^3.3.0"

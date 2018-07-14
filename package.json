@@ -34,7 +34,7 @@
     "next": "^6.0.3",
     "node-process": "^1.0.1",
     "node-sass-magic-importer": "^5.1.3",
-    "parcel-bundler": "github:parcel-bundler/parcel#master",
+    "parcel-bundler": "^1.9.6",
     "parcel-plugin-darty": "github:terrierscript/parcel-plugin-darty",
     "parcel-plugin-typescript": "^1.0.0",
     "path-parse": "^1.0.5",
