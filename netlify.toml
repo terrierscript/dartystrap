@@ -1,6 +1,6 @@
 [build]
   functions = "functions"
-  command = "yarn init-prepare; yarn build"
+  command = "yarn build"
   publish = "dist/"
 
 [[redirects]]
