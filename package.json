@@ -15,6 +15,7 @@
     "deploy": "yarn build; netlify deploy"
   },
   "dependencies": {
+    "buffer": "^5.1.0",
     "core-js": "^2.5.7",
     "cross-fetch": "^2.2.2",
     "dart-sass": "^1.8.0",

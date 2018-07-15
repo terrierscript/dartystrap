@@ -8,7 +8,7 @@ const ExmapleSnippet = ({ html }) => (
 
 const ExampleWithCss = ({ css, html }) => {
   return (
-    <ShadowDOM>
+    <ShadowDOM boundaryMode="closed">
       <div>
         <style>{css}</style>
         <ExmapleSnippet html={html} />
