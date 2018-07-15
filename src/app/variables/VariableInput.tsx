@@ -37,6 +37,7 @@ export const VariableInput: SFC<{
       <InlineBlock width="100px">
         <Input
           {...inputProps}
+          data-test-id={`input-form-${variable.name}`}
           onChange={(e) => {
             const newValue =
               type === "checkbox" ? e.target.checked : e.target.value
