@@ -10,7 +10,7 @@
     "lambda": "npx netlify-lambda serve functions",
     "budo": "budo src/index.js",
     "silent": " browserify  -t brfs src/index.js > dist/build.js",
-    "build": "parcel build parcel/index.html ",
+    "build": "parcel build parcel/index.html --no-minify",
     "predeploy": "yarn build",
     "deploy": "yarn build; netlify deploy"
   },
