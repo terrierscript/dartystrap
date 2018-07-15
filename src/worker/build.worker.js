@@ -10,7 +10,7 @@ self.addEventListener(
       })
       .catch((error) => {
         // TODO: use native error
-        self.postMessage({ error: error })
+        self.postMessage({ error: error.message })
         throw error
       })
     // })
