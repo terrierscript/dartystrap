@@ -9,7 +9,7 @@ self.addEventListener(
         self.postMessage(css)
       })
       .catch((e) => {
-        console.error(e)
+        throw e
       })
     // })
   },

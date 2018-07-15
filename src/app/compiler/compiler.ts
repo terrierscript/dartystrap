@@ -1,13 +1,13 @@
 export const compileWithWorker = (variables) => {
   const worker = new Worker("../../worker/build.worker.js")
   const promise = new Promise((resolve, reject) => {
-    worker.addEventListener("message", (e) => {
+    worker.addEventListener("message", (event) => {
       // console.log(e)
-      resolve(e.data.toString())
+      resolve(event.data.toString())
     })
-    worker.onerror((e) => {
-      reject(e)
-    })
+    worker.onerror = (error) => {
+      reject(error)
+    }
   })
   worker.postMessage(variables)
 
