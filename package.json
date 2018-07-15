@@ -10,7 +10,7 @@
     "lambda": "npx netlify-lambda serve functions",
     "budo": "budo src/index.js",
     "silent": " browserify  -t brfs src/index.js > dist/build.js",
-    "build": "parcel build parcel/index.html --no-minify",
+    "build": "parcel build parcel/index.html",
     "predeploy": "yarn build",
     "deploy": "yarn build; netlify deploy"
   },
@@ -51,7 +51,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "jest": "^23.1.0",
     "parcel-bundler": "^1.9.6",
-    "parcel-plugin-darty": "github:terrierscript/parcel-plugin-darty",
+    "parcel-plugin-darty": "github:terrierscript/parcel-plugin-darty#visitor2",
     "parcel-plugin-typescript": "^1.0.0"
   }
 }
