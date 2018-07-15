@@ -3,9 +3,10 @@ import { ReactNode, PureComponent } from "react"
 import { VariablesMap, convertToKeyValue } from "../scssVariables"
 import {
   compileWithWorker,
-  compile,
+  // compile,
   compileWithDynamicImport
 } from "./compiler"
+import { Label, Input } from "reakit"
 
 type Props = {
   submitVariables: VariablesMap
@@ -30,7 +31,6 @@ export type BootstrapCompilerChildrenProps = State
 export class BootstrapCompiler extends PureComponent<Props, State> {
   state = {
     css: "",
-    // isCompiling: false,
     status: CompilerStatus.INIT,
     useWorker: true,
     lastError: undefined
@@ -67,13 +67,14 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     const { useWorker } = this.state
     return (
       <div>
-        <label>
-          <input
+        <Label>
+          <Input
             type="checkbox"
             onChange={this.handleUseWorker}
             checked={useWorker}
-          />Use WebWorker
-        </label>
+          />
+          <span>Enable Web Worker</span>
+        </Label>
         {this.props.children(this.state)}
       </div>
     )

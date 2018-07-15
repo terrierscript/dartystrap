@@ -3,6 +3,7 @@ import { SFC } from "react"
 import { VariableType } from "../scssVariables"
 import styled from "react-emotion"
 import { VariableChangeHandler } from "./VariablesState"
+import { Input, Label, InlineBlock } from "reakit"
 
 export const getType = (value) => {
   if (value === "true" || value === "false") {
@@ -31,10 +32,10 @@ export const VariableInput: SFC<{
     checked: value
   }
   return (
-    <Row>
-      <label>
-        {variable.name}
-        <input
+    <label>
+      <InlineBlock width="50%">{variable.name}</InlineBlock>
+      <InlineBlock width="100px">
+        <Input
           {...inputProps}
           onChange={(e) => {
             const newValue =
@@ -42,7 +43,7 @@ export const VariableInput: SFC<{
             onChangeVariable({ ...variable, value: newValue.toString() })
           }}
         />
-      </label>
-    </Row>
+      </InlineBlock>
+    </label>
   )
 }
