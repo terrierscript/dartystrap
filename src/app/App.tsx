@@ -39,7 +39,7 @@ export class MyApp extends Component {
                 <Examples baseCss={css} />
               </FlexRow>
               <FlexRow>
-                <Result>{css}</Result>
+                <Result code={css} />
               </FlexRow>
             </FlexRow>
           )}
