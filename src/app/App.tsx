@@ -6,11 +6,11 @@ import {
 import { Component } from "react"
 import { Variables, VariableContainerChildProps } from "app/variables/Variables"
 import { Examples } from "app/examples/Examples"
-import { FlexRow } from "./layout"
+// import { FlexRow } from "./layout"
 import { Result } from "./result/Result"
 // import styled from "react-emotion"
 import { CompileStatus } from "./compiler/CompileStatus"
-import { Flex, Base } from "reakit"
+import { Flex, Base, Block } from "reakit"
 const Container: SFC<{
   children: (
     props: VariableContainerChildProps & BootstrapCompilerChildrenProps
@@ -31,17 +31,17 @@ export class MyApp extends Component {
       <Base>
         <Container>
           {({ css, status }) => (
-            <FlexRow>
-              <FlexRow>
+            <Block>
+              <Block>
                 <CompileStatus status={status} />
-              </FlexRow>
-              <FlexRow>
+              </Block>
+              <Block>
                 <Examples baseCss={css} />
-              </FlexRow>
-              <FlexRow>
+              </Block>
+              <Block>
                 <Result code={css} />
-              </FlexRow>
-            </FlexRow>
+              </Block>
+            </Block>
           )}
         </Container>
       </Base>
