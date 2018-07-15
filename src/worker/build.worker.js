@@ -8,8 +8,10 @@ self.addEventListener(
       .then((css) => {
         self.postMessage(css)
       })
-      .catch((e) => {
-        console.error(e)
+      .catch((error) => {
+        // TODO: use native error
+        self.postMessage({ error: error.message })
+        throw error
       })
     // })
   },
