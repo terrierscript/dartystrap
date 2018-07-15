@@ -9,6 +9,7 @@ self.addEventListener(
         self.postMessage(css)
       })
       .catch((error) => {
+        // TODO: use native error
         self.postMessage({ error: error })
         throw error
       })
