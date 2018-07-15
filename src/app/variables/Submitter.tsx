@@ -16,7 +16,7 @@ export class Submitter<T> extends Component<Props<T>, State<T>> {
   constructor(props) {
     super(props)
     // TODO
-    this.state = { item: {}, realtime: true } // = { item: this.props.item }
+    this.state = { item: {}, realtime: false } // = { item: this.props.item }
   }
   handleClick = () => {
     this.setState({ item: this.props.item })
