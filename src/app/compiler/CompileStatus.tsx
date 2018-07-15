@@ -33,8 +33,8 @@ export const CompileStatus: SFC<{ status: CompilerStatus }> = ({ status }) => {
     case CompilerStatus.PROGRESS:
       return <NowCompiling />
     case CompilerStatus.SUCCESS:
-      return <div>✅ Compile Complete</div>
+      return <div data-test-id="success">✅ Compile Complete</div>
     case CompilerStatus.ERROR:
-      return <div>❌ Error!</div>
+      return <div data-test-id="error">❌ Error!</div>
   }
 }

@@ -24,7 +24,9 @@ export const Variables: SFC<{
             {({ onSubmit, item }) => {
               return (
                 <div>
-                  <Button onClick={onSubmit}>Generate</Button>
+                  <Button data-test-id="generate-button" onClick={onSubmit}>
+                    Generate
+                  </Button>
                   <div>
                     {children({
                       submitVariables: item
