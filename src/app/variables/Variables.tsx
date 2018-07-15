@@ -9,8 +9,6 @@ import { VariablesMap } from "app/scssVariables"
 import { Submitter } from "./Submitter"
 import { Button } from "reakit"
 
-// import { VariableForm } from "./VariableForm"
-
 export type VariableContainerChildProps = {
   submitVariables: VariablesMap
 }
@@ -21,8 +19,6 @@ export const Variables: SFC<{
   return (
     <VariablesState>
       {(props: VariableContainerChildren) => {
-        // const Form: SFC = () => <VariableForm key="form" {...props} />
-
         return (
           <Submitter<VariablesMap> item={props.variables}>
             {({ onSubmit, item }) => {
