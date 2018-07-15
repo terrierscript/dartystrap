@@ -12,7 +12,6 @@
     "silent": " browserify  -t brfs src/index.js > dist/build.js",
     "build": "parcel build parcel/index.html --no-minify",
     "predeploy": "yarn build",
-    "init-prepare": "yarn build-parcel",
     "deploy": "yarn build; netlify deploy"
   },
   "dependencies": {
