@@ -24,7 +24,7 @@ const Container: SFC<{
   </Variables>
 )
 
-const AppSytle = styled(Base)`
+const SourceSans = styled(Base)`
   font-family: "Source Sans Pro", sans-serif;
   -webkit-font-smoothing: antialiased;
 `
@@ -32,7 +32,7 @@ const AppSytle = styled(Base)`
 export class MyApp extends Component {
   render() {
     return (
-      <AppSytle>
+      <Base>
         <Container>
           {({ css, status }) => (
             <Block>
@@ -48,7 +48,7 @@ export class MyApp extends Component {
             </Block>
           )}
         </Container>
-      </AppSytle>
+      </Base>
     )
   }
 }
