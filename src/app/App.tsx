@@ -6,11 +6,10 @@ import {
 import { Component } from "react"
 import { Variables, VariableContainerChildProps } from "app/variables/Variables"
 import { Examples } from "app/examples/Examples"
-// import { FlexRow } from "./layout"
 import { Result } from "./result/Result"
-// import styled from "react-emotion"
 import { CompileStatus } from "./compiler/CompileStatus"
 import { Flex, Base, Block } from "reakit"
+import styled from "styled-components"
 const Container: SFC<{
   children: (
     props: VariableContainerChildProps & BootstrapCompilerChildrenProps
@@ -25,10 +24,15 @@ const Container: SFC<{
   </Variables>
 )
 
+const AppSytle = styled(Base)`
+  font-family: "Source Sans Pro", sans-serif;
+  -webkit-font-smoothing: antialiased;
+`
+
 export class MyApp extends Component {
   render() {
     return (
-      <Base>
+      <AppSytle>
         <Container>
           {({ css, status }) => (
             <Block>
@@ -44,7 +48,7 @@ export class MyApp extends Component {
             </Block>
           )}
         </Container>
-      </Base>
+      </AppSytle>
     )
   }
 }
