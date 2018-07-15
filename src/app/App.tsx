@@ -6,11 +6,11 @@ import {
 import { Component } from "react"
 import { Variables, VariableContainerChildProps } from "app/variables/Variables"
 import { Examples } from "app/examples/Examples"
-import { Flexbox } from "./layout"
+import { FlexRow } from "./layout"
 import { Result } from "./result/Result"
-import styled from "react-emotion"
+// import styled from "react-emotion"
 import { CompileStatus } from "./compiler/CompileStatus"
-
+import { Flex, Base } from "reakit"
 const Container: SFC<{
   children: (
     props: VariableContainerChildProps & BootstrapCompilerChildrenProps
@@ -25,33 +25,26 @@ const Container: SFC<{
   </Variables>
 )
 
-const Center = styled(Flexbox)`
-  max-width: 800px;
-`
-
 export class MyApp extends Component {
   render() {
     return (
-      <Center>
+      <Base>
         <Container>
-          {({ Button, css, status }) => (
-            <Flexbox>
-              <Flexbox>
-                <Button />
-              </Flexbox>
-              <Flexbox>
+          {({ css, status }) => (
+            <FlexRow>
+              <FlexRow>
                 <CompileStatus status={status} />
-              </Flexbox>
-              <Flexbox>
+              </FlexRow>
+              <FlexRow>
                 <Examples baseCss={css} />
-              </Flexbox>
-              <Flexbox>
+              </FlexRow>
+              <FlexRow>
                 <Result>{css}</Result>
-              </Flexbox>
-            </Flexbox>
+              </FlexRow>
+            </FlexRow>
           )}
         </Container>
-      </Center>
+      </Base>
     )
   }
 }

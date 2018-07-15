@@ -7,12 +7,14 @@ import { ReactNode } from "react"
 import { VariablesMap } from "app/scssVariables"
 
 import { Submitter } from "./Submitter"
+import { Button } from "reakit"
+
 // import { VariableForm } from "./VariableForm"
 
 export type VariableContainerChildProps = {
   submitVariables: VariablesMap
   // Form: SFC
-  Button: SFC
+  // Button: SFC
 }
 
 export const Variables: SFC<{
@@ -25,13 +27,15 @@ export const Variables: SFC<{
 
         return (
           <Submitter<VariablesMap> item={props.variables}>
-            {({ Button, item }) => {
+            {({ onSubmit, item }) => {
               return (
                 <div>
-                  {children({
-                    submitVariables: item,
-                    Button
-                  })}
+                  <Button onClick={onSubmit}>Generate</Button>
+                  <div>
+                    {children({
+                      submitVariables: item
+                    })}
+                  </div>
                 </div>
               )
             }}
