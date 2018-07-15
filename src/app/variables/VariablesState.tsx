@@ -37,15 +37,7 @@ export class VariablesState extends React.Component<Props, State> {
       variables: this.state.variables,
       onChangeVariable: this.handleChange
     }
-    return (
-      <FlexRow>
-        <Grid columns="1fr 2fr">
-          <Grid.Item>
-            <VariableForm key="form" {...props} />
-          </Grid.Item>
-          <Grid.Item>{this.props.children(props)}</Grid.Item>
-        </Grid>
-      </FlexRow>
-    )
+
+    return this.props.children(props)
   }
 }
