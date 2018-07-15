@@ -1,4 +1,8 @@
-export const compileWithWorker = (variables) => {
+interface Compiler {
+  execute: Promise<any>
+  terminate?: Function
+}
+export const compileWithWorker = (variables): Compiler => {
   const worker = new Worker("../../worker/build.worker.js")
   const promise = new Promise((resolve, reject) => {
     worker.onmessage = (msg) => {
@@ -13,18 +17,27 @@ export const compileWithWorker = (variables) => {
   })
   worker.postMessage(variables)
 
-  return promise
+  return {
+    execute: promise,
+    terminate: () => {
+      worker.terminate()
+    }
+  }
 }
 
-export const compile = (variables): any => {
-  const { build } = require("../../lib/build.js")
-  console.log(build)
-  return build(variables)
-}
+// export const compile = (variables): Compiler => {
+//   const { build } = require("../../lib/build.js")
+//   console.log(build)
+//   return {
+//     promise: build(variables)
+//   }
+// }
 
-export const compileWithDynamicImport = (variables): any => {
-  return import("../../lib/build.js").then((modules) => {
-    const { build } = modules
-    return build(variables)
-  })
+export const compileWithDynamicImport = (variables): Compiler => {
+  return {
+    execute: import("../../lib/build.js").then((modules) => {
+      const { build } = modules
+      return build(variables)
+    })
+  }
 }

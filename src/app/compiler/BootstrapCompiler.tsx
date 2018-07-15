@@ -45,10 +45,11 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     this.setState({ status: CompilerStatus.PROGRESS }, () => {
       const { submitVariables } = this.props
       const variablesKeyValue = convertToKeyValue(submitVariables)
-      const compilerFn = this.state.useWorker
+      const compiler = this.state.useWorker
         ? compileWithWorker
         : compileWithDynamicImport
-      compilerFn(variablesKeyValue)
+      const { execute, terminate } = compiler(variablesKeyValue)
+      execute
         .then((css) => {
           this.setState({ css, status: CompilerStatus.SUCCESS })
         })
