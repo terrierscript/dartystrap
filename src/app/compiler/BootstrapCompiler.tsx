@@ -41,7 +41,15 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     }
     this.buildBootstrap()
   }
+  currentTerminate = null
+  terminateIfExist() {
+    if (this.currentTerminate) {
+      this.currentTerminate()
+    }
+    this.currentTerminate = null
+  }
   buildBootstrap() {
+    this.terminateIfExist()
     this.setState({ status: CompilerStatus.PROGRESS }, () => {
       const { submitVariables } = this.props
       const variablesKeyValue = convertToKeyValue(submitVariables)
@@ -49,15 +57,13 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
         ? compileWithWorker
         : compileWithDynamicImport
       const { execute, terminate } = compiler(variablesKeyValue)
+      this.currentTerminate = terminate
       execute
         .then((css) => {
           this.setState({ css, status: CompilerStatus.SUCCESS })
         })
         .catch((e) => {
-          this.setState({
-            status: CompilerStatus.ERROR,
-            lastError: e
-          })
+          this.setState({ status: CompilerStatus.ERROR, lastError: e })
         })
     })
   }

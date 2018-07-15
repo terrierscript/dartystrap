@@ -9,25 +9,30 @@ type ChildProps<T> = {
 type Props<T> = { item: T; children: (props: ChildProps<T>) => ReactNode }
 type State<T> = {
   item: T | {}
+  realtime: boolean
 }
 
 export class Submitter<T> extends Component<Props<T>, State<T>> {
   constructor(props) {
     super(props)
     // TODO
-    this.state = { item: {} } // = { item: this.props.item }
+    this.state = { item: {}, realtime: true } // = { item: this.props.item }
   }
   handleClick = () => {
     this.setState({ item: this.props.item })
   }
   // update only state update
   shouldComponentUpdate(_, nextState) {
+    if (this.state.realtime) {
+      return true
+    }
     const stateUpdated = this.state !== nextState
     return stateUpdated
   }
   render() {
+    const item = this.state.realtime ? this.props.item : this.state.item
     return this.props.children({
-      item: this.state.item,
+      item,
       onSubmit: this.handleClick
     })
   }

@@ -20,6 +20,7 @@ export const compileWithWorker = (variables): Compiler => {
   return {
     execute: promise,
     terminate: () => {
+      console.log("terminate")
       worker.terminate()
     }
   }

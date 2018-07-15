@@ -8,7 +8,7 @@ const ExmapleSnippet = ({ html }) => (
 
 const ExampleWithCss = ({ css, html }) => {
   return (
-    <ShadowDOM boundaryMode="closed">
+    <ShadowDOM>
       <div>
         <style>{css}</style>
         <ExmapleSnippet html={html} />
@@ -31,6 +31,7 @@ const ExampleWithDefaultBootstrap = ({ html }) => {
 
 export class Examples extends React.Component<{ baseCss: string }, {}> {
   render() {
+    console.info("update css", this.props.baseCss)
     const html = examples["button"]
     return (
       <div>
