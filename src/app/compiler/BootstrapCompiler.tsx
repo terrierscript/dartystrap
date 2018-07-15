@@ -31,7 +31,6 @@ export type BootstrapCompilerChildrenProps = State
 export class BootstrapCompiler extends PureComponent<Props, State> {
   state = {
     css: "",
-    // isCompiling: false,
     status: CompilerStatus.INIT,
     useWorker: true,
     lastError: undefined
@@ -73,7 +72,8 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
             type="checkbox"
             onChange={this.handleUseWorker}
             checked={useWorker}
-          />Use WebWorker
+          />
+          <span>Enable Web Worker</span>
         </Label>
         {this.props.children(this.state)}
       </div>
