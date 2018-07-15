@@ -8,7 +8,7 @@ const log = (...args) => {
   console.log(...args)
 }
 
-const select = (id) => `[data-test=${id}]`
+const select = (id) => `[data-test-id=${id}]`
 
 async function runBundle() {
   // Initializes a bundler using the entrypoint location and options provided
@@ -29,7 +29,23 @@ async function runBundle() {
   log("page launched")
 
   await page.goto(`http://localhost:${port}`)
-  const elm = await page.waitForSelector(select("generate-button"))
+  await page.waitForSelector(select("generate-button"))
+  page.click(select("generate-button"))
+  page.waitForSelector(select("result-error")).then((e) => {
+    throw e
+  })
+  // page.on("error").then((e) => {
+  //   throw e
+  // })
+  page.waitForSelector(select("result-success")).then((e) => {
+    console.log("success")
+  })
 }
 
 runBundle()
+  .then(() => {
+    process.exit(0)
+  })
+  .catch((e) => {
+    process.exit(1)
+  })
