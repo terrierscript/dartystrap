@@ -39,11 +39,11 @@ export class VariablesState extends React.Component<Props, State> {
     }
     return (
       <FlexRow>
-        <Grid columns="repeat(2, 1fr)">
-          <Grid.Item>{this.props.children(props)}</Grid.Item>
+        <Grid columns="1fr 2fr">
           <Grid.Item>
             <VariableForm key="form" {...props} />
           </Grid.Item>
+          <Grid.Item>{this.props.children(props)}</Grid.Item>
         </Grid>
       </FlexRow>
     )

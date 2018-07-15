@@ -11,12 +11,12 @@ export class VariableForm extends React.Component<VariableContainerChildren> {
       <Grid columns="repeat(1, 1fr)" autoRows="auto">
         {Object.values(variables).map((variable) => {
           return (
-            <Grid.Item key={variable.name}>
+            <div key={variable.name}>
               <VariableInput
                 variable={variable}
                 onChangeVariable={onChangeVariable}
               />
-            </Grid.Item>
+            </div>
           )
         })}
       </Grid>

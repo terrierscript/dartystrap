@@ -13,8 +13,6 @@ import { Button } from "reakit"
 
 export type VariableContainerChildProps = {
   submitVariables: VariablesMap
-  // Form: SFC
-  // Button: SFC
 }
 
 export const Variables: SFC<{

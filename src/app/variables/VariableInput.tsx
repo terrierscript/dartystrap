@@ -32,7 +32,7 @@ export const VariableInput: SFC<{
     checked: value
   }
   return (
-    <Label>
+    <label>
       <InlineBlock width="50%">{variable.name}</InlineBlock>
       <InlineBlock width="100px">
         <Input
@@ -44,6 +44,6 @@ export const VariableInput: SFC<{
           }}
         />
       </InlineBlock>
-    </Label>
+    </label>
   )
 }
