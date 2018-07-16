@@ -4,7 +4,7 @@ import { VariablesState, VariableContainerChildren } from "./VariablesState"
 
 import { SFC } from "react"
 import { ReactNode } from "react"
-import { VariablesMap } from "app/scssVariables"
+import { VariablesMap } from "../scssVariables"
 
 import { Submitter } from "./Submitter"
 import { Button, Grid, Base } from "reakit"

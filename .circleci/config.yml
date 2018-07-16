@@ -33,6 +33,8 @@ jobs:
         
       # run tests!
       - run:
+          command: yarn tsc
+      - run:
           command: node test-integration/scinario.js
           timeout: 30000
 

@@ -1,4 +1,4 @@
-import window from "global/window"
+import window from "global"
 // polyfill if need
 if (!fetch) {
   const fetch = require("cross-fetch")

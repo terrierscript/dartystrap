@@ -36,7 +36,7 @@ export const compileWithWorker = (variables): Compiler => {
 
 export const compileWithDynamicImport = (variables): Compiler => {
   return {
-    execute: import("../../lib/build.js").then((modules) => {
+    execute: import("../../compiler/build.js").then((modules) => {
       const { build } = modules
       return build(variables)
     })
