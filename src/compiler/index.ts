@@ -3,7 +3,7 @@ interface Compiler {
   terminate?: Function
 }
 export const compileWithWorker = (variables): Compiler => {
-  const worker = new Worker("../../worker/build.worker.js")
+  const worker = new Worker("../worker/build.worker.js")
   const promise = new Promise((resolve, reject) => {
     worker.onmessage = (msg) => {
       if (msg.data.error) {
