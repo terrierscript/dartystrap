@@ -4,7 +4,7 @@ import {
   VariableType,
   VariablesMap,
   convertToMapFromArray
-} from "../scssVariables"
+} from "../../compiler/scssVariables"
 import { ReactNode } from "react"
 import { fields } from "./init"
 // import { VariableForm } from "./VariableForm"

@@ -1,11 +1,11 @@
 import React from "react"
 import { ReactNode, PureComponent } from "react"
-import { VariablesMap, convertToKeyValue } from "../scssVariables"
+import { VariablesMap, convertToKeyValue } from "../../compiler/scssVariables"
 import {
   compileWithWorker,
   // compile,
   compileWithDynamicImport
-} from "../../compiler"
+} from "../../compiler/index"
 import { Label, Input } from "reakit"
 
 type Props = {
