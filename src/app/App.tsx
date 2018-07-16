@@ -2,10 +2,10 @@ import React, { SFC, ReactNode } from "react"
 import {
   BootstrapCompiler,
   BootstrapCompilerChildrenProps
-} from "app/compiler/BootstrapCompiler"
+} from "./compiler/BootstrapCompiler"
 import { Component } from "react"
-import { Variables, VariableContainerChildProps } from "app/variables/Variables"
-import { Examples } from "app/examples/Examples"
+import { Variables, VariableContainerChildProps } from "./variables/Variables"
+import { Examples } from "./examples/Examples"
 import { Result } from "./result/Result"
 import { CompileStatus } from "./compiler/CompileStatus"
 import { Flex, Base, Block } from "reakit"

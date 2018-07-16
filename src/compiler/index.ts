@@ -3,7 +3,7 @@ interface Compiler {
   terminate?: Function
 }
 export const compileWithWorker = (variables): Compiler => {
-  const worker = new Worker("../../worker/build.worker.js")
+  const worker = new Worker("../worker/build.worker.js")
   const promise = new Promise((resolve, reject) => {
     worker.onmessage = (msg) => {
       if (msg.data.error) {
@@ -36,7 +36,7 @@ export const compileWithWorker = (variables): Compiler => {
 
 export const compileWithDynamicImport = (variables): Compiler => {
   return {
-    execute: import("../../lib/build.js").then((modules) => {
+    execute: import("./build.js").then((modules) => {
       const { build } = modules
       return build(variables)
     })
