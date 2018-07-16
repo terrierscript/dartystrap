@@ -1,5 +1,5 @@
 // for syntax highligh
-const html = (strings) => {
+const html = (strings: any) => {
   return strings[0]
 }
 

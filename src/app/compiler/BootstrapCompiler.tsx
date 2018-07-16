@@ -1,11 +1,11 @@
 import React from "react"
 import { ReactNode, PureComponent } from "react"
-import { VariablesMap, convertToKeyValue } from "../scssVariables"
+import { VariablesMap, convertToKeyValue } from "../../compiler/scssVariables"
 import {
   compileWithWorker,
   // compile,
   compileWithDynamicImport
-} from "./compiler"
+} from "../../compiler/"
 import { Label, Input } from "reakit"
 
 type Props = {
@@ -35,15 +35,16 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     useWorker: true,
     lastError: undefined
   }
-  componentDidUpdate(prevProps) {
+  currentTerminate: Function | null | undefined = null
+  componentDidUpdate(prevProps: Props) {
     if (prevProps == this.props) {
       return
     }
     this.buildBootstrap()
   }
-  currentTerminate = null
   terminateIfExist() {
     if (this.currentTerminate) {
+      // @ts-ignore
       this.currentTerminate()
     }
     this.currentTerminate = null
@@ -52,11 +53,11 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     this.terminateIfExist()
     this.setState({ status: CompilerStatus.PROGRESS }, () => {
       const { submitVariables } = this.props
-      const variablesKeyValue = convertToKeyValue(submitVariables)
+      // const variablesKeyValue = convertToKeyValue(submitVariables)
       const compiler = this.state.useWorker
         ? compileWithWorker
         : compileWithDynamicImport
-      const { execute, terminate } = compiler(variablesKeyValue)
+      const { execute, terminate } = compiler(submitVariables)
       this.currentTerminate = terminate
       execute
         .then((css) => {
@@ -67,7 +68,7 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
         })
     })
   }
-  handleUseWorker = (e) => {
+  handleUseWorker = (e: any) => {
     this.setState({ useWorker: e.target.checked })
   }
   render() {
