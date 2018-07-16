@@ -5,7 +5,7 @@ import {
   compileWithWorker,
   // compile,
   compileWithDynamicImport
-} from "./compiler"
+} from "../../compiler"
 import { Label, Input } from "reakit"
 
 type Props = {
