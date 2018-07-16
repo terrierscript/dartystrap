@@ -1,11 +1,9 @@
 import { flatten } from "./flatten"
 import { resolver } from "./resolver"
 import { fetchWithStorage, fetchWithStorageJson } from "./fetch"
-import path from "path"
 
 const unpkg =
-  // process.env.NODE_ENV === "production" ? "/unpkg/" :
-  "https://unpkg.com/"
+  process.env.NODE_ENV === "production" ? "/unpkg/" : "https://unpkg.com/"
 
 const loadAllContents = (
   baseUrl: string,
