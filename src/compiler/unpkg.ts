@@ -31,15 +31,15 @@ type FileStorage = {
   [filename: string]: string
 }
 
-class _FileNameResolver {
+class _FileNameResolver implements Resolver {
   files: string[] = []
-  resolved = {}
+  resolved: { [key: string]: string } = {}
   fileStorage: FileStorage = {}
-  constructor(fileStorage) {
+  constructor(fileStorage: FileStorage) {
     this.files = Object.keys(fileStorage)
     this.fileStorage = fileStorage
   }
-  resolveFilename(filePath, prev) {
+  resolveFilename(filePath: string, prev: string) {
     const prevCached = this.resolved[prev] ? this.resolved[prev] : prev
     const fileName = resolver(this.files, filePath, prevCached)
     if (!fileName) {
@@ -48,7 +48,7 @@ class _FileNameResolver {
     this.resolved[filePath] = fileName
     return fileName
   }
-  getContent(url, prev): string {
+  getContent(url: string, prev: string): string {
     const filename = this.resolveFilename(url, prev)
     const content = this.fileStorage[filename]
     if (!content) {
@@ -58,7 +58,11 @@ class _FileNameResolver {
   }
 }
 
-export default (packageName, version = "4.1.1") => {
+export interface Resolver {
+  getContent(url: string, prev: string): string
+}
+
+export default (packageName: string, version = "4.1.1") => {
   const baseUrl = `${unpkg}${packageName}@${version}`
   const metaUrl = `${baseUrl}/?meta`
   return fetchWithStorageJson(metaUrl)
