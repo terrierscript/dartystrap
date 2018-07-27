@@ -5627,10 +5627,11 @@ parcel-bundler@^1.9.6:
     ws "^5.1.1"
 
 "parcel-plugin-darty@github:terrierscript/parcel-plugin-darty":
-  version "1.0.10"
-  resolved "https://codeload.github.com/terrierscript/parcel-plugin-darty/tar.gz/3c09e05671f43ec09d5b5ef2c8f929169f17df3c"
+  version "1.2.0"
+  resolved "https://codeload.github.com/terrierscript/parcel-plugin-darty/tar.gz/650d11b16ac4d6e22310bb36de80f10aaeeaf74e"
   dependencies:
     mocha "^5.2.0"
+    parcel-bundler "^1.9.6"
 
 parcel-plugin-typescript@^1.0.0:
   version "1.0.0"
@@ -7718,9 +7719,9 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@^2.9.2:
-  version "2.9.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
+typescript@^3.0.0-rc:
+  version "3.0.0-rc"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.0-rc.tgz#13553808426d393d3f92c054f4fa6f24589549c1"
 
 typical@^2.6.0, typical@^2.6.1:
   version "2.6.1"

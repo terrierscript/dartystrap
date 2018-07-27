@@ -1,4 +1,6 @@
-import window from "global/window"
+//@ts-ignore
+import window from "global"
+
 // polyfill if need
 if (!fetch) {
   const fetch = require("cross-fetch")

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { SFC } from "react"
-import { VariableType } from "../scssVariables"
+import { VariableType } from "../../compiler/scssVariables"
 import styled from "react-emotion"
 import { VariableChangeHandler } from "./VariablesState"
 import { Input, Label, InlineBlock } from "reakit"

@@ -1,9 +1,11 @@
+import { VariablesMap } from "./scssVariables"
+
 interface Compiler {
   execute: Promise<any>
   terminate?: Function
 }
-export const compileWithWorker = (variables): Compiler => {
-  const worker = new Worker("../../worker/build.worker.js")
+export const compileWithWorker = (variables: VariablesMap): Compiler => {
+  const worker = new Worker("../worker/build.worker.js")
   const promise = new Promise((resolve, reject) => {
     worker.onmessage = (msg) => {
       if (msg.data.error) {
@@ -34,9 +36,10 @@ export const compileWithWorker = (variables): Compiler => {
 //   }
 // }
 
-export const compileWithDynamicImport = (variables): Compiler => {
+export const compileWithDynamicImport = (variables: VariablesMap): Compiler => {
   return {
-    execute: import("../../lib/build.js").then((modules) => {
+    // @ts-ignore
+    execute: import("./entry.js").then((modules) => {
       const { build } = modules
       return build(variables)
     })

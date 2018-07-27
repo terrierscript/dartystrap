@@ -1,4 +1,4 @@
-import { build } from "../lib/build.js"
+import { build } from "../compiler/entry.js"
 
 self.addEventListener(
   "message",

@@ -4,12 +4,12 @@ import {
   VariableType,
   VariablesMap,
   convertToMapFromArray
-} from "app/scssVariables"
+} from "../../compiler/scssVariables"
 import { ReactNode } from "react"
 import { fields } from "./init"
-import { VariableForm } from "./VariableForm"
-import { FlexRow } from "../layout/index"
-import { Grid } from "reakit"
+// import { VariableForm } from "./VariableForm"
+// import { FlexRow } from "../layout/index"
+// import { Grid } from "reakit"
 export type VariableChangeHandler = (value: VariableType) => any
 export type VariableContainerChildren = {
   variables: VariablesMap
