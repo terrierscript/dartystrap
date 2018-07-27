@@ -13,7 +13,7 @@ const loadAllContents = (
 ): Promise<FileStorage> =>
   Promise.all(
     paths.map((url) =>
-      fetchWithStorage(`${baseUrl}/${url}`).then((scss) => {
+      fetchWithStorage(`${baseUrl}${url}`).then((scss) => {
         return {
           url,
           scss
