@@ -44,13 +44,10 @@
     "@types/node": "^10.5.1",
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
-    "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
-    "jest": "^23.1.0",
     "parcel-bundler": "^1.9.6",
-    "parcel-plugin-darty": "github:terrierscript/parcel-plugin-darty",
-    "parcel-plugin-typescript": "^1.0.0"
+    "parcel-plugin-darty": "github:terrierscript/parcel-plugin-darty"
   }
 }
