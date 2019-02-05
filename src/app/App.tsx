@@ -1,7 +1,7 @@
 import React, { SFC } from "react"
 import {
   BootstrapCompiler,
-  BootstrapCompilerContext
+  BootstrapCompilerContextConsumer
 } from "./compiler/BootstrapCompiler"
 import { Component } from "react"
 import { Variables } from "./variables/Variables"
@@ -11,13 +11,9 @@ import { CompileStatus } from "./compiler/CompileStatus"
 import { Base, Block } from "reakit"
 
 const Container: SFC<{}> = ({ children }) => (
-  <Variables>
-    {(variableProps) => (
-      <BootstrapCompiler submitVariables={variableProps.submitVariables}>
-        {children}
-      </BootstrapCompiler>
-    )}
-  </Variables>
+  <BootstrapCompiler>
+    <Variables>{children}</Variables>
+  </BootstrapCompiler>
 )
 
 export class MyApp extends Component {
@@ -25,7 +21,7 @@ export class MyApp extends Component {
     return (
       <Base>
         <Container>
-          <BootstrapCompilerContext.Consumer>
+          <BootstrapCompilerContextConsumer>
             {({ css, status }) => (
               <Block>
                 <Block>
@@ -39,7 +35,7 @@ export class MyApp extends Component {
                 </Block>
               </Block>
             )}
-          </BootstrapCompilerContext.Consumer>
+          </BootstrapCompilerContextConsumer>
         </Container>
       </Base>
     )

@@ -8,7 +8,7 @@ import { VariablesMap } from "../../compiler/scssVariables"
 
 import { Button, Grid, Base } from "reakit"
 import { VariableForm } from "./VariableForm"
-import { BootstrapCompilerContext } from "../compiler/BootstrapCompiler"
+import { BootstrapCompilerContextConsumer } from "../compiler/BootstrapCompiler"
 
 export type VariableContainerChildProps = {
   submitVariables: VariablesMap
@@ -18,16 +18,14 @@ const BuildConsumer = ({ children }) => {
   return (
     <VariableContextConsumer>
       {([variables]) => (
-        <BootstrapCompilerContext.Consumer>
+        <BootstrapCompilerContextConsumer>
           {({ doCompile }) => children({ variables, doCompile })}
-        </BootstrapCompilerContext.Consumer>
+        </BootstrapCompilerContextConsumer>
       )}
     </VariableContextConsumer>
   )
 }
-export const Variables: SFC<{
-  children: (props: VariableContainerChildProps) => ReactNode
-}> = ({ children }) => {
+export const Variables: SFC<{}> = ({ children }) => {
   return (
     <VariablesState>
       <Base>
@@ -40,10 +38,15 @@ export const Variables: SFC<{
               {({ variables, doCompile }) => {
                 return (
                   <div>
-                    <Button data-test-id="generate-button" onClick={doCompile}>
+                    <Button
+                      data-test-id="generate-button"
+                      onClick={() => {
+                        doCompile(variables)
+                      }}
+                    >
                       Generate
                     </Button>
-                    <div>{children({ submitVariables: variables })}</div>
+                    <div>{children}</div>
                   </div>
                 )
               }}
