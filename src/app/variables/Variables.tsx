@@ -6,18 +6,26 @@ import { SFC } from "react"
 import { ReactNode } from "react"
 import { VariablesMap } from "../../compiler/scssVariables"
 
-import { Submitter } from "./Submitter"
 import { Button, Grid, Base } from "reakit"
 import { VariableForm } from "./VariableForm"
-// import { FlexRow } from "../layout/index"
+import { BootstrapCompilerContextConsumer } from "../compiler/BootstrapCompiler"
 
 export type VariableContainerChildProps = {
   submitVariables: VariablesMap
 }
 
-export const Variables: SFC<{
-  children: (props: VariableContainerChildProps) => ReactNode
-}> = ({ children }) => {
+const BuildConsumer = ({ children }) => {
+  return (
+    <VariableContextConsumer>
+      {([variables]) => (
+        <BootstrapCompilerContextConsumer>
+          {({ doCompile }) => children({ variables, doCompile })}
+        </BootstrapCompilerContextConsumer>
+      )}
+    </VariableContextConsumer>
+  )
+}
+export const Variables: SFC<{}> = ({ children }) => {
   return (
     <VariablesState>
       <Base>
@@ -26,27 +34,23 @@ export const Variables: SFC<{
             <VariableForm key="form" />
           </Grid.Item>
           <Grid.Item>
-            <VariableContextConsumer>
-              {([variables]) => {
+            <BuildConsumer>
+              {({ variables, doCompile }) => {
                 return (
-                  <Submitter<VariablesMap> item={variables}>
-                    {({ onSubmit, item }) => {
-                      return (
-                        <div>
-                          <Button
-                            data-test-id="generate-button"
-                            onClick={onSubmit}
-                          >
-                            Generate
-                          </Button>
-                          <div>{children({ submitVariables: item })}</div>
-                        </div>
-                      )
-                    }}
-                  </Submitter>
+                  <div>
+                    <Button
+                      data-test-id="generate-button"
+                      onClick={() => {
+                        doCompile(variables)
+                      }}
+                    >
+                      Generate
+                    </Button>
+                    <div>{children}</div>
+                  </div>
                 )
               }}
-            </VariableContextConsumer>
+            </BuildConsumer>
           </Grid.Item>
         </Grid>
       </Base>

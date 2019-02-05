@@ -1,11 +1,7 @@
 import React, { createContext } from "react"
-import { ReactNode, PureComponent } from "react"
-import { VariablesMap, convertToKeyValue } from "../../compiler/scssVariables"
-import {
-  compileWithWorker,
-  // compile,
-  compileWithDynamicImport
-} from "../../compiler/"
+import { PureComponent } from "react"
+import { VariablesMap } from "../../compiler/scssVariables"
+import { compileWithWorker, compileWithDynamicImport } from "../../compiler/"
 import { Label, Input } from "reakit"
 
 type Props = {
@@ -33,20 +29,29 @@ const initialState = {
   useWorker: true,
   lastError: undefined
 }
-export const BootstrapCompilerContext = createContext<{
+const BootstrapCompilerContext = createContext<{
   css: string
   status: CompilerStatus
-}>(initialState)
+  doCompile: (...args: unknown[]) => any
+}>({
+  ...initialState,
+  doCompile: () => {
+    throw new Error("Not Initilized BootstrapCompilerContext")
+  }
+})
 
-export class BootstrapCompiler extends PureComponent<Props, State> {
+export const BootstrapCompilerContextConsumer =
+  BootstrapCompilerContext.Consumer
+export class BootstrapCompiler extends PureComponent<{}, State> {
   state = initialState
   currentTerminate: Function | null | undefined = null
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps == this.props) {
-      return
-    }
-    this.buildBootstrap()
-  }
+  // TODO: wan't build first time
+  // componentDidUpdate(prevProps: Props) {
+  //   if (prevProps == this.props) {
+  //     return
+  //   }
+  //   this.buildBootstrap()
+  // }
   terminateIfExist() {
     if (this.currentTerminate) {
       // @ts-ignore
@@ -54,14 +59,14 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     }
     this.currentTerminate = null
   }
-  buildBootstrap() {
+  buildBootstrap = (submitVariables) => {
     this.terminateIfExist()
     this.setState({ status: CompilerStatus.PROGRESS }, () => {
-      const { submitVariables } = this.props
       // const variablesKeyValue = convertToKeyValue(submitVariables)
       const compiler = this.state.useWorker
         ? compileWithWorker
         : compileWithDynamicImport
+      // const compiler = compileLocal
       const { execute, terminate } = compiler(submitVariables)
       this.currentTerminate = terminate
       execute
@@ -81,7 +86,8 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
   }
   render() {
     const { useWorker, css, status } = this.state
-    const values = { css, status }
+    const values = { css, status, doCompile: this.buildBootstrap }
+
     return (
       <BootstrapCompilerContext.Provider value={values}>
         <div>
