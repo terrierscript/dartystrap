@@ -29,7 +29,7 @@ const initialState = {
   useWorker: true,
   lastError: undefined
 }
-const BootstrapCompilerContext = createContext<{
+export const BootstrapCompilerContext = createContext<{
   css: string
   status: CompilerStatus
   doCompile: (...args: unknown[]) => any
@@ -40,8 +40,6 @@ const BootstrapCompilerContext = createContext<{
   }
 })
 
-export const BootstrapCompilerContextConsumer =
-  BootstrapCompilerContext.Consumer
 export class BootstrapCompiler extends PureComponent<{}, State> {
   state = initialState
   currentTerminate: Function | null | undefined = null
