@@ -6,7 +6,7 @@ import { VariableContext } from "../variables/VariablesState"
 
 const useCompile = () => {
   const [variables] = useContext(VariableContext)
-  const { doCompile } = useContext(BootstrapCompilerContext)
+  const { executeCompile: doCompile } = useContext(BootstrapCompilerContext)
   const compile = useCallback(() => {
     doCompile(variables)
   }, [variables, doCompile])

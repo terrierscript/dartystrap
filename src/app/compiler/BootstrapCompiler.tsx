@@ -35,11 +35,11 @@ export const BootstrapCompilerContext = createContext<{
   css: string
   useWorker: boolean
   status: CompilerStatus
-  doCompile: (...args: unknown[]) => any
+  executeCompile: (...args: unknown[]) => any
   handleUseWorker: (...args: unknown[]) => any
 }>({
   ...initialState,
-  doCompile: initialContextHandler,
+  executeCompile: initialContextHandler,
   handleUseWorker: initialContextHandler
 })
 
@@ -84,7 +84,7 @@ export class BootstrapCompiler extends PureComponent<{}, State> {
       css,
       status,
       useWorker,
-      doCompile: this.buildBootstrap,
+      executeCompile: this.buildBootstrap,
       handleUseWorker: this.handleUseWorker
     }
 
