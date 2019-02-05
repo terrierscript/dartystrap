@@ -1,48 +1,27 @@
+import { BootstrapCompilerContext } from "../compiler/BootstrapCompiler"
 import * as React from "react"
-
-import { VariablesState, VariableContextConsumer } from "./VariablesState"
-
-import { SFC, useEffect } from "react"
-import { ReactNode } from "react"
+import { SFC, useContext, useEffect, useCallback } from "react"
+import { Base, Button, Grid } from "reakit"
 import { VariablesMap } from "../../compiler/scssVariables"
-
-import { Button, Grid, Base } from "reakit"
 import { VariableForm } from "./VariableForm"
-import { BootstrapCompilerContextConsumer } from "../compiler/BootstrapCompiler"
+import { VariableContext, VariablesState } from "./VariablesState"
 
 export type VariableContainerChildProps = {
   submitVariables: VariablesMap
 }
 
-const CompilerContextWithInitialVariable = ({
-  variables,
-  doCompile,
-  children
-}) => {
-  useEffect(() => {
+const BuildConsumer = ({ children }) => {
+  const [variables] = useContext(VariableContext)
+  const { doCompile } = useContext(BootstrapCompilerContext)
+  const compile = useCallback(() => {
     doCompile(variables)
+  }, [variables, doCompile])
+  useEffect(() => {
+    compile()
   }, [])
-  return children({ variables, doCompile })
+  return <div>{children({ compile })}</div>
 }
 
-const BuildConsumer = ({ children }) => {
-  return (
-    <VariableContextConsumer>
-      {([variables]) => (
-        <BootstrapCompilerContextConsumer>
-          {({ doCompile }) => (
-            <CompilerContextWithInitialVariable
-              variables={variables}
-              doCompile={doCompile}
-            >
-              {children}
-            </CompilerContextWithInitialVariable>
-          )}
-        </BootstrapCompilerContextConsumer>
-      )}
-    </VariableContextConsumer>
-  )
-}
 export const Variables: SFC<{}> = ({ children }) => {
   return (
     <VariablesState>
@@ -53,13 +32,13 @@ export const Variables: SFC<{}> = ({ children }) => {
           </Grid.Item>
           <Grid.Item>
             <BuildConsumer>
-              {({ variables, doCompile }) => {
+              {({ compile }) => {
                 return (
                   <div>
                     <Button
                       data-test-id="generate-button"
                       onClick={() => {
-                        doCompile(variables)
+                        compile()
                       }}
                     >
                       Generate

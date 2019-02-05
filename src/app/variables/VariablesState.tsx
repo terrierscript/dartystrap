@@ -34,7 +34,7 @@ const useVariableState = (): UseVariableState => {
   )
   return [variables, onChangeVariable]
 }
-const VariableContext = React.createContext<UseVariableState>([
+export const VariableContext = React.createContext<UseVariableState>([
   {},
   (value: VariableType) => {}
 ])

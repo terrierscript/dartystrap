@@ -1,7 +1,7 @@
-import React, { SFC } from "react"
+import React, { useContext } from "react"
 import {
   BootstrapCompiler,
-  BootstrapCompilerContextConsumer
+  BootstrapCompilerContext
 } from "./compiler/BootstrapCompiler"
 import { Component } from "react"
 import { Variables } from "./variables/Variables"
@@ -10,34 +10,31 @@ import { Result } from "./result/Result"
 import { CompileStatus } from "./compiler/CompileStatus"
 import { Base, Block } from "reakit"
 
-const Container: SFC<{}> = ({ children }) => (
-  <BootstrapCompiler>
-    <Variables>{children}</Variables>
-  </BootstrapCompiler>
-)
+const Status = () => {
+  const { css, status } = useContext(BootstrapCompilerContext)
+  return (
+    <Block>
+      <Block>
+        <CompileStatus status={status} />
+      </Block>
+      <Block>
+        <Examples baseCss={css} />
+      </Block>
+      <Block>
+        <Result code={css} />
+      </Block>
+    </Block>
+  )
+}
 
-export class MyApp extends Component {
-  render() {
-    return (
-      <Base>
-        <Container>
-          <BootstrapCompilerContextConsumer>
-            {({ css, status }) => (
-              <Block>
-                <Block>
-                  <CompileStatus status={status} />
-                </Block>
-                <Block>
-                  <Examples baseCss={css} />
-                </Block>
-                <Block>
-                  <Result code={css} />
-                </Block>
-              </Block>
-            )}
-          </BootstrapCompilerContextConsumer>
-        </Container>
-      </Base>
-    )
-  }
+export const MyApp = () => {
+  return (
+    <Base>
+      <BootstrapCompiler>
+        <Variables>
+          <Status />
+        </Variables>
+      </BootstrapCompiler>
+    </Base>
+  )
 }
