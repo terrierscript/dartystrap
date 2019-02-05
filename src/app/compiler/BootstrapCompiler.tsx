@@ -32,12 +32,12 @@ const initialState = {
 const BootstrapCompilerContext = createContext<{
   css: string
   status: CompilerStatus
-  doCompile?: any
+  doCompile: () => any
 }>({
-  ...initialState
-  // doCompile: () => {
-  //   throw new Error("Not Initilized BootstrapCompilerContext")
-  // }
+  ...initialState,
+  doCompile: () => {
+    throw new Error("Not Initilized BootstrapCompilerContext")
+  }
 })
 
 export const BootstrapCompilerContextConsumer =
@@ -88,7 +88,6 @@ export class BootstrapCompiler extends PureComponent<{}, State> {
   render() {
     const { useWorker, css, status } = this.state
     const values = { css, status, doCompile: this.buildBootstrap }
-    console.log(values)
 
     return (
       <BootstrapCompilerContext.Provider value={values}>
