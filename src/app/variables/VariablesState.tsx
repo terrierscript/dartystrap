@@ -5,11 +5,8 @@ import {
   VariablesMap,
   convertToMapFromArray
 } from "../../compiler/scssVariables"
-import { ReactNode, useState, SFC, useCallback } from "react"
+import { useState, SFC, useCallback } from "react"
 import { fields } from "./init"
-// import { VariableForm } from "./VariableForm"
-// import { FlexRow } from "../layout/index"
-// import { Grid } from "reakit"
 export type VariableChangeHandler = (value: VariableType) => any
 
 export type State = { variables: VariablesMap }
@@ -27,7 +24,6 @@ const useVariableState = (): UseVariableState => {
         ...variables,
         [name]: newVariableType
       }
-      console.log(variables, "=>", newVariables)
       setVariables(newVariables)
     },
     [variables]
@@ -38,8 +34,6 @@ export const VariableContext = React.createContext<UseVariableState>([
   {},
   (value: VariableType) => {}
 ])
-
-export const VariableContextConsumer = VariableContext.Consumer
 
 export const VariablesState: SFC<{}> = ({ children }) => {
   const context = useVariableState()
