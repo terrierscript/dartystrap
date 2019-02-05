@@ -9,7 +9,7 @@ import { Examples } from "./examples/Examples"
 import { Result } from "./result/Result"
 import { CompileStatus } from "./compiler/CompileStatus"
 import { Base, Block } from "reakit"
-import styled from "styled-components"
+
 const Container: SFC<{}> = ({ children }) => (
   <Variables>
     {(variableProps) => (

@@ -1,11 +1,7 @@
 import React, { createContext } from "react"
-import { ReactNode, PureComponent } from "react"
-import { VariablesMap, convertToKeyValue } from "../../compiler/scssVariables"
-import {
-  compileWithWorker,
-  // compile,
-  compileWithDynamicImport
-} from "../../compiler/"
+import { PureComponent } from "react"
+import { VariablesMap } from "../../compiler/scssVariables"
+import { compileWithWorker, compileWithDynamicImport } from "../../compiler/"
 import { Label, Input } from "reakit"
 
 type Props = {
@@ -62,6 +58,7 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
       const compiler = this.state.useWorker
         ? compileWithWorker
         : compileWithDynamicImport
+      // const compiler = compileLocal
       const { execute, terminate } = compiler(submitVariables)
       this.currentTerminate = terminate
       execute
