@@ -1,39 +1,17 @@
-import React, { useContext } from "react"
-import {
-  BootstrapCompiler,
-  BootstrapCompilerContext
-} from "./compiler/BootstrapCompiler"
+import React from "react"
+import { BootstrapCompiler } from "./compiler/BootstrapCompiler"
 import { Component } from "react"
-import { Variables } from "./variables/Variables"
-import { Examples } from "./examples/Examples"
-import { Result } from "./result/Result"
-import { CompileStatus } from "./compiler/CompileStatus"
-import { Base, Block } from "reakit"
-
-const Status = () => {
-  const { css, status } = useContext(BootstrapCompilerContext)
-  return (
-    <Block>
-      <Block>
-        <CompileStatus status={status} />
-      </Block>
-      <Block>
-        <Examples baseCss={css} />
-      </Block>
-      <Block>
-        <Result code={css} />
-      </Block>
-    </Block>
-  )
-}
+import { Layout } from "./main/Layout"
+import { Base } from "reakit"
+import { VariablesState } from "./variables/VariablesState"
 
 export const MyApp = () => {
   return (
     <Base>
       <BootstrapCompiler>
-        <Variables>
-          <Status />
-        </Variables>
+        <VariablesState>
+          <Layout />
+        </VariablesState>
       </BootstrapCompiler>
     </Base>
   )

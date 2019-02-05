@@ -2,7 +2,6 @@ import React, { createContext } from "react"
 import { PureComponent } from "react"
 import { VariablesMap } from "../../compiler/scssVariables"
 import { compileWithWorker, compileWithDynamicImport } from "../../compiler/"
-import { Label, Input } from "reakit"
 
 type Props = {
   submitVariables: VariablesMap
@@ -29,27 +28,24 @@ const initialState = {
   useWorker: true,
   lastError: undefined
 }
+const initialContextHandler = () => {
+  throw new Error("Not Initilized BootstrapCompilerContext")
+}
 export const BootstrapCompilerContext = createContext<{
   css: string
+  useWorker: boolean
   status: CompilerStatus
   doCompile: (...args: unknown[]) => any
+  handleUseWorker: (...args: unknown[]) => any
 }>({
   ...initialState,
-  doCompile: () => {
-    throw new Error("Not Initilized BootstrapCompilerContext")
-  }
+  doCompile: initialContextHandler,
+  handleUseWorker: initialContextHandler
 })
 
 export class BootstrapCompiler extends PureComponent<{}, State> {
   state = initialState
   currentTerminate: Function | null | undefined = null
-  // TODO: wan't build first time
-  // componentDidUpdate(prevProps: Props) {
-  //   if (prevProps == this.props) {
-  //     return
-  //   }
-  //   this.buildBootstrap()
-  // }
   terminateIfExist() {
     if (this.currentTerminate) {
       // @ts-ignore
@@ -84,21 +80,17 @@ export class BootstrapCompiler extends PureComponent<{}, State> {
   }
   render() {
     const { useWorker, css, status } = this.state
-    const values = { css, status, doCompile: this.buildBootstrap }
+    const values = {
+      css,
+      status,
+      useWorker,
+      doCompile: this.buildBootstrap,
+      handleUseWorker: this.handleUseWorker
+    }
 
     return (
       <BootstrapCompilerContext.Provider value={values}>
-        <div>
-          <Label>
-            <Input
-              type="checkbox"
-              onChange={this.handleUseWorker}
-              checked={useWorker}
-            />
-            <span>Enable Web Worker</span>
-          </Label>
-          {this.props.children}
-        </div>
+        {this.props.children}
       </BootstrapCompilerContext.Provider>
     )
   }
