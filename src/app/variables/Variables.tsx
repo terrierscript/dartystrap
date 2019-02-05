@@ -8,7 +8,7 @@ import { VariablesMap } from "../../compiler/scssVariables"
 
 import { Button, Grid, Base } from "reakit"
 import { VariableForm } from "./VariableForm"
-import { BootstrapCompilerContext } from "app/compiler/BootstrapCompiler"
+import { BootstrapCompilerContext } from "../compiler/BootstrapCompiler"
 
 export type VariableContainerChildProps = {
   submitVariables: VariablesMap
