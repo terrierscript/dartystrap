@@ -1,4 +1,4 @@
-import React, { createContext } from "react"
+import React, { createContext, useState, useMemo, useCallback } from "react"
 import { PureComponent } from "react"
 import { VariablesMap } from "../../compiler/scssVariables"
 import { compileWithWorker, compileWithDynamicImport } from "../../compiler/"
@@ -31,67 +31,66 @@ const initialState = {
 const initialContextHandler = () => {
   throw new Error("Not Initilized BootstrapCompilerContext")
 }
-export const BootstrapCompilerContext = createContext<{
-  css: string
-  useWorker: boolean
-  status: CompilerStatus
-  executeCompile: (...args: unknown[]) => any
-  handleUseWorker: (...args: unknown[]) => any
-}>({
+
+export const BootstrapCompilerContext = createContext<ContextState>({
   ...initialState,
   executeCompile: initialContextHandler,
   handleUseWorker: initialContextHandler
 })
 
-export class BootstrapCompiler extends PureComponent<{}, State> {
-  state = initialState
-  currentTerminate: Function | null | undefined = null
-  terminateIfExist() {
-    if (this.currentTerminate) {
-      // @ts-ignore
-      this.currentTerminate()
-    }
-    this.currentTerminate = null
-  }
-  buildBootstrap = (submitVariables) => {
-    this.terminateIfExist()
-    this.setState({ status: CompilerStatus.PROGRESS }, () => {
-      // const variablesKeyValue = convertToKeyValue(submitVariables)
-      const compiler = this.state.useWorker
-        ? compileWithWorker
-        : compileWithDynamicImport
-      // const compiler = compileLocal
+type MaybeFunction = Function | null | undefined
+
+const useBootstrapCompiler = () => {
+  const [css, setCss] = useState("")
+  const [status, setStatus] = useState(CompilerStatus.INIT)
+  // const [currentTerminate, setTerminate] = useState<MaybeFunction>(null)
+  const [lastError, setLastError] = useState(undefined)
+  const [useWorker, setUseWorker] = useState(true)
+
+  const compiler = useMemo(() => {
+    return useWorker ? compileWithWorker : compileWithDynamicImport
+  }, [useWorker])
+  const executeCompile = useCallback(
+    (submitVariables) => {
+      setStatus(CompilerStatus.PROGRESS)
+      // if (typeof currentTerminate === "function") {
+      //   currentTerminate()
+      //   setTerminate(null)
+      // }
       const { execute, terminate } = compiler(submitVariables)
-      this.currentTerminate = terminate
+      // setTerminate(terminate)
+      // console.log(currentTerminate)
+
       execute
         .then((css) => {
-          this.setState({ css, status: CompilerStatus.SUCCESS })
+          setStatus(CompilerStatus.SUCCESS)
+          setCss(css)
         })
         .catch((e) => {
-          this.setState({
-            status: CompilerStatus.ERROR,
-            lastError: e
-          })
+          setStatus(CompilerStatus.ERROR)
+          setLastError(e)
         })
-    })
+    },
+    [compiler /*currentTerminate*/]
+  )
+  return {
+    css,
+    status,
+    lastError,
+    useWorker,
+    executeCompile,
+    handleUseWorker: setUseWorker
   }
-  handleUseWorker = (e: any) => {
-    this.setState({ useWorker: e.target.checked })
-  }
-  render() {
-    const { useWorker, css, status } = this.state
-    const values = {
-      css,
-      status,
-      useWorker,
-      executeCompile: this.buildBootstrap,
-      handleUseWorker: this.handleUseWorker
-    }
+}
 
-    return (
-      <BootstrapCompilerContext.Provider value={values}>
-        {this.props.children}
-      </BootstrapCompilerContext.Provider>
-    )
-  }
+type ContextState = ReturnType<typeof useBootstrapCompiler>
+
+export const BootstrapCompiler = ({ children }) => {
+  const values: ContextState = useBootstrapCompiler()
+
+  return (
+    <BootstrapCompilerContext.Provider value={values}>
+      {children}
+    </BootstrapCompilerContext.Provider>
+  )
 }

@@ -22,7 +22,7 @@ export const compileWithWorker = (variables: VariablesMap): Compiler => {
   return {
     execute: promise,
     terminate: () => {
-      console.log("terminate")
+      console.log("terminate--")
       worker.terminate()
     }
   }
