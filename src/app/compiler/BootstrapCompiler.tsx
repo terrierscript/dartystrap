@@ -32,7 +32,7 @@ const initialState = {
 const BootstrapCompilerContext = createContext<{
   css: string
   status: CompilerStatus
-  doCompile: () => any
+  doCompile: (...args: unknown[]) => any
 }>({
   ...initialState,
   doCompile: () => {
@@ -60,7 +60,6 @@ export class BootstrapCompiler extends PureComponent<{}, State> {
     this.currentTerminate = null
   }
   buildBootstrap = (submitVariables) => {
-    console.log("start compile")
     this.terminateIfExist()
     this.setState({ status: CompilerStatus.PROGRESS }, () => {
       // const variablesKeyValue = convertToKeyValue(submitVariables)
