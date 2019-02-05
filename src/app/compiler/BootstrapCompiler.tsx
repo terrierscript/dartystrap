@@ -32,17 +32,18 @@ const initialState = {
 export const BootstrapCompilerContext = createContext<{
   css: string
   status: CompilerStatus
-}>(initialState)
+  doCompile: () => any
+}>({ ...initialState, doCompile: () => {} })
 
 export class BootstrapCompiler extends PureComponent<Props, State> {
   state = initialState
   currentTerminate: Function | null | undefined = null
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps == this.props) {
-      return
-    }
-    this.buildBootstrap()
-  }
+  // componentDidUpdate(prevProps: Props) {
+  //   if (prevProps == this.props) {
+  //     return
+  //   }
+  //   this.buildBootstrap()
+  // }
   terminateIfExist() {
     if (this.currentTerminate) {
       // @ts-ignore
@@ -78,7 +79,8 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
   }
   render() {
     const { useWorker, css, status } = this.state
-    const values = { css, status }
+    const values = { css, status, doCompile: this.buildBootstrap }
+
     return (
       <BootstrapCompilerContext.Provider value={values}>
         <div>
