@@ -1,4 +1,10 @@
-import React, { createContext, useState, useMemo, useCallback } from "react"
+import React, {
+  createContext,
+  useState,
+  useMemo,
+  useCallback,
+  useRef
+} from "react"
 import { PureComponent } from "react"
 import { VariablesMap } from "../../compiler/scssVariables"
 import { compileWithWorker, compileWithDynamicImport } from "../../compiler/"
@@ -43,7 +49,7 @@ type MaybeFunction = Function | null | undefined
 const useBootstrapCompiler = () => {
   const [css, setCss] = useState("")
   const [status, setStatus] = useState(CompilerStatus.INIT)
-  // const [currentTerminate, setTerminate] = useState<MaybeFunction>(null)
+  const terminateFn = useRef<MaybeFunction>(null)
   const [lastError, setLastError] = useState(undefined)
   const [useWorker, setUseWorker] = useState(true)
 
@@ -53,13 +59,12 @@ const useBootstrapCompiler = () => {
   const executeCompile = useCallback(
     (submitVariables) => {
       setStatus(CompilerStatus.PROGRESS)
-      // if (typeof currentTerminate === "function") {
-      //   currentTerminate()
-      //   setTerminate(null)
-      // }
+      if (typeof terminateFn.current === "function") {
+        terminateFn.current()
+        terminateFn.current = null
+      }
       const { execute, terminate } = compiler(submitVariables)
-      // setTerminate(terminate)
-      // console.log(currentTerminate)
+      terminateFn.current = terminate
 
       execute
         .then((css) => {
@@ -71,7 +76,7 @@ const useBootstrapCompiler = () => {
           setLastError(e)
         })
     },
-    [compiler /*currentTerminate*/]
+    [compiler]
   )
   return {
     css,
