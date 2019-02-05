@@ -45,6 +45,7 @@ export const BootstrapCompilerContextConsumer =
 export class BootstrapCompiler extends PureComponent<{}, State> {
   state = initialState
   currentTerminate: Function | null | undefined = null
+  // TODO: wan't build first time
   // componentDidUpdate(prevProps: Props) {
   //   if (prevProps == this.props) {
   //     return
