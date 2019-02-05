@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { VariablesState, VariableContextConsumer } from "./VariablesState"
 
-import { SFC } from "react"
+import { SFC, useEffect } from "react"
 import { ReactNode } from "react"
 import { VariablesMap } from "../../compiler/scssVariables"
 
@@ -14,12 +14,30 @@ export type VariableContainerChildProps = {
   submitVariables: VariablesMap
 }
 
+const CompilerContextWithInitialVariable = ({
+  variables,
+  doCompile,
+  children
+}) => {
+  useEffect(() => {
+    doCompile(variables)
+  }, [])
+  return children({ variables, doCompile })
+}
+
 const BuildConsumer = ({ children }) => {
   return (
     <VariableContextConsumer>
       {([variables]) => (
         <BootstrapCompilerContextConsumer>
-          {({ doCompile }) => children({ variables, doCompile })}
+          {({ doCompile }) => (
+            <CompilerContextWithInitialVariable
+              variables={variables}
+              doCompile={doCompile}
+            >
+              {children}
+            </CompilerContextWithInitialVariable>
+          )}
         </BootstrapCompilerContextConsumer>
       )}
     </VariableContextConsumer>

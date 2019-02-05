@@ -49,6 +49,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
     "parcel-bundler": "^1.11.0",
-    "parcel-plugin-darty": "github:terrierscript/parcel-plugin-darty"
+    "parcel-plugin-darty": "github:terrierscript/parcel-plugin-darty",
+    "puppeteer": "^1.12.1"
   }
 }
