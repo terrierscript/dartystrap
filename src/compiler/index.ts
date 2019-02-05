@@ -1,6 +1,6 @@
 import { VariablesMap } from "./scssVariables"
 
-interface Compiler {
+type Compiler = {
   execute: Promise<any>
   terminate?: Function
 }
@@ -28,13 +28,15 @@ export const compileWithWorker = (variables: VariablesMap): Compiler => {
   }
 }
 
-// export const compile = (variables): Compiler => {
-//   const { build } = require("../../lib/build.js")
-//   console.log(build)
-//   return {
-//     promise: build(variables)
-//   }
-// }
+export const compileLocal = (variables): Compiler => {
+  const { build } = require("./entry.js")
+  console.log(build)
+  return {
+    execute: new Promise((res, rej) => {
+      res(build(variables))
+    })
+  }
+}
 
 export const compileWithDynamicImport = (variables: VariablesMap): Compiler => {
   return {

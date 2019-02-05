@@ -7,11 +7,11 @@ if (!fetch) {
 }
 
 export const fetchPlain = (url: string) => {
-  return fetch(url).then((r) => r.text())
+  return fetch(url, { mode: "cors" }).then((r) => r.text())
 }
 
 export const fetchJson = (url: string) => {
-  return fetch(url).then((r) => r.json())
+  return fetch(url, { mode: "cors" }).then((r) => r.json())
 }
 
 export const fetchWithStorage = (url: string) => {
