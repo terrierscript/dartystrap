@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { VariablesState, VariableContainerChildren } from "./VariablesState"
+import { VariablesState, VariableContextConsumer } from "./VariablesState"
 
 import { SFC } from "react"
 import { ReactNode } from "react"
@@ -20,34 +20,36 @@ export const Variables: SFC<{
 }> = ({ children }) => {
   return (
     <VariablesState>
-      {(props: VariableContainerChildren) => {
-        return (
-          <Base>
-            <Grid columns="1fr 2fr">
-              <Grid.Item>
-                <VariableForm key="form" {...props} />
-              </Grid.Item>
-              <Grid.Item>
-                <Submitter<VariablesMap> item={props.variables}>
-                  {({ onSubmit, item }) => {
-                    return (
-                      <div>
-                        <Button
-                          data-test-id="generate-button"
-                          onClick={onSubmit}
-                        >
-                          Generate
-                        </Button>
-                        <div>{children({ submitVariables: item })}</div>
-                      </div>
-                    )
-                  }}
-                </Submitter>
-              </Grid.Item>
-            </Grid>
-          </Base>
-        )
-      }}
+      <Base>
+        <Grid columns="1fr 2fr">
+          <Grid.Item>
+            <VariableForm key="form" />
+          </Grid.Item>
+          <Grid.Item>
+            <VariableContextConsumer>
+              {([variables]) => {
+                return (
+                  <Submitter<VariablesMap> item={variables}>
+                    {({ onSubmit, item }) => {
+                      return (
+                        <div>
+                          <Button
+                            data-test-id="generate-button"
+                            onClick={onSubmit}
+                          >
+                            Generate
+                          </Button>
+                          <div>{children({ submitVariables: item })}</div>
+                        </div>
+                      )
+                    }}
+                  </Submitter>
+                )
+              }}
+            </VariableContextConsumer>
+          </Grid.Item>
+        </Grid>
+      </Base>
     </VariablesState>
   )
 }
