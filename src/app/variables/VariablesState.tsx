@@ -5,15 +5,11 @@ import {
   VariablesMap,
   convertToMapFromArray
 } from "../../compiler/scssVariables"
-import { useState, SFC, useCallback, useReducer } from "react"
+import { SFC, useReducer } from "react"
 import { fields } from "./init"
 export type VariableChangeHandler = (value: VariableType) => any
 
-export type State = { variables: VariablesMap }
-
 export const initial: VariablesMap = convertToMapFromArray(fields)
-
-type UseVariableState = [VariablesMap, VariableChangeHandler]
 
 const variableReducer = (state, action: VariableType) => {
   return {
@@ -21,14 +17,17 @@ const variableReducer = (state, action: VariableType) => {
     [action.name]: action
   }
 }
-const useVariableState = (): UseVariableState => {
+const useVariableState = () => {
   const [variables, onChangeVariable] = useReducer(variableReducer, initial)
-  return [variables, onChangeVariable]
+  return { variables, onChangeVariable }
 }
-export const VariableContext = React.createContext<UseVariableState>([
-  {},
-  (value: VariableType) => {}
-])
+export const VariableContext = React.createContext<{
+  variables: VariablesMap
+  onChangeVariable: VariableChangeHandler
+}>({
+  variables: {},
+  onChangeVariable: (...args) => {}
+})
 
 export const VariablesState: SFC<{}> = ({ children }) => {
   const context = useVariableState()

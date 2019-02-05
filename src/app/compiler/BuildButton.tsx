@@ -5,7 +5,7 @@ import { Button } from "reakit"
 import { VariableContext } from "../variables/VariablesState"
 
 const useCompile = () => {
-  const [variables] = useContext(VariableContext)
+  const { variables } = useContext(VariableContext)
   const { executeCompile: doCompile } = useContext(BootstrapCompilerContext)
   const compile = useCallback(() => {
     doCompile(variables)
