@@ -1,4 +1,4 @@
-import React from "react"
+import React, { createContext } from "react"
 import { ReactNode, PureComponent } from "react"
 import { VariablesMap, convertToKeyValue } from "../../compiler/scssVariables"
 import {
@@ -10,7 +10,6 @@ import { Label, Input } from "reakit"
 
 type Props = {
   submitVariables: VariablesMap
-  children: (props: State) => ReactNode
 }
 export enum CompilerStatus {
   INIT = "init",
@@ -28,13 +27,19 @@ type State = {
 
 export type BootstrapCompilerChildrenProps = State
 
+const initialState = {
+  css: "",
+  status: CompilerStatus.INIT,
+  useWorker: true,
+  lastError: undefined
+}
+export const BootstrapCompilerContext = createContext<{
+  css: string
+  status: CompilerStatus
+}>(initialState)
+
 export class BootstrapCompiler extends PureComponent<Props, State> {
-  state = {
-    css: "",
-    status: CompilerStatus.INIT,
-    useWorker: true,
-    lastError: undefined
-  }
+  state = initialState
   currentTerminate: Function | null | undefined = null
   componentDidUpdate(prevProps: Props) {
     if (prevProps == this.props) {
@@ -64,7 +69,10 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
           this.setState({ css, status: CompilerStatus.SUCCESS })
         })
         .catch((e) => {
-          this.setState({ status: CompilerStatus.ERROR, lastError: e })
+          this.setState({
+            status: CompilerStatus.ERROR,
+            lastError: e
+          })
         })
     })
   }
@@ -72,19 +80,22 @@ export class BootstrapCompiler extends PureComponent<Props, State> {
     this.setState({ useWorker: e.target.checked })
   }
   render() {
-    const { useWorker } = this.state
+    const { useWorker, css, status } = this.state
+    const values = { css, status }
     return (
-      <div>
-        <Label>
-          <Input
-            type="checkbox"
-            onChange={this.handleUseWorker}
-            checked={useWorker}
-          />
-          <span>Enable Web Worker</span>
-        </Label>
-        {this.props.children(this.state)}
-      </div>
+      <BootstrapCompilerContext.Provider value={values}>
+        <div>
+          <Label>
+            <Input
+              type="checkbox"
+              onChange={this.handleUseWorker}
+              checked={useWorker}
+            />
+            <span>Enable Web Worker</span>
+          </Label>
+          {this.props.children}
+        </div>
+      </BootstrapCompilerContext.Provider>
     )
   }
 }
