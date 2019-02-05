@@ -4,7 +4,7 @@ import { useContext, useEffect, useCallback } from "react"
 import { Button } from "reakit"
 import { VariableContext } from "../variables/VariablesState"
 
-export const BuildButton = () => {
+const useCompile = () => {
   const [variables] = useContext(VariableContext)
   const { doCompile } = useContext(BootstrapCompilerContext)
   const compile = useCallback(() => {
@@ -13,6 +13,11 @@ export const BuildButton = () => {
   useEffect(() => {
     compile()
   }, [])
+  return compile
+}
+
+export const BuildButton = () => {
+  const compile = useCompile()
   return (
     <div>
       <Button
