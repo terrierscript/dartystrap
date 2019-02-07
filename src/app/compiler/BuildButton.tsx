@@ -7,11 +7,13 @@ import { VariableContext } from "../variables/VariablesState"
 const useCompile = () => {
   const { variables } = useContext(VariableContext)
   const { executeCompile: doCompile } = useContext(BootstrapCompilerContext)
+
+  // compile関数は外出しできる
   const compile = useCallback(() => {
     doCompile(variables)
   }, [variables, doCompile])
-  
-  // componentDidMount
+
+  // componentDidMountの代わりとして初回にcompile実行をする
   useEffect(() => {
     compile()
   }, [])
