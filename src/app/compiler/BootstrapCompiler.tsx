@@ -47,15 +47,15 @@ export const BootstrapCompilerContext = createContext<ContextState>({
 type MaybeFunction = Function | null | undefined
 
 const useBootstrapCompiler = () => {
-  const { useWorker } = useContext(CompilerModeContext)
+  const isWorkerCompiler = useContext(CompilerModeContext)
   const [css, setCss] = useState("")
   const [status, setStatus] = useState(CompilerStatus.INIT)
   const terminateFn = useRef<MaybeFunction>(null)
   const [lastError, setLastError] = useState(undefined)
 
   const compiler = useMemo(() => {
-    return useWorker ? compileWithWorker : compileWithDynamicImport
-  }, [useWorker])
+    return isWorkerCompiler ? compileWithWorker : compileWithDynamicImport
+  }, [isWorkerCompiler])
   const executeCompile = useCallback(
     (submitVariables) => {
       setStatus(CompilerStatus.PROGRESS)
