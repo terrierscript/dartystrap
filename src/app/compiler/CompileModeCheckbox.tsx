@@ -18,7 +18,7 @@ export const CompilerModeContext = createContext({
   handleUseWorker: (e) => {}
 })
 
-export const CompileModeCheckboxState = ({ children }) => {
+const useCompileModeCheckboxState = () => {
   const [compilerMode, setCompilerMode] = useState(CompilerMode.WORKER)
   const handleUseWorker = useCallback(
     (e) => {
@@ -30,10 +30,14 @@ export const CompileModeCheckboxState = ({ children }) => {
   const isWorker = useMemo(() => {
     return compilerMode === CompilerMode.WORKER
   }, [compilerMode])
-  const value = {
+  return {
     isWorker,
     handleUseWorker
   }
+}
+
+export const CompileModeCheckboxState = ({ children }) => {
+  const value = useCompileModeCheckboxState()
   return (
     <CompilerModeContext.Provider value={value}>
       {children}
