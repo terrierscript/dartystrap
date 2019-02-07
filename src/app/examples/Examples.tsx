@@ -30,7 +30,7 @@ const ExampleWithDefaultBootstrap = ({ html }) => {
 }
 
 export const Examples = ({ baseCss }) => {
-  console.debug("update css", baseCss)
+  // console.debug("update css", baseCss)
   const html = examples["button"]
   return (
     <div>

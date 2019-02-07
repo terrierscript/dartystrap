@@ -44,40 +44,44 @@ export const BootstrapCompilerContext = createContext<ContextState>({
   executeCompile: initialContextHandler
 })
 
-type MaybeFunction = Function | null | undefined
+type MaybeFunction = Function | null
 
 const useBootstrapCompiler = () => {
-  const isWorkerCompiler = useContext(CompilerModeContext)
+  const { isWorker } = useContext(CompilerModeContext)
   const [css, setCss] = useState("")
   const [status, setStatus] = useState(CompilerStatus.INIT)
   const terminateFn = useRef<MaybeFunction>(null)
   const [lastError, setLastError] = useState(undefined)
 
   const compiler = useMemo(() => {
-    return isWorkerCompiler ? compileWithWorker : compileWithDynamicImport
-  }, [isWorkerCompiler])
+    return isWorker ? compileWithWorker : compileWithDynamicImport
+  }, [isWorker])
+
   const executeCompile = useCallback(
-    (submitVariables) => {
+    async (submitVariables) => {
+      console.log(compiler.name)
       setStatus(CompilerStatus.PROGRESS)
       if (typeof terminateFn.current === "function") {
         terminateFn.current()
         terminateFn.current = null
       }
       const { execute, terminate } = compiler(submitVariables)
-      terminateFn.current = terminate
-
-      execute
-        .then((css) => {
-          setStatus(CompilerStatus.SUCCESS)
-          setCss(css)
-        })
-        .catch((e) => {
-          setStatus(CompilerStatus.ERROR)
-          setLastError(e)
-        })
+      if (terminate) {
+        terminateFn.current = terminate
+      }
+      try {
+        const css = await execute
+        setStatus(CompilerStatus.SUCCESS)
+        setCss(css)
+      } catch (e) {
+        setStatus(CompilerStatus.ERROR)
+        setLastError(e)
+        console.error(e)
+      }
     },
     [compiler]
   )
+
   return {
     css,
     status,

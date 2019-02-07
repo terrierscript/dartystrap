@@ -19,10 +19,6 @@ export const VariableInput: SFC<{
   variable: VariableType
   onChangeVariable: VariableChangeHandler
 }> = ({ variable, onChangeVariable }) => {
-  if(variable.defaultValue === undefined){
-    console.log(variable)
-  }
-  
   const type = getType(variable.defaultValue)
 
   let value = variable.value
