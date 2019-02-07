@@ -3,11 +3,13 @@ import React, {
   useState,
   useMemo,
   useCallback,
-  useRef
+  useRef,
+  useContext
 } from "react"
 import { PureComponent } from "react"
 import { VariablesMap } from "../../compiler/scssVariables"
 import { compileWithWorker, compileWithDynamicImport } from "../../compiler/"
+import { CompilerModeContext } from "./CompileModeCheckbox"
 
 type Props = {
   submitVariables: VariablesMap
@@ -31,7 +33,6 @@ export type BootstrapCompilerChildrenProps = State
 const initialState = {
   css: "",
   status: CompilerStatus.INIT,
-  useWorker: true,
   lastError: undefined
 }
 const initialContextHandler = () => {
@@ -40,18 +41,17 @@ const initialContextHandler = () => {
 
 export const BootstrapCompilerContext = createContext<ContextState>({
   ...initialState,
-  executeCompile: initialContextHandler,
-  handleUseWorker: initialContextHandler
+  executeCompile: initialContextHandler
 })
 
 type MaybeFunction = Function | null | undefined
 
 const useBootstrapCompiler = () => {
+  const { useWorker } = useContext(CompilerModeContext)
   const [css, setCss] = useState("")
   const [status, setStatus] = useState(CompilerStatus.INIT)
   const terminateFn = useRef<MaybeFunction>(null)
   const [lastError, setLastError] = useState(undefined)
-  const [useWorker, setUseWorker] = useState(true)
 
   const compiler = useMemo(() => {
     return useWorker ? compileWithWorker : compileWithDynamicImport
@@ -82,9 +82,7 @@ const useBootstrapCompiler = () => {
     css,
     status,
     lastError,
-    useWorker,
-    executeCompile,
-    handleUseWorker: setUseWorker
+    executeCompile
   }
 }
 

@@ -17,10 +17,12 @@ const variableReducer = (state, action: VariableType) => {
     [action.name]: action
   }
 }
+
 const useVariableState = () => {
   const [variables, onChangeVariable] = useReducer(variableReducer, initial)
   return { variables, onChangeVariable }
 }
+
 export const VariableContext = React.createContext<{
   variables: VariablesMap
   onChangeVariable: VariableChangeHandler

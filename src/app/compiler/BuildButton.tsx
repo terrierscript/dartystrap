@@ -10,6 +10,8 @@ const useCompile = () => {
   const compile = useCallback(() => {
     doCompile(variables)
   }, [variables, doCompile])
+  
+  // componentDidMount
   useEffect(() => {
     compile()
   }, [])
